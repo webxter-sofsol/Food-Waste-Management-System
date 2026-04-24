@@ -1,0 +1,140 @@
+/* Responsive Layout Styles */
+
+/* Mobile First - Base styles for 320px+ */
+.layout-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main-content {
+  flex: 1;
+  padding: 16px;
+  width: 100%;
+}
+
+/* Tablet - 768px+ */
+@media (min-width: 768px) {
+  .main-content {
+    padding: 24px;
+  }
+}
+
+/* Desktop - 1024px+ */
+@media (min-width: 1024px) {
+  .main-content {
+    padding: 32px;
+  }
+}
+
+/* Large Desktop - 1440px+ */
+@media (min-width: 1440px) {
+  .main-content {
+    padding: 40px;
+  }
+}
+
+/* Extra Large - 1920px */
+@media (min-width: 1920px) {
+  .main-content {
+    max-width: 1920px;
+    margin: 0 auto;
+  }
+}
+
+/* Mobile Navigation */
+.mobile-nav {
+  display: block;
+}
+
+@media (min-width: 768px) {
+  .mobile-nav {
+    display: none;
+  }
+}
+
+/* Desktop Navigation */
+.desktop-nav {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .desktop-nav {
+    display: flex;
+  }
+}
+
+/* Notification Badge */
+.notification-badge {
+  position: relative;
+}
+
+.notification-badge .badge-count {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  background-color: #f44336;
+  color: white;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 12px;
+  font-weight: 600;
+  min-width: 20px;
+  text-align: center;
+}
+
+/* Hamburger Menu Animation */
+.hamburger-menu {
+  transition: transform 0.3s ease;
+}
+
+.hamburger-menu.open {
+  transform: rotate(90deg);
+}
+
+/* Sidebar Responsive */
+.sidebar {
+  width: 250px;
+  transition: width 0.3s ease;
+}
+
+@media (max-width: 767px) {
+  .sidebar {
+    position: fixed;
+    left: -250px;
+    transition: left 0.3s ease;
+  }
+
+  .sidebar.open {
+    left: 0;
+  }
+}
+
+/* Footer Responsive */
+.footer-content {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+@media (min-width: 768px) {
+  .footer-content {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Accessibility */
+.skip-to-content {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: #000;
+  color: #fff;
+  padding: 8px;
+  text-decoration: none;
+  z-index: 100;
+}
+
+.skip-to-content:focus {
+  top: 0;
+}

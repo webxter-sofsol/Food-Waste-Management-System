@@ -4,6 +4,7 @@ from . import views
 urlpatterns = [
     # Food listing CRUD operations
     path('', views.FoodListingCreateView.as_view(), name='food-listing-create'),
+    path('my/', views.DonorListingsView.as_view(), name='donor-listings'),
     path('browse/', views.FoodListingListView.as_view(), name='food-listing-list'),
     path('<int:pk>/', views.FoodListingDetailView.as_view(), name='food-listing-detail'),
     path('<int:pk>/update/', views.FoodListingUpdateView.as_view(), name='food-listing-update'),

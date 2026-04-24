@@ -244,8 +244,8 @@ The implementation follows a bottom-up approach: database models → backend API
     - **Validates: Requirements 14.3, 14.5**
 
 
-- [-] 5. Food Listing Module (Backend)
-  - [ ] 5.1 Implement food listing creation API
+- [x] 5. Food Listing Module (Backend)
+  - [x] 5.1 Implement food listing creation API
     - Create FoodListing serializer with all required fields
     - Implement POST /api/food-listings endpoint
     - Validate expiry_time is in the future
@@ -255,14 +255,14 @@ The implementation follows a bottom-up approach: database models → backend API
     - Restrict to donor role only
     - _Requirements: 4.1, 4.2, 4.3, 4.4, 4.5, 4.6_
   
-  - [ ]* 5.2 Write property tests for listing creation
+  - [x] 5.2 Write property tests for listing creation
     - **Property 14: Food Listing Creation with Required Fields** - Test with random valid listing data
     - **Property 15: Future Expiry Time Validation** - Test rejection of past expiry times
     - **Property 16: Freshness Score Calculation** - Test score consistency and logic
     - **Property 17: Image Upload Limit Enforcement** - Test max 5 images constraint
     - **Validates: Requirements 4.1, 4.2, 4.3, 4.5**
   
-  - [ ] 5.2 Implement food listing browsing and search API
+  - [x] 5.2 Implement food listing browsing and search API
     - Create GET /api/food-listings endpoint returning active listings
     - Implement filtering by food_type, dietary attributes, location distance, expiry_time
     - Implement sorting by freshness_score, distance, quantity, expiry_time
@@ -281,7 +281,7 @@ The implementation follows a bottom-up approach: database models → backend API
     - **Property 82: Pagination Implementation** - Test pagination with >20 results
     - **Validates: Requirements 5.1, 5.2, 5.3, 5.4, 5.5, 20.5**
   
-  - [ ] 5.4 Implement food listing comparison API
+  - [x] 5.4 Implement food listing comparison API
     - Create POST /api/food-listings/compare endpoint
     - Accept up to 4 listing IDs for comparison
     - Return comparison view with all required fields for each listing
@@ -295,7 +295,7 @@ The implementation follows a bottom-up approach: database models → backend API
     - **Property 25: Comparison Difference Highlighting** - Test difference detection
     - **Validates: Requirements 6.1, 6.2, 6.3, 6.4**
   
-  - [ ] 5.6 Implement listing update and cancellation API
+  - [x] 5.6 Implement listing update and cancellation API
     - Create PUT /api/food-listings/{id} endpoint for updates
     - Allow edits only before match creation
     - Create DELETE /api/food-listings/{id} endpoint for cancellation
@@ -309,7 +309,7 @@ The implementation follows a bottom-up approach: database models → backend API
     - **Property 77: Cancellation Notification to Requesters** - Test notifications sent
     - **Validates: Requirements 19.1, 19.2, 19.3**
   
-  - [ ] 5.8 Implement search preference persistence
+  - [x] 5.8 Implement search preference persistence
     - Create GET/PUT /api/search-preferences endpoint
     - Save filter preferences to SearchPreference model
     - Auto-apply saved filters on browse page load
@@ -317,15 +317,15 @@ The implementation follows a bottom-up approach: database models → backend API
     - Save up to 5 recent search queries
     - _Requirements: 18.1, 18.2, 18.3, 18.4_
   
-  - [ ]* 5.9 Write property tests for search preferences
+  - [x] 5.9 Write property tests for search preferences
     - **Property 72: Filter Preference Persistence Round-Trip** - Test save and auto-apply
     - **Property 73: Filter Reset** - Test clearing filters
     - **Property 74: Recent Search Query Limit** - Test max 5 queries with FIFO
     - **Validates: Requirements 18.1, 18.2, 18.3, 18.4**
 
 
-- [ ] 6. Request and Matching Module (Backend)
-  - [ ] 6.1 Implement food request submission API
+- [x] 6. Request and Matching Module (Backend)
+  - [x] 6.1 Implement food request submission API
     - Create FoodRequest serializer with validation
     - Implement POST /api/food-requests endpoint
     - Validate requested_quantity <= available_quantity
@@ -342,7 +342,7 @@ The implementation follows a bottom-up approach: database models → backend API
     - **Property 30: Duplicate Request Prevention** - Test duplicate rejection
     - **Validates: Requirements 7.1, 7.2, 7.3, 7.5**
   
-  - [ ] 6.3 Implement request approval and matching API
+  - [x] 6.3 Implement request approval and matching API
     - Create PUT /api/food-requests/{id}/approve endpoint
     - Create Match record on approval
     - Update FoodListing status to 'reserved' or reduce available_quantity
@@ -357,7 +357,7 @@ The implementation follows a bottom-up approach: database models → backend API
     - **Property 33: Listing Quantity Update on Match** - Test quantity/status update
     - **Validates: Requirements 8.1, 8.2, 8.3**
   
-  - [ ] 6.5 Implement request rejection API
+  - [x] 6.5 Implement request rejection API
     - Create PUT /api/food-requests/{id}/reject endpoint
     - Update request status to 'rejected'
     - Send notification to receiver with optional reason
@@ -368,7 +368,7 @@ The implementation follows a bottom-up approach: database models → backend API
     - **Property 34: Request Rejection Notification** - Test rejection notification with reason
     - **Validates: Requirements 8.4**
   
-  - [ ] 6.7 Implement request cancellation API
+  - [x] 6.7 Implement request cancellation API
     - Create DELETE /api/food-requests/{id} endpoint
     - Allow cancellation only for pending requests
     - For matched requests, require mutual agreement from donor and receiver
@@ -381,7 +381,7 @@ The implementation follows a bottom-up approach: database models → backend API
     - **Property 80: Volunteer Cancellation Notification** - Test volunteer notification
     - **Validates: Requirements 19.4, 19.5, 19.6**
   
-  - [ ] 6.9 Implement match listing API
+  - [x] 6.9 Implement match listing API
     - Create GET /api/matches endpoint
     - Return matches filtered by user role (donor, receiver, volunteer)
     - Include match status and related entities
@@ -389,7 +389,7 @@ The implementation follows a bottom-up approach: database models → backend API
     - _Requirements: 8.1, 8.2_
 
 
-- [ ] 7. Volunteer Coordination Module (Backend)
+- [x] 7. Volunteer Coordination Module (Backend)
   - [ ] 7.1 Implement volunteer notification and assignment API
     - Create background task to notify available volunteers on match creation
     - Filter volunteers by location proximity to pickup area
@@ -404,7 +404,7 @@ The implementation follows a bottom-up approach: database models → backend API
     - **Property 39: Volunteer Assignment Escalation** - Test escalation after 15 minutes
     - **Validates: Requirements 9.1, 9.2, 9.5**
   
-  - [ ] 7.3 Implement volunteer assignment acceptance API
+  - [x] 7.3 Implement volunteer assignment acceptance API
     - Create POST /api/volunteer/assignments/{id}/accept endpoint
     - Create PickupCoordination record on acceptance
     - Ensure only one volunteer can accept (use database transaction)

@@ -1,4 +1,4 @@
-"""
+﻿"""
 Views for admin dashboard module
 """
 from rest_framework import status, generics
@@ -22,444 +22,270 @@ from .serializers import PendingUserSerializer, UserVerificationSerializer
 
 
 class PendingVerificationsView(generics.ListAPIView):
-    """
-    GET /api/admin/pending-verifications
-    List all pending user verifications
-    """
     serializer_class = PendingUserSerializer
     permission_classes = [IsAuthenticated, IsAdmin]
-    
     def get_queryset(self):
-        """Get all users with pending verification status"""
-        return User.objects.filter(
-            verification_status='pending'
-        ).select_related('profile').order_by('-date_joined')
+        return User.objects.filter(verification_status='pending').select_related('profile').order_by('-date_joined')
 
 
 @api_view(['PUT'])
 @permission_classes([IsAuthenticated, IsAdmin])
 def verify_user(request, user_id):
-    """
-    PUT /api/admin/users/{id}/verify
-    Approve a user's registration
-    """
     try:
         user = User.objects.get(id=user_id)
     except User.DoesNotExist:
-        return Response(
-            {'error': 'User not found'},
-            status=status.HTTP_404_NOT_FOUND
-        )
-    
-    # Check if user is already verified
+        return Response({'error': 'User not found'}, status=status.HTTP_404_NOT_FOUND)
     if user.verification_status == 'approved':
-        return Response(
-            {'error': 'User is already verified'},
-            status=status.HTTP_400_BAD_REQUEST
-        )
-    
-    # Update user status
+        return Response({'error': 'User is already verified'}, status=status.HTTP_400_BAD_REQUEST)
     user.verification_status = 'approved'
     user.is_active = True
     user.save()
-    
-    # Send confirmation email
     try:
         send_mail(
-            subject='Account Verified - Buffet Management System',
-            message=f'Dear {user.username},\n\n'
-                    f'Your account has been verified and approved. '
-                    f'You can now access all features of the Buffet Management System.\n\n'
-                    f'Thank you for joining us!\n\n'
-                    f'Best regards,\n'
-                    f'Buffet Management Team',
-            from_email=settings.DEFAULT_FROM_EMAIL if hasattr(settings, 'DEFAULT_FROM_EMAIL') else 'noreply@buffet.com',
+            subject='Account Verified - FoodShare',
+            message=f'Dear {user.username},\n\nYour account has been verified.\n\nBest regards,\nFoodShare Team',
+            from_email=getattr(settings, 'DEFAULT_FROM_EMAIL', 'noreply@foodshare.com'),
             recipient_list=[user.email],
             fail_silently=True,
         )
-    except Exception as e:
-        # Log error but don't fail the request
-        print(f"Failed to send verification email: {e}")
-    
+    except Exception:
+        pass
     serializer = PendingUserSerializer(user)
-    return Response(
-        {
-            'message': 'User verified successfully',
-            'user': serializer.data
-        },
-        status=status.HTTP_200_OK
-    )
+    return Response({'message': 'User verified successfully', 'user': serializer.data}, status=status.HTTP_200_OK)
 
 
 @api_view(['PUT'])
 @permission_classes([IsAuthenticated, IsAdmin])
 def reject_user(request, user_id):
-    """
-    PUT /api/admin/users/{id}/reject
-    Reject a user's registration
-    """
     try:
         user = User.objects.get(id=user_id)
     except User.DoesNotExist:
-        return Response(
-            {'error': 'User not found'},
-            status=status.HTTP_404_NOT_FOUND
-        )
-    
-    # Validate request data
+        return Response({'error': 'User not found'}, status=status.HTTP_404_NOT_FOUND)
     serializer = UserVerificationSerializer(data=request.data)
     if not serializer.is_valid():
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    
     reason = serializer.validated_data.get('reason', 'No reason provided')
-    
-    # Update user status
     user.verification_status = 'rejected'
     user.is_active = False
     user.save()
-    
-    # Send rejection email
     try:
         send_mail(
-            subject='Account Registration - Buffet Management System',
-            message=f'Dear {user.username},\n\n'
-                    f'We regret to inform you that your account registration has been rejected.\n\n'
-                    f'Reason: {reason}\n\n'
-                    f'If you believe this is an error, please contact our support team.\n\n'
-                    f'Best regards,\n'
-                    f'Buffet Management Team',
-            from_email=settings.DEFAULT_FROM_EMAIL if hasattr(settings, 'DEFAULT_FROM_EMAIL') else 'noreply@buffet.com',
+            subject='Account Registration - FoodShare',
+            message=f'Dear {user.username},\n\nYour registration was rejected.\nReason: {reason}\n\nBest regards,\nFoodShare Team',
+            from_email=getattr(settings, 'DEFAULT_FROM_EMAIL', 'noreply@foodshare.com'),
             recipient_list=[user.email],
             fail_silently=True,
         )
-    except Exception as e:
-        # Log error but don't fail the request
-        print(f"Failed to send rejection email: {e}")
-    
-    return Response(
-        {
-            'message': 'User rejected successfully',
-            'user_id': user_id,
-            'reason': reason
-        },
-        status=status.HTTP_200_OK
-    )
+    except Exception:
+        pass
+    return Response({'message': 'User rejected successfully', 'user_id': user_id, 'reason': reason}, status=status.HTTP_200_OK)
 
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated, IsAdmin])
 def admin_metrics(request):
-    """
-    GET /api/admin/metrics
-    Get admin dashboard metrics with 5-minute caching
-    """
-    # Try to get cached metrics
     cache_key = 'admin_metrics'
-    cached_metrics = cache.get(cache_key)
-    
-    if cached_metrics:
-        return Response(cached_metrics, status=status.HTTP_200_OK)
-    
-    # Calculate metrics
-    # User counts by role
-    user_counts = User.objects.filter(
-        verification_status='approved',
-        is_active=True
-    ).values('role').annotate(count=Count('id'))
-    
+    cached = cache.get(cache_key)
+    if cached:
+        return Response(cached, status=status.HTTP_200_OK)
+    user_counts = User.objects.filter(verification_status='approved', is_active=True).values('role').annotate(count=Count('id'))
     user_counts_dict = {item['role']: item['count'] for item in user_counts}
-    
-    # Food listing metrics
     total_food_listings = FoodListing.objects.count()
     active_food_listings = FoodListing.objects.filter(status='available').count()
-    
-    # Match metrics
     total_matches = Match.objects.count()
     completed_deliveries = Match.objects.filter(status='completed').count()
-    
-    # Calculate average response times
-    # Average time from match creation to volunteer assignment
-    avg_volunteer_assignment_time = PickupCoordination.objects.filter(
-        assigned_at__isnull=False
-    ).annotate(
-        response_time=F('assigned_at') - F('created_at')
-    ).aggregate(
-        avg_time=Avg('response_time')
-    )['avg_time']
-    
-    # Average time from match creation to completion
-    avg_delivery_time = Match.objects.filter(
-        completed_at__isnull=False
-    ).annotate(
-        completion_time=F('completed_at') - F('created_at')
-    ).aggregate(
-        avg_time=Avg('completion_time')
-    )['avg_time']
-    
-    # Convert timedelta to seconds for JSON serialization
-    avg_volunteer_assignment_seconds = None
-    if avg_volunteer_assignment_time:
-        avg_volunteer_assignment_seconds = avg_volunteer_assignment_time.total_seconds()
-    
-    avg_delivery_seconds = None
-    if avg_delivery_time:
-        avg_delivery_seconds = avg_delivery_time.total_seconds()
-    
-    # Pending verifications
+    avg_vol = PickupCoordination.objects.filter(assigned_at__isnull=False).annotate(rt=F('assigned_at') - F('created_at')).aggregate(avg=Avg('rt'))['avg']
+    avg_del = Match.objects.filter(completed_at__isnull=False).annotate(ct=F('completed_at') - F('created_at')).aggregate(avg=Avg('ct'))['avg']
     pending_verifications = User.objects.filter(verification_status='pending').count()
-    
-    # System alerts (example: expiring soon listings)
-    expiring_soon = FoodListing.objects.filter(
-        status='available',
-        expiry_time__lte=timezone.now() + timedelta(hours=2),
-        expiry_time__gt=timezone.now()
-    ).count()
-    
+    expiring_soon = FoodListing.objects.filter(status='available', expiry_time__lte=timezone.now() + timedelta(hours=2), expiry_time__gt=timezone.now()).count()
     metrics = {
-        'user_counts': {
-            'donor': user_counts_dict.get('donor', 0),
-            'receiver': user_counts_dict.get('receiver', 0),
-            'volunteer': user_counts_dict.get('volunteer', 0),
-            'admin': user_counts_dict.get('admin', 0),
-            'total': sum(user_counts_dict.values())
-        },
-        'food_listings': {
-            'total': total_food_listings,
-            'active': active_food_listings
-        },
-        'matches': {
-            'total': total_matches,
-            'completed_deliveries': completed_deliveries
-        },
-        'average_response_times': {
-            'volunteer_assignment_seconds': avg_volunteer_assignment_seconds,
-            'delivery_completion_seconds': avg_delivery_seconds
-        },
+        'user_counts': {'donor': user_counts_dict.get('donor', 0), 'receiver': user_counts_dict.get('receiver', 0), 'volunteer': user_counts_dict.get('volunteer', 0), 'admin': user_counts_dict.get('admin', 0), 'total': sum(user_counts_dict.values())},
+        'food_listings': {'total': total_food_listings, 'active': active_food_listings},
+        'matches': {'total': total_matches, 'completed_deliveries': completed_deliveries},
+        'average_response_times': {'volunteer_assignment_seconds': avg_vol.total_seconds() if avg_vol else None, 'delivery_completion_seconds': avg_del.total_seconds() if avg_del else None},
         'pending_verifications': pending_verifications,
-        'system_alerts': {
-            'expiring_soon_listings': expiring_soon
-        }
+        'system_alerts': {'expiring_soon_listings': expiring_soon},
     }
-    
-    # Cache metrics for 5 minutes
-    cache.set(cache_key, metrics, 300)
-    
+    cache.set(cache_key, metrics, 30)
     return Response(metrics, status=status.HTTP_200_OK)
 
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated, IsAdmin])
 def admin_reports(request):
-    """
-    GET /api/admin/reports
-    Generate admin reports with filtering
-    """
-    # Get filter parameters
     start_date = request.query_params.get('start_date')
     end_date = request.query_params.get('end_date')
     role = request.query_params.get('role')
     location = request.query_params.get('location')
-    report_type = request.query_params.get('type', 'users')  # users, listings, matches
-    
-    # Build base queryset based on report type
+    report_type = request.query_params.get('type', 'users')
+
     if report_type == 'users':
         queryset = User.objects.all()
-        
-        # Apply filters
         if role:
             queryset = queryset.filter(role=role)
-        
         if start_date:
             queryset = queryset.filter(date_joined__gte=start_date)
-        
         if end_date:
             queryset = queryset.filter(date_joined__lte=end_date)
-        
-        # Prepare report data
-        data = queryset.values(
-            'id', 'email', 'username', 'role', 
-            'verification_status', 'is_active', 'date_joined'
-        ).order_by('-date_joined')
-        
+        data = list(queryset.values('id', 'email', 'username', 'role', 'verification_status', 'is_active', 'date_joined').order_by('-date_joined'))
     elif report_type == 'listings':
         queryset = FoodListing.objects.select_related('donor')
-        
-        # Apply filters
         if start_date:
             queryset = queryset.filter(created_at__gte=start_date)
-        
         if end_date:
             queryset = queryset.filter(created_at__lte=end_date)
-        
         if location:
-            # Simple location filter by address contains
             queryset = queryset.filter(pickup_address__icontains=location)
-        
-        # Prepare report data
-        data = queryset.values(
-            'id', 'food_type', 'quantity', 'unit', 'status',
-            'preparation_time', 'expiry_time', 'freshness_score',
-            'pickup_address', 'created_at'
-        ).order_by('-created_at')
-        
+        data = list(queryset.values('id', 'food_type', 'quantity', 'unit', 'status', 'preparation_time', 'expiry_time', 'freshness_score', 'pickup_address', 'created_at', 'donor__email').order_by('-created_at'))
     elif report_type == 'matches':
         queryset = Match.objects.select_related('donor', 'receiver', 'listing')
-        
-        # Apply filters
         if start_date:
             queryset = queryset.filter(created_at__gte=start_date)
-        
         if end_date:
             queryset = queryset.filter(created_at__lte=end_date)
-        
-        # Prepare report data
-        data = queryset.values(
-            'id', 'matched_quantity', 'status',
-            'created_at', 'completed_at',
-            'donor__email', 'receiver__email',
-            'listing__food_type'
-        ).order_by('-created_at')
-        
+        data = list(queryset.values('id', 'matched_quantity', 'status', 'created_at', 'completed_at', 'donor__email', 'receiver__email', 'listing__food_type').order_by('-created_at'))
     else:
-        return Response(
-            {'error': 'Invalid report type. Must be one of: users, listings, matches'},
-            status=status.HTTP_400_BAD_REQUEST
-        )
-    
-    # Paginate results (20 items per page as per requirements)
+        return Response({'error': 'Invalid report type. Must be one of: users, listings, matches'}, status=status.HTTP_400_BAD_REQUEST)
+
     from rest_framework.pagination import PageNumberPagination
     paginator = PageNumberPagination()
     paginator.page_size = 20
-    
-    # Convert queryset to list for pagination
-    data_list = list(data)
-    paginated_data = paginator.paginate_queryset(data_list, request)
-    
-    # Build response with pagination
-    response_data = {
-        'report_type': report_type,
-        'filters': {
-            'start_date': start_date,
-            'end_date': end_date,
-            'role': role,
-            'location': location
-        },
-        'data': paginated_data,
-        'count': len(data_list),
-        'next': paginator.get_next_link(),
-        'previous': paginator.get_previous_link()
-    }
-    
-    return Response(response_data, status=status.HTTP_200_OK)
+    paginated_data = paginator.paginate_queryset(data, request)
+    return Response({'report_type': report_type, 'filters': {'start_date': start_date, 'end_date': end_date, 'role': role, 'location': location}, 'data': paginated_data, 'count': len(data), 'next': paginator.get_next_link(), 'previous': paginator.get_previous_link()})
 
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated, IsAdmin])
 def export_report(request):
-    """
-    POST /api/admin/reports/export
-    Export reports in CSV or PDF format
-    """
     import csv
     from django.http import HttpResponse
-    
-    # Get export parameters
-    export_format = request.data.get('format', 'csv')  # csv or pdf
+    export_format = request.data.get('format', 'csv')
     report_type = request.data.get('type', 'users')
     start_date = request.data.get('start_date')
     end_date = request.data.get('end_date')
     role = request.data.get('role')
     location = request.data.get('location')
-    
-    # Validate format
     if export_format not in ['csv', 'pdf']:
-        return Response(
-            {'error': 'Invalid format. Must be csv or pdf'},
-            status=status.HTTP_400_BAD_REQUEST
-        )
-    
-    # Build queryset (same logic as admin_reports)
+        return Response({'error': 'Invalid format'}, status=status.HTTP_400_BAD_REQUEST)
     if report_type == 'users':
         queryset = User.objects.all()
-        
-        if role:
-            queryset = queryset.filter(role=role)
-        if start_date:
-            queryset = queryset.filter(date_joined__gte=start_date)
-        if end_date:
-            queryset = queryset.filter(date_joined__lte=end_date)
-        
-        data = queryset.values(
-            'id', 'email', 'username', 'role', 
-            'verification_status', 'is_active', 'date_joined'
-        )
-        
+        if role: queryset = queryset.filter(role=role)
+        if start_date: queryset = queryset.filter(date_joined__gte=start_date)
+        if end_date: queryset = queryset.filter(date_joined__lte=end_date)
+        data = queryset.values('id', 'email', 'username', 'role', 'verification_status', 'is_active', 'date_joined')
         fields = ['id', 'email', 'username', 'role', 'verification_status', 'is_active', 'date_joined']
-        
     elif report_type == 'listings':
         queryset = FoodListing.objects.all()
-        
-        if start_date:
-            queryset = queryset.filter(created_at__gte=start_date)
-        if end_date:
-            queryset = queryset.filter(created_at__lte=end_date)
-        if location:
-            queryset = queryset.filter(pickup_address__icontains=location)
-        
-        data = queryset.values(
-            'id', 'food_type', 'quantity', 'unit', 'status',
-            'preparation_time', 'expiry_time', 'freshness_score',
-            'pickup_address', 'created_at'
-        )
-        
-        fields = ['id', 'food_type', 'quantity', 'unit', 'status', 
-                  'preparation_time', 'expiry_time', 'freshness_score',
-                  'pickup_address', 'created_at']
-        
+        if start_date: queryset = queryset.filter(created_at__gte=start_date)
+        if end_date: queryset = queryset.filter(created_at__lte=end_date)
+        if location: queryset = queryset.filter(pickup_address__icontains=location)
+        data = queryset.values('id', 'food_type', 'quantity', 'unit', 'status', 'preparation_time', 'expiry_time', 'freshness_score', 'pickup_address', 'created_at')
+        fields = ['id', 'food_type', 'quantity', 'unit', 'status', 'preparation_time', 'expiry_time', 'freshness_score', 'pickup_address', 'created_at']
     elif report_type == 'matches':
         queryset = Match.objects.select_related('donor', 'receiver', 'listing')
-        
-        if start_date:
-            queryset = queryset.filter(created_at__gte=start_date)
-        if end_date:
-            queryset = queryset.filter(created_at__lte=end_date)
-        
-        data = queryset.values(
-            'id', 'matched_quantity', 'status',
-            'created_at', 'completed_at',
-            'donor__email', 'receiver__email',
-            'listing__food_type'
-        )
-        
-        fields = ['id', 'matched_quantity', 'status', 'created_at', 'completed_at',
-                  'donor__email', 'receiver__email', 'listing__food_type']
+        if start_date: queryset = queryset.filter(created_at__gte=start_date)
+        if end_date: queryset = queryset.filter(created_at__lte=end_date)
+        data = queryset.values('id', 'matched_quantity', 'status', 'created_at', 'completed_at', 'donor__email', 'receiver__email', 'listing__food_type')
+        fields = ['id', 'matched_quantity', 'status', 'created_at', 'completed_at', 'donor__email', 'receiver__email', 'listing__food_type']
     else:
-        return Response(
-            {'error': 'Invalid report type'},
-            status=status.HTTP_400_BAD_REQUEST
-        )
-    
-    # Export as CSV
+        return Response({'error': 'Invalid report type'}, status=status.HTTP_400_BAD_REQUEST)
     if export_format == 'csv':
         response = HttpResponse(content_type='text/csv')
         response['Content-Disposition'] = f'attachment; filename="{report_type}_report.csv"'
-        
         writer = csv.DictWriter(response, fieldnames=fields)
         writer.writeheader()
-        
         for row in data:
             writer.writerow(row)
-        
         return response
-    
-    # Export as PDF (simplified - would need reportlab or similar in production)
-    elif export_format == 'pdf':
-        # For now, return a simple text response
-        # In production, use reportlab or weasyprint
-        return Response(
-            {
-                'message': 'PDF export not yet implemented',
-                'note': 'Use CSV export for now'
-            },
-            status=status.HTTP_501_NOT_IMPLEMENTED
-        )
+    return Response({'message': 'PDF export not yet implemented'}, status=status.HTTP_501_NOT_IMPLEMENTED)
+
+
+@api_view(['PUT'])
+@permission_classes([IsAuthenticated, IsAdmin])
+def approve_listing(request, listing_id):
+    try:
+        listing = FoodListing.objects.get(id=listing_id)
+    except FoodListing.DoesNotExist:
+        return Response({'error': 'Listing not found'}, status=status.HTTP_404_NOT_FOUND)
+    if listing.status != 'pending':
+        return Response({'error': 'Listing is not pending approval'}, status=status.HTTP_400_BAD_REQUEST)
+    listing.status = 'available'
+    listing.save()
+    cache.delete('admin_metrics')
+    return Response({'message': 'Listing approved', 'id': listing_id}, status=status.HTTP_200_OK)
+
+
+@api_view(['PUT'])
+@permission_classes([IsAuthenticated, IsAdmin])
+def reject_listing(request, listing_id):
+    try:
+        listing = FoodListing.objects.get(id=listing_id)
+    except FoodListing.DoesNotExist:
+        return Response({'error': 'Listing not found'}, status=status.HTTP_404_NOT_FOUND)
+    reason = request.data.get('reason', 'Rejected by admin')
+    listing.status = 'cancelled'
+    listing.save()
+    cache.delete('admin_metrics')
+    return Response({'message': 'Listing rejected', 'id': listing_id, 'reason': reason}, status=status.HTTP_200_OK)
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated, IsAdmin])
+def pending_listings(request):
+    listings = FoodListing.objects.filter(status='pending').select_related('donor', 'donor__profile').order_by('-created_at')
+    data = [{'id': l.id, 'food_type': l.food_type, 'description': l.description, 'quantity': l.quantity, 'unit': l.unit, 'pickup_address': l.pickup_address, 'expiry_time': l.expiry_time.isoformat(), 'created_at': l.created_at.isoformat(), 'donor_email': l.donor.email, 'donor_name': getattr(l.donor, 'profile', None) and l.donor.profile.full_name or l.donor.email, 'is_vegetarian': l.is_vegetarian, 'is_vegan': l.is_vegan, 'is_gluten_free': l.is_gluten_free} for l in listings]
+    return Response({'count': len(data), 'results': data})
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated, IsAdmin])
+def list_all_matches(request):
+    matches = Match.objects.select_related('listing', 'donor', 'receiver', 'donor__profile', 'receiver__profile').prefetch_related('pickup_coordination').order_by('-created_at')
+    status_filter = request.query_params.get('status')
+    if status_filter:
+        matches = matches.filter(status=status_filter)
+    data = []
+    for m in matches:
+        coord = m.pickup_coordination.first()
+        data.append({'id': m.id, 'listing_food_type': m.listing.food_type, 'listing_pickup_address': m.listing.pickup_address, 'donor_email': m.donor.email, 'donor_name': getattr(m.donor, 'profile', None) and m.donor.profile.full_name or m.donor.email, 'receiver_email': m.receiver.email, 'receiver_name': getattr(m.receiver, 'profile', None) and m.receiver.profile.full_name or m.receiver.email, 'matched_quantity': m.matched_quantity, 'status': m.status, 'created_at': m.created_at.isoformat(), 'completed_at': m.completed_at.isoformat() if m.completed_at else None, 'volunteer_assigned': coord is not None and coord.volunteer is not None, 'volunteer_email': coord.volunteer.email if coord and coord.volunteer else None, 'volunteer_name': coord.volunteer.profile.full_name if coord and coord.volunteer and hasattr(coord.volunteer, 'profile') else None, 'coordination_id': coord.id if coord else None, 'assignment_status': coord.assignment_status if coord else 'unassigned'})
+    return Response({'count': len(data), 'results': data})
+
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated, IsAdmin])
+def assign_volunteer(request, match_id):
+    try:
+        match = Match.objects.get(id=match_id)
+    except Match.DoesNotExist:
+        return Response({'error': 'Match not found'}, status=status.HTTP_404_NOT_FOUND)
+    volunteer_id = request.data.get('volunteer_id')
+    if not volunteer_id:
+        return Response({'error': 'volunteer_id is required'}, status=status.HTTP_400_BAD_REQUEST)
+    try:
+        volunteer = User.objects.get(id=volunteer_id, role='volunteer', is_active=True)
+    except User.DoesNotExist:
+        return Response({'error': 'Volunteer not found'}, status=status.HTTP_404_NOT_FOUND)
+    now = timezone.now()
+    coord, created = PickupCoordination.objects.get_or_create(match=match, defaults={'donor_location': {'lat': match.listing.pickup_latitude, 'lon': match.listing.pickup_longitude}, 'receiver_location': {'lat': getattr(getattr(match.receiver, 'profile', None), 'latitude', None) or 0, 'lon': getattr(getattr(match.receiver, 'profile', None), 'longitude', None) or 0}, 'food_quantity': match.matched_quantity, 'required_pickup_time': match.listing.expiry_time, 'assignment_status': 'assigned', 'volunteer': volunteer, 'assigned_at': now})
+    if not created:
+        coord.volunteer = volunteer
+        coord.assignment_status = 'assigned'
+        coord.assigned_at = now
+        coord.save()
+    match.status = 'in_progress'
+    match.save()
+    try:
+        from safety_analytics.models import Notification
+        Notification.objects.create(user=volunteer, notification_type='volunteer_assignment', title='New Delivery Assignment', message=f'You have been assigned to deliver {match.listing.food_type} from {match.listing.pickup_address}.', related_entity_type='pickup_coordination', related_entity_id=coord.id)
+    except Exception:
+        pass
+    cache.delete('admin_metrics')
+    return Response({'message': f'Volunteer {volunteer.email} assigned successfully.', 'coordination_id': coord.id, 'match_id': match_id}, status=status.HTTP_200_OK)
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated, IsAdmin])
+def list_volunteers(request):
+    volunteers = User.objects.filter(role='volunteer', is_active=True, verification_status='approved').select_related('profile').order_by('email')
+    data = [{'id': v.id, 'email': v.email, 'name': getattr(v, 'profile', None) and v.profile.full_name or v.email, 'phone': getattr(v, 'profile', None) and v.profile.phone or None} for v in volunteers]
+    return Response({'count': len(data), 'results': data})

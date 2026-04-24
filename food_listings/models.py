@@ -8,6 +8,7 @@ class FoodListing(models.Model):
     """Food listing model with freshness score calculation"""
     
     STATUS_CHOICES = [
+        ('pending', 'Pending Approval'),
         ('available', 'Available'),
         ('reserved', 'Reserved'),
         ('completed', 'Completed'),
