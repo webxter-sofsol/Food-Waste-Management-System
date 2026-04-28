@@ -23,7 +23,7 @@ const schema = Yup.object({
   description: Yup.string().required('Required').min(10, 'At least 10 characters').max(500),
   quantity: Yup.number().required('Required').positive('Must be positive').integer('Whole number'),
   unit: Yup.string().required('Required').oneOf(['servings', 'kg', 'liters']),
-  preparation_time: Yup.date().required('Required').max(new Date(), 'Cannot be in the future'),
+  preparation_time: Yup.date().required('Required'),
   expiry_time: Yup.date()
     .required('Required')
     .min(new Date(), 'Must be in the future')
