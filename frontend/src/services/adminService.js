@@ -109,6 +109,57 @@ export const getAdminReports = async (filters = {}) => {
 };
 
 /**
+ * Get pending food listings awaiting admin approval
+ * @returns {Promise<Object>} Response with pending listings list
+ */
+export const getPendingListings = async () => {
+  try {
+    const response = await api.get('/admin/listings/pending/');
+    return { success: true, data: response.data.results || [] };
+  } catch (error) {
+    return {
+      success: false,
+      error: error.response?.data?.error || error.message || 'Failed to fetch pending listings',
+    };
+  }
+};
+
+/**
+ * Approve a pending food listing
+ * @param {number} listingId - Listing ID to approve
+ * @returns {Promise<Object>} Response with success status
+ */
+export const approveListing = async (listingId) => {
+  try {
+    const response = await api.put(`/admin/listings/${listingId}/approve/`);
+    return { success: true, data: response.data };
+  } catch (error) {
+    return {
+      success: false,
+      error: error.response?.data?.error || error.message || 'Failed to approve listing',
+    };
+  }
+};
+
+/**
+ * Reject a pending food listing
+ * @param {number} listingId - Listing ID to reject
+ * @param {string} reason - Reason for rejection
+ * @returns {Promise<Object>} Response with success status
+ */
+export const rejectListing = async (listingId, reason) => {
+  try {
+    const response = await api.put(`/admin/listings/${listingId}/reject/`, { reason });
+    return { success: true, data: response.data };
+  } catch (error) {
+    return {
+      success: false,
+      error: error.response?.data?.error || error.message || 'Failed to reject listing',
+    };
+  }
+};
+
+/**
  * Export admin report
  * @param {Object} exportData - Export parameters (format, type, filters)
  * @returns {Promise<Object>} Response with export data
@@ -137,6 +188,9 @@ const adminService = {
   getAdminMetrics,
   getAdminReports,
   exportReport,
+  getPendingListings,
+  approveListing,
+  rejectListing,
 };
 
 export default adminService;
