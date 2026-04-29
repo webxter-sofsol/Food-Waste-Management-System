@@ -40,6 +40,7 @@ import ListingRequestsPanel from '../components/donor/ListingRequestsPanel';
 
 const STATUS_CONFIG = {
   available: { label: 'Available', color: 'success' },
+  pending: { label: 'Pending Approval', color: 'warning' },
   reserved: { label: 'Reserved', color: 'warning' },
   completed: { label: 'Completed', color: 'info' },
   expired: { label: 'Expired', color: 'default' },

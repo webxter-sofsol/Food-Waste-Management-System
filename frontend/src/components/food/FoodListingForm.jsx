@@ -294,7 +294,7 @@ const FoodListingForm = ({ listing = null }) => {
                         <Grid container spacing={2.5}>
                           <Grid item xs={12} sm={6}>
                             <DateTimePicker label='Preparation Time *' value={values.preparation_time}
-                              onChange={v => setFieldValue('preparation_time', v)} maxDateTime={new Date()}
+                              onChange={v => setFieldValue('preparation_time', v)}
                               slotProps={{ textField: { fullWidth: true, error: touched.preparation_time && !!errors.preparation_time, helperText: touched.preparation_time && errors.preparation_time } }} />
                           </Grid>
                           <Grid item xs={12} sm={6}>
