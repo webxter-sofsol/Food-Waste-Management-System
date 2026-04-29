@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import {
   Alert, Avatar, Box, Button, Chip, CircularProgress, Container,
   Dialog, DialogActions, DialogContent, DialogTitle, Divider,
@@ -21,6 +21,7 @@ const FoodListingDetailPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { user } = useAuth();
+  const { state } = useLocation();
 
   const [listing, setListing] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -64,7 +65,12 @@ const FoodListingDetailPage = () => {
     fetchListing();
   }, [id, user]);
 
-  // Live expiry countdown
+  // Auto-open request modal if navigated with openRequest state
+  useEffect(() => {
+    if (state?.openRequest && listing) {
+      setRequestOpen(true);
+    }
+  }, [state, listing]);
   useEffect(() => {
     if (!listing?.expiry_time) return;
     const update = () => {

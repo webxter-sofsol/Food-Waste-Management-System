@@ -25,6 +25,7 @@ import {
   Visibility,
 } from '@mui/icons-material';
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { calculateDistance, formatDistance, formatTimeRemaining } from '../../utils/helpers';
 import foodListingService from '../../services/foodListingService';
 
@@ -39,6 +40,7 @@ const ListingCard = ({
   userLocation = null,
 }) => {
   const theme = useTheme();
+  const navigate = useNavigate();
   const [freshnessScore, setFreshnessScore] = useState(0);
   const [distance, setDistance] = useState(null);
   const [timeRemaining, setTimeRemaining] = useState('');
@@ -219,7 +221,7 @@ const ListingCard = ({
         <Button
           size="small"
           startIcon={<Visibility />}
-          onClick={() => { window.location.href = `/food-listings/${listing.id}`; }}
+          onClick={() => navigate(`/food-listings/${listing.id}`)}
           sx={{ flex: 1 }}
         >
           Details
@@ -228,7 +230,7 @@ const ListingCard = ({
           size="small"
           variant="contained"
           startIcon={<ShoppingCart />}
-          onClick={() => { window.location.href = `/food-listings/${listing.id}/request`; }}
+          onClick={() => navigate(`/food-listings/${listing.id}`, { state: { openRequest: true } })}
           disabled={listing.status !== 'available'}
           sx={{ flex: 1 }}
         >
