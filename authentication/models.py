@@ -70,6 +70,24 @@ class UserProfile(models.Model):
     longitude_encrypted = models.BinaryField(null=True, blank=True)
     
     # Receiver-specific fields
+    RECEIVER_TYPE_CHOICES = [
+        ('individual', 'Individual'),
+        ('ngo', 'NGO'),
+        ('shelter', 'Shelter'),
+        ('orphanage', 'Orphanage'),
+    ]
+    receiver_type = models.CharField(
+        max_length=20,
+        choices=RECEIVER_TYPE_CHOICES,
+        null=True,
+        blank=True,
+    )
+    verification_document = models.FileField(
+        upload_to='verification_docs/',
+        null=True,
+        blank=True,
+        help_text='Required for NGO, Shelter, and Orphanage receiver types'
+    )
     dietary_preferences = models.JSONField(null=True, blank=True, default=list)
     allergies = models.JSONField(null=True, blank=True, default=list)
     

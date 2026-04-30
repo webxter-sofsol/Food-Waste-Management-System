@@ -7,11 +7,29 @@ class AuthService {
   /**
    * Register a new user
    * @param {Object} userData - User registration data
+   * @param {File|null} verificationDocument - Optional verification document file
    * @returns {Promise<Object>} Registration result
    */
-  async register(userData) {
+  async register(userData, verificationDocument = null) {
     try {
-      const response = await api.post('/auth/register', userData);
+      let payload;
+      let headers = {};
+
+      if (verificationDocument) {
+        // Use multipart/form-data when a file is attached
+        payload = new FormData();
+        Object.entries(userData).forEach(([key, value]) => {
+          if (value !== null && value !== undefined) {
+            payload.append(key, value);
+          }
+        });
+        payload.append('verification_document', verificationDocument);
+        headers['Content-Type'] = 'multipart/form-data';
+      } else {
+        payload = userData;
+      }
+
+      const response = await api.post('/auth/register', payload, { headers });
       return {
         success: true,
         data: response.data,

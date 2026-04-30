@@ -14,6 +14,7 @@ import {
   Assessment as ReportIcon,
   BarChart as MetricsIcon,
   Person as PersonIcon,
+  People as PeopleIcon,
   Logout as LogoutIcon,
 } from '@mui/icons-material';
 import { useAuth } from '../../context/AuthContext';
@@ -49,6 +50,7 @@ const NAV = {
   ],
   admin: [
     { label: 'Dashboard',       path: '/admin/dashboard',     icon: <DashboardIcon /> },
+    { label: 'All Users',       path: '/admin/users',         icon: <PeopleIcon /> },
     { label: 'Food Listings',   path: '/admin/listings',      icon: <RestaurantIcon /> },
     { label: 'Verifications',   path: '/admin/verifications', icon: <VerifiedUserIcon /> },
     { label: 'Reports',         path: '/admin/reports',       icon: <ReportIcon /> },

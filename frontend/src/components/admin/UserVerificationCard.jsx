@@ -14,6 +14,7 @@ import {
   DialogActions,
   TextField,
   Alert,
+  Tooltip,
 } from '@mui/material';
 import {
   CheckCircle,
@@ -23,6 +24,9 @@ import {
   Business,
   Person,
   CalendarToday,
+  Description,
+  OpenInNew,
+  Category,
 } from '@mui/icons-material';
 import { formatDistanceToNow } from 'date-fns';
 
@@ -157,6 +161,61 @@ const UserVerificationCard = ({ user, onVerify, onReject }) => {
                 </Typography>
               </Box>
             </Grid>
+
+            {/* Receiver type */}
+            {user.role === 'receiver' && user.receiver_type && (
+              <Grid item xs={12}>
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                  <Category fontSize="small" color="action" />
+                  <Typography variant="body2" color="text.secondary">
+                    Type:&nbsp;
+                    <Chip
+                      label={user.receiver_type.charAt(0).toUpperCase() + user.receiver_type.slice(1)}
+                      size="small"
+                      color={user.receiver_type === 'individual' ? 'default' : 'info'}
+                      sx={{ height: 20, fontSize: '0.7rem' }}
+                    />
+                  </Typography>
+                </Box>
+              </Grid>
+            )}
+
+            {/* Verification document */}
+            {user.verification_document && (
+              <Grid item xs={12}>
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                  <Description fontSize="small" color="primary" />
+                  <Tooltip title="Open verification document">
+                    <Button
+                      size="small"
+                      variant="outlined"
+                      endIcon={<OpenInNew fontSize="small" />}
+                      href={user.verification_document}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      sx={{ textTransform: 'none', fontSize: '0.75rem', py: 0.25 }}
+                    >
+                      View Document
+                    </Button>
+                  </Tooltip>
+                </Box>
+              </Grid>
+            )}
+
+            {/* Flag if doc required but missing */}
+            {user.role === 'receiver' &&
+              user.receiver_type &&
+              user.receiver_type !== 'individual' &&
+              !user.verification_document && (
+              <Grid item xs={12}>
+                <Chip
+                  label="⚠ No verification document uploaded"
+                  color="warning"
+                  size="small"
+                  variant="outlined"
+                />
+              </Grid>
+            )}
           </Grid>
 
           {error && (

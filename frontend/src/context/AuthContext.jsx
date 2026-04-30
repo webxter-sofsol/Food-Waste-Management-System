@@ -168,11 +168,11 @@ export const AuthProvider = ({ children }) => {
   };
 
   // Register function
-  const register = async (userData) => {
+  const register = async (userData, verificationDocument = null) => {
     try {
       dispatch({ type: AUTH_ACTIONS.REGISTER_START });
       
-      const result = await authService.register(userData);
+      const result = await authService.register(userData, verificationDocument);
 
       if (result.success) {
         dispatch({ type: AUTH_ACTIONS.REGISTER_SUCCESS });

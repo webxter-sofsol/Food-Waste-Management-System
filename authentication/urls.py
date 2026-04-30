@@ -15,6 +15,10 @@ urlpatterns = [
     path('refresh-token/', TokenRefreshView.as_view(), name='token_refresh'),
     path('verify-session/', views.verify_session, name='verify_session'),
 
+    # Password reset
+    path('forgot-password/', views.forgot_password, name='forgot_password'),
+    path('reset-password/', views.reset_password, name='reset_password'),
+
     # Profile management
     path('profile/', views.user_profile, name='user_profile'),
 ]

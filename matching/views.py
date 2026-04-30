@@ -436,3 +436,48 @@ class MatchListView(APIView):
         
         serializer = MatchSerializer(matches, many=True, context={'request': request})
         return Response(serializer.data)
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated, IsDonor])
+def download_certificate(request, match_id):
+    """
+    GET /api/matches/{id}/certificate/
+    Donor downloads their PDF donation certificate for a completed match.
+    """
+    from django.http import HttpResponse
+    from authentication.certificate import generate_donation_certificate
+
+    try:
+        match = Match.objects.select_related(
+            'listing', 'donor', 'receiver',
+            'donor__profile', 'receiver__profile',
+        ).get(id=match_id, donor=request.user, status='completed')
+    except Match.DoesNotExist:
+        return Response(
+            {'error': 'Completed match not found or access denied.'},
+            status=status.HTTP_404_NOT_FOUND,
+        )
+
+    donor = match.donor
+    donor_name = getattr(donor, 'profile', None) and donor.profile.full_name or donor.username
+    receiver_name = (
+        getattr(match.receiver, 'profile', None) and match.receiver.profile.full_name
+        or match.receiver.email
+    )
+
+    pdf_bytes = generate_donation_certificate(
+        donor_name=donor_name,
+        donor_email=donor.email,
+        food_type=match.listing.food_type,
+        quantity=match.matched_quantity,
+        unit=match.listing.unit,
+        pickup_address=match.listing.pickup_address,
+        completed_at=match.completed_at,
+        match_id=match.id,
+        receiver_name=receiver_name,
+    )
+
+    response = HttpResponse(pdf_bytes, content_type='application/pdf')
+    response['Content-Disposition'] = f'attachment; filename="FoodShare_Certificate_{match.id}.pdf"'
+    return response

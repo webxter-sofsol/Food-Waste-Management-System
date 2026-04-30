@@ -160,6 +160,38 @@ export const rejectListing = async (listingId, reason) => {
 };
 
 /**
+ * Get all users with full profile details (admin only)
+ * @param {Object} params - Filter params (role, verification_status, search, page, page_size)
+ */
+export const getAllUsers = async (params = {}) => {
+  try {
+    const response = await api.get('/admin/users/', { params });
+    return { success: true, data: response.data };
+  } catch (error) {
+    return {
+      success: false,
+      error: error.response?.data?.error || error.message || 'Failed to fetch users',
+    };
+  }
+};
+
+/**
+ * Get full details for a single user (admin only)
+ * @param {number} userId
+ */
+export const getUserDetail = async (userId) => {
+  try {
+    const response = await api.get(`/admin/users/${userId}/`);
+    return { success: true, data: response.data };
+  } catch (error) {
+    return {
+      success: false,
+      error: error.response?.data?.error || error.message || 'Failed to fetch user',
+    };
+  }
+};
+
+/**
  * Export admin report
  * @param {Object} exportData - Export parameters (format, type, filters)
  * @returns {Promise<Object>} Response with export data
@@ -191,6 +223,8 @@ const adminService = {
   getPendingListings,
   approveListing,
   rejectListing,
+  getAllUsers,
+  getUserDetail,
 };
 
 export default adminService;

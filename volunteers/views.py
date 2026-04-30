@@ -418,3 +418,128 @@ def self_assign_match(request, match_id):
         'coordination_id': coord.id,
         'match_id': match_id,
     }, status=200)
+
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated, IsVolunteer])
+def complete_delivery(request, match_id):
+    """
+    POST /api/volunteer/matches/{id}/complete/
+    Volunteer marks a delivery as completed.
+    - Sets Match.status = 'completed' and records completed_at
+    - Sets FoodListing.status = 'completed'
+    - Emails a PDF donation certificate to the donor
+    """
+    try:
+        match = Match.objects.select_related(
+            'listing', 'donor', 'receiver',
+            'donor__profile', 'receiver__profile',
+        ).get(id=match_id, status='in_progress')
+    except Match.DoesNotExist:
+        return Response(
+            {'error': 'Match not found or not in progress.'},
+            status=status.HTTP_404_NOT_FOUND,
+        )
+
+    # Verify this volunteer is assigned
+    coord = match.pickup_coordination.filter(volunteer=request.user).first()
+    if not coord:
+        return Response(
+            {'error': 'You are not assigned to this delivery.'},
+            status=status.HTTP_403_FORBIDDEN,
+        )
+
+    with transaction.atomic():
+        now = timezone.now()
+
+        # Complete the match
+        match.status = 'completed'
+        match.completed_at = now
+        match.save()
+
+        # Complete the listing
+        listing = match.listing
+        listing.status = 'completed'
+        listing.save()
+
+        # Complete the coordination
+        coord.assignment_status = 'completed'
+        coord.save()
+
+    # Send certificate email to donor (non-blocking — errors are logged, not raised)
+    _send_donation_certificate(match)
+
+    # Notify donor and receiver
+    try:
+        donor_name = getattr(match.donor, 'profile', None) and match.donor.profile.full_name or match.donor.email
+        receiver_name = getattr(match.receiver, 'profile', None) and match.receiver.profile.full_name or match.receiver.email
+        Notification.objects.create(
+            user=match.donor,
+            notification_type='delivery_completed',
+            title='Delivery Completed',
+            message=f'Your donation of {match.listing.food_type} has been successfully delivered to {receiver_name}. A certificate of donation has been sent to your email.',
+            related_entity_type='match',
+            related_entity_id=match.id,
+        )
+        Notification.objects.create(
+            user=match.receiver,
+            notification_type='delivery_completed',
+            title='Food Received',
+            message=f'Your food order ({match.listing.food_type}) has been delivered by {getattr(request.user, "profile", None) and request.user.profile.full_name or request.user.email}.',
+            related_entity_type='match',
+            related_entity_id=match.id,
+        )
+    except Exception as e:
+        print(f'Notification error: {e}')
+
+    return Response({'message': 'Delivery marked as completed. Certificate sent to donor.'}, status=status.HTTP_200_OK)
+
+
+def _send_donation_certificate(match):
+    """Generate and email a PDF donation certificate to the donor."""
+    try:
+        from authentication.certificate import generate_donation_certificate
+        from django.core.mail import EmailMessage
+        from django.conf import settings as django_settings
+
+        donor = match.donor
+        donor_name = getattr(donor, 'profile', None) and donor.profile.full_name or donor.username
+        receiver_name = (
+            getattr(match.receiver, 'profile', None) and match.receiver.profile.full_name
+            or match.receiver.email
+        )
+
+        pdf_bytes = generate_donation_certificate(
+            donor_name=donor_name,
+            donor_email=donor.email,
+            food_type=match.listing.food_type,
+            quantity=match.matched_quantity,
+            unit=match.listing.unit,
+            pickup_address=match.listing.pickup_address,
+            completed_at=match.completed_at,
+            match_id=match.id,
+            receiver_name=receiver_name,
+        )
+
+        email = EmailMessage(
+            subject='Your FoodShare Donation Certificate 🌿',
+            body=(
+                f'Dear {donor_name},\n\n'
+                f'Thank you for your generous donation of {match.matched_quantity} '
+                f'{match.listing.unit} of {match.listing.food_type}!\n\n'
+                f'Please find your Certificate of Donation attached to this email.\n\n'
+                f'Your contribution helps reduce food waste and supports those in need.\n\n'
+                f'With gratitude,\nThe FoodShare Team'
+            ),
+            from_email=getattr(django_settings, 'DEFAULT_FROM_EMAIL', 'noreply@foodshare.com'),
+            to=[donor.email],
+        )
+        email.attach(
+            filename=f'FoodShare_Certificate_{match.id}.pdf',
+            content=pdf_bytes,
+            mimetype='application/pdf',
+        )
+        email.send(fail_silently=False)
+
+    except Exception as e:
+        print(f'Certificate email error for match {match.id}: {e}')

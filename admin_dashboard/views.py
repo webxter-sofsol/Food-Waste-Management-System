@@ -18,7 +18,7 @@ from food_listings.models import FoodListing
 from matching.models import Match
 from tracking.models import DeliveryTracking
 from volunteers.models import PickupCoordination
-from .serializers import PendingUserSerializer, UserVerificationSerializer
+from .serializers import PendingUserSerializer, UserVerificationSerializer, AllUsersSerializer
 
 
 class PendingVerificationsView(generics.ListAPIView):
@@ -26,6 +26,11 @@ class PendingVerificationsView(generics.ListAPIView):
     permission_classes = [IsAuthenticated, IsAdmin]
     def get_queryset(self):
         return User.objects.filter(verification_status='pending').select_related('profile').order_by('-date_joined')
+    
+    def get_serializer_context(self):
+        context = super().get_serializer_context()
+        context['request'] = self.request
+        return context
 
 
 @api_view(['PUT'])
@@ -289,3 +294,56 @@ def list_volunteers(request):
     volunteers = User.objects.filter(role='volunteer', is_active=True, verification_status='approved').select_related('profile').order_by('email')
     data = [{'id': v.id, 'email': v.email, 'name': getattr(v, 'profile', None) and v.profile.full_name or v.email, 'phone': getattr(v, 'profile', None) and v.profile.phone or None} for v in volunteers]
     return Response({'count': len(data), 'results': data})
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated, IsAdmin])
+def list_all_users(request):
+    """
+    GET /api/admin/users/
+    Returns all users with full profile details.
+    Supports filtering by role, verification_status, search (email/name).
+    """
+    queryset = User.objects.select_related('profile').order_by('-date_joined')
+
+    role = request.query_params.get('role')
+    if role:
+        queryset = queryset.filter(role=role)
+
+    verification_status = request.query_params.get('verification_status')
+    if verification_status:
+        queryset = queryset.filter(verification_status=verification_status)
+
+    is_active = request.query_params.get('is_active')
+    if is_active is not None:
+        queryset = queryset.filter(is_active=(is_active.lower() == 'true'))
+
+    search = request.query_params.get('search', '').strip()
+    if search:
+        queryset = queryset.filter(
+            Q(email__icontains=search) |
+            Q(username__icontains=search) |
+            Q(profile__full_name__icontains=search)
+        )
+
+    from rest_framework.pagination import PageNumberPagination
+    paginator = PageNumberPagination()
+    paginator.page_size = int(request.query_params.get('page_size', 20))
+    page = paginator.paginate_queryset(queryset, request)
+    serializer = AllUsersSerializer(page, many=True, context={'request': request})
+    return paginator.get_paginated_response(serializer.data)
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated, IsAdmin])
+def get_user_detail(request, user_id):
+    """
+    GET /api/admin/users/{id}/
+    Returns full details for a single user.
+    """
+    try:
+        user = User.objects.select_related('profile').get(id=user_id)
+    except User.DoesNotExist:
+        return Response({'error': 'User not found'}, status=status.HTTP_404_NOT_FOUND)
+    serializer = AllUsersSerializer(user, context={'request': request})
+    return Response(serializer.data)

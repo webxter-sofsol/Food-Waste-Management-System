@@ -4,15 +4,21 @@ import {
 } from '@mui/material';
 import {
   ArrowForward,
-  TrendingUp as TrendingUpIcon,
-  People as PeopleIcon,
-  Restaurant as RestaurantIcon,
   CheckCircleOutline,
   Verified,
   HourglassEmpty,
 } from '@mui/icons-material';
 import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import {
+  FoodSharingIllustration,
+  DeliveryIllustration,
+  CommunityIllustration,
+  AdminIllustration,
+  UsersIcon,
+  FoodIcon,
+  MatchIcon,
+} from '../components/illustrations';
 
 // ── per-role config ────────────────────────────────────────────────────────────
 const ROLE_CONFIG = {
@@ -21,6 +27,7 @@ const ROLE_CONFIG = {
     subtitle: 'Share your surplus food and help reduce waste in your community.',
     emoji: '🍽️',
     gradient: ['#16a34a', '#15803d'],
+    Illustration: FoodSharingIllustration,
     actions: [
       { label: 'Create Listing', path: '/donor/create-listing', primary: true },
       { label: 'My Listings',    path: '/donor/dashboard' },
@@ -38,6 +45,7 @@ const ROLE_CONFIG = {
     subtitle: 'Find and request food items from generous donors near you.',
     emoji: '🤲',
     gradient: ['#2563eb', '#1d4ed8'],
+    Illustration: CommunityIllustration,
     actions: [
       { label: 'Browse Food',  path: '/receiver/food-listings', primary: true },
       { label: 'My Requests', path: '/receiver/dashboard' },
@@ -55,6 +63,7 @@ const ROLE_CONFIG = {
     subtitle: 'Help deliver food from donors to receivers in your area.',
     emoji: '🚚',
     gradient: ['#ea580c', '#c2410c'],
+    Illustration: DeliveryIllustration,
     actions: [
       { label: 'Available Deliveries', path: '/volunteer/dashboard',   primary: true },
       { label: 'My Assignments',       path: '/volunteer/assignments' },
@@ -72,6 +81,7 @@ const ROLE_CONFIG = {
     subtitle: 'Manage users, verify accounts, and monitor system health.',
     emoji: '⚙️',
     gradient: ['#7c3aed', '#6d28d9'],
+    Illustration: AdminIllustration,
     actions: [
       { label: 'Admin Panel',    path: '/admin/dashboard',     primary: true },
       { label: 'Verifications',  path: '/admin/verifications' },
@@ -88,20 +98,24 @@ const ROLE_CONFIG = {
 };
 
 const STATS = [
-  { label: 'Active Users',       value: '2,847',  icon: <PeopleIcon sx={{ fontSize: 20 }} />,      color: '#2563eb', bg: '#eff6ff' },
-  { label: 'Food Items Shared',  value: '15,234', icon: <RestaurantIcon sx={{ fontSize: 20 }} />,  color: '#16a34a', bg: '#f0fdf4' },
-  { label: 'Successful Matches', value: '8,921',  icon: <TrendingUpIcon sx={{ fontSize: 20 }} />,  color: '#ea580c', bg: '#fff7ed' },
+  { label: 'Active Users',       value: '2,847',  Icon: UsersIcon,  color: '#2563eb', bg: '#eff6ff' },
+  { label: 'Food Items Shared',  value: '15,234', Icon: FoodIcon,   color: '#16a34a', bg: '#f0fdf4' },
+  { label: 'Successful Matches', value: '8,921',  Icon: MatchIcon,  color: '#ea580c', bg: '#fff7ed' },
 ];
 
 // ── small reusable pieces ──────────────────────────────────────────────────────
-const StatCard = ({ label, value, icon, color, bg }) => (
+const StatCard = ({ label, value, Icon, color, bg }) => (
   <Card sx={{ border: '1px solid #f1f5f9', boxShadow: '0 1px 4px rgba(0,0,0,0.06)', height: '100%' }}>
     <CardContent sx={{ p: 2.5, '&:last-child': { pb: 2.5 } }}>
       <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 1.5 }}>
-        <Box sx={{ width: 40, height: 40, borderRadius: '10px', bgcolor: bg, display: 'flex', alignItems: 'center', justifyContent: 'center', color }}>
-          {icon}
+        <Box sx={{ width: 40, height: 40, borderRadius: '10px', bgcolor: bg, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <Icon size={20} color={color} />
         </Box>
-        <TrendingUpIcon sx={{ fontSize: 14, color: '#16a34a' }} />
+        {/* Trend arrow SVG */}
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M3 17 L9 11 L13 15 L21 7" stroke="#16a34a" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+          <path d="M17 7 L21 7 L21 11" stroke="#16a34a" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
       </Box>
       <Typography variant="h5" fontWeight={800} sx={{ lineHeight: 1, mb: 0.5 }}>{value}</Typography>
       <Typography variant="caption" color="text.secondary" fontWeight={500}>{label}</Typography>
@@ -133,7 +147,7 @@ const DashboardPage = () => {
 
   const cfg = ROLE_CONFIG[user?.role] ?? {
     title: 'Dashboard', subtitle: 'Welcome to FoodShare.', emoji: '🌿',
-    gradient: ['#16a34a', '#15803d'], actions: [], quickLinks: [],
+    gradient: ['#16a34a', '#15803d'], Illustration: FoodSharingIllustration, actions: [], quickLinks: [],
   };
 
   const firstName = user?.profile?.full_name?.split(' ')[0]
@@ -160,9 +174,16 @@ const DashboardPage = () => {
               position: 'relative',
             }}
           >
-            {/* Decorative circles */}
-            <Box sx={{ position: 'absolute', top: -30, right: -30, width: 140, height: 140, borderRadius: '50%', bgcolor: 'rgba(255,255,255,0.08)', pointerEvents: 'none' }} />
-            <Box sx={{ position: 'absolute', bottom: -40, right: 60, width: 100, height: 100, borderRadius: '50%', bgcolor: 'rgba(255,255,255,0.06)', pointerEvents: 'none' }} />
+            {/* SVG illustration — decorative, positioned top-right */}
+            <Box sx={{
+              position: 'absolute', top: 0, right: 0,
+              display: { xs: 'none', sm: 'block' },
+              pointerEvents: 'none', userSelect: 'none',
+            }}>
+              <cfg.Illustration width={220} height={160} opacity={0.15} />
+            </Box>
+            {/* Subtle circle accent bottom-right (mobile fallback) */}
+            <Box sx={{ position: 'absolute', bottom: -40, right: 60, width: 100, height: 100, borderRadius: '50%', bgcolor: 'rgba(255,255,255,0.06)', pointerEvents: 'none', display: { sm: 'none' } }} />
 
             <CardContent sx={{ p: { xs: 2.5, sm: 3.5 }, '&:last-child': { pb: { xs: 2.5, sm: 3.5 } }, position: 'relative', zIndex: 1 }}>
               <Box sx={{ display: 'flex', alignItems: 'flex-start', gap: 2, mb: 2.5 }}>
@@ -261,10 +282,43 @@ const DashboardPage = () => {
               </Typography>
               <Box sx={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
                 {[
-                  { step: 1, emoji: '🍽️', title: 'Donors list food', body: 'Restaurants and households post surplus food with pickup details and expiry times.' },
-                  { step: 2, emoji: '🔍', title: 'Receivers browse', body: 'People in need browse available listings and request what they need.' },
-                  { step: 3, emoji: '🚚', title: 'Volunteers deliver', body: 'Volunteers coordinate pickup and delivery to get food where it\'s needed.' },
-                ].map(({ step, emoji, title, body }, i, arr) => (
+                  {
+                    step: 1,
+                    title: 'Donors list food',
+                    body: 'Restaurants and households post surplus food with pickup details and expiry times.',
+                    svg: (
+                      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <path d="M12 2C8 2 4 6 4 10c0 4 3 7 7 7.9V22h2v-4.1c4-1 7-4 7-7.9C20 6 16 2 12 2z" stroke="#16a34a" strokeWidth="1.8" strokeLinejoin="round"/>
+                        <path d="M8 10q2-3 4 0q2 3 4 0" stroke="#16a34a" strokeWidth="1.5" strokeLinecap="round"/>
+                      </svg>
+                    ),
+                  },
+                  {
+                    step: 2,
+                    title: 'Receivers browse',
+                    body: 'People in need browse available listings and request what they need.',
+                    svg: (
+                      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <circle cx="11" cy="11" r="7" stroke="#16a34a" strokeWidth="1.8"/>
+                        <path d="M16.5 16.5 L21 21" stroke="#16a34a" strokeWidth="2" strokeLinecap="round"/>
+                        <path d="M8 11h6M11 8v6" stroke="#16a34a" strokeWidth="1.5" strokeLinecap="round"/>
+                      </svg>
+                    ),
+                  },
+                  {
+                    step: 3,
+                    title: 'Volunteers deliver',
+                    body: "Volunteers coordinate pickup and delivery to get food where it's needed.",
+                    svg: (
+                      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <rect x="1" y="8" width="13" height="9" rx="2" stroke="#16a34a" strokeWidth="1.8"/>
+                        <path d="M14 11h4l3 4v2h-7V11z" stroke="#16a34a" strokeWidth="1.8" strokeLinejoin="round"/>
+                        <circle cx="6" cy="19" r="2" stroke="#16a34a" strokeWidth="1.8"/>
+                        <circle cx="18" cy="19" r="2" stroke="#16a34a" strokeWidth="1.8"/>
+                      </svg>
+                    ),
+                  },
+                ].map(({ step, svg, title, body }, i, arr) => (
                   <Box key={step}>
                     <Box sx={{ display: 'flex', gap: 2, py: 2 }}>
                       {/* Step indicator */}
@@ -274,10 +328,9 @@ const DashboardPage = () => {
                             width: 40, height: 40, borderRadius: '50%',
                             bgcolor: '#f0fdf4', border: '2px solid #bbf7d0',
                             display: 'flex', alignItems: 'center', justifyContent: 'center',
-                            fontSize: '1.1rem',
                           }}
                         >
-                          {emoji}
+                          {svg}
                         </Box>
                         {i < arr.length - 1 && (
                           <Box sx={{ width: 2, flexGrow: 1, bgcolor: '#e2e8f0', mt: 1, minHeight: 20 }} />

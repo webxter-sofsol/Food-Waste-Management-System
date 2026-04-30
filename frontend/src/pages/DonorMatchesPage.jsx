@@ -4,10 +4,10 @@
  */
 import { useState, useEffect, useCallback } from 'react';
 import {
-  Alert, Avatar, Box, Card, CardContent, Chip, CircularProgress,
+  Alert, Avatar, Box, Button, Card, CardContent, Chip, CircularProgress,
   Container, Divider, Grid, IconButton, Tab, Tabs, Tooltip, Typography,
 } from '@mui/material';
-import { Handshake, Refresh, LocationOn, Person } from '@mui/icons-material';
+import { Download, Handshake, Refresh, LocationOn, Person } from '@mui/icons-material';
 import api from '../services/api';
 
 // ── helpers ───────────────────────────────────────────────────────────────────
@@ -23,9 +23,32 @@ const fmt = (iso) => iso ? new Date(iso).toLocaleString() : '—';
 // ── Match card ────────────────────────────────────────────────────────────────
 const MatchCard = ({ match }) => {
   const cfg = STATUS_CFG[match.status] ?? { label: match.status, color: 'default' };
+  const [downloading, setDownloading] = useState(false);
+  const [dlError, setDlError] = useState('');
+
+  const handleDownloadCertificate = async () => {
+    setDownloading(true);
+    setDlError('');
+    try {
+      const res = await api.get(`/matches/${match.id}/certificate/`, {
+        responseType: 'blob',
+      });
+      const url = window.URL.createObjectURL(new Blob([res.data], { type: 'application/pdf' }));
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `FoodShare_Certificate_${match.id}.pdf`;
+      a.click();
+      window.URL.revokeObjectURL(url);
+    } catch {
+      setDlError('Failed to download certificate. Please try again.');
+    } finally {
+      setDownloading(false);
+    }
+  };
+
   return (
-    <Card sx={{ height: '100%' }}>
-      <CardContent>
+    <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+      <CardContent sx={{ flexGrow: 1 }}>
         {/* Header */}
         <Box display="flex" justifyContent="space-between" alignItems="flex-start" gap={1} mb={1.5}>
           <Box minWidth={0}>
@@ -68,7 +91,30 @@ const MatchCard = ({ match }) => {
             </Box>
           )}
         </Box>
+
+        {dlError && (
+          <Alert severity="error" sx={{ mt: 1.5, py: 0.5 }} onClose={() => setDlError('')}>
+            {dlError}
+          </Alert>
+        )}
       </CardContent>
+
+      {/* Certificate download — only for completed matches */}
+      {match.status === 'completed' && (
+        <Box sx={{ px: 2, pb: 2 }}>
+          <Button
+            fullWidth
+            variant="outlined"
+            color="success"
+            size="small"
+            startIcon={downloading ? <CircularProgress size={14} color="inherit" /> : <Download />}
+            onClick={handleDownloadCertificate}
+            disabled={downloading}
+          >
+            {downloading ? 'Downloading…' : 'Download Certificate'}
+          </Button>
+        </Box>
+      )}
     </Card>
   );
 };

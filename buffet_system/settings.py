@@ -192,6 +192,19 @@ CACHES = {
     }
 }
 
-# Email Configuration (for development)
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-DEFAULT_FROM_EMAIL = 'noreply@buffet.com'
+# Email Configuration
+# Set EMAIL_BACKEND in .env:
+#   - For real sending: django.core.mail.backends.smtp.EmailBackend
+#   - For development:  django.core.mail.backends.console.EmailBackend
+EMAIL_BACKEND = os.getenv('EMAIL_BACKEND', 'django.core.mail.backends.console.EmailBackend')
+EMAIL_HOST = os.getenv('EMAIL_HOST', 'smtp.gmail.com')
+EMAIL_PORT = int(os.getenv('EMAIL_PORT', 587))
+EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS', 'True') == 'True'
+EMAIL_USE_SSL = os.getenv('EMAIL_USE_SSL', 'False') == 'True'
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER', '')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD', '')
+DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL', f'FoodShare <{EMAIL_HOST_USER}>')
+
+# Media files (uploaded documents, images)
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
