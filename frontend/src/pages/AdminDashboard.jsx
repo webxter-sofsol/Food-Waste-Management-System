@@ -215,7 +215,7 @@ const MatchCertificatesPanel = () => {
     setIssuing(matchId);
     const res = await adminService.issueCertificate(matchId);
     if (res.success) {
-      setSnackbar({ open: true, message: `Certificate sent to ${donorEmail}`, severity: 'success' });
+      setSnackbar({ open: true, message: `Receipt sent to ${donorEmail}`, severity: 'success' });
       load();
     } else {
       setSnackbar({ open: true, message: res.error, severity: 'error' });
@@ -243,7 +243,7 @@ const MatchCertificatesPanel = () => {
       <Box display="flex" alignItems="center" justifyContent="space-between" flexWrap="wrap" gap={1} mb={2}>
         <Box display="flex" alignItems="center" gap={1}>
           <CertificateIcon color="primary" />
-          <Typography variant="h6" fontWeight={700}>Matches & Certificates</Typography>
+          <Typography variant="h6" fontWeight={700}>Matches & Receipts</Typography>
           <Chip label={matches.length} size="small" color="primary" variant="outlined" />
         </Box>
         <Tooltip title="Refresh">
@@ -319,7 +319,7 @@ const MatchCertificatesPanel = () => {
                       disabled={issuing === m.id || m.status === 'cancelled'}
                       sx={{ whiteSpace: 'nowrap', fontSize: '0.75rem' }}
                     >
-                      {m.status === 'completed' ? 'Re-send' : 'Issue'}
+                      {m.status === 'completed' ? 'Re-send Receipt' : 'Issue Receipt'}
                     </Button>
                   </TableCell>
                 </TableRow>

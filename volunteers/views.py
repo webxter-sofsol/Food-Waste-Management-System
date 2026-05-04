@@ -492,7 +492,7 @@ def complete_delivery(request, match_id):
     except Exception as e:
         print(f'Notification error: {e}')
 
-    return Response({'message': 'Delivery marked as completed. Certificate sent to donor.'}, status=status.HTTP_200_OK)
+    return Response({'message': 'Delivery marked as completed. Receipt sent to donor.'}, status=status.HTTP_200_OK)
 
 
 def _send_donation_certificate(match):

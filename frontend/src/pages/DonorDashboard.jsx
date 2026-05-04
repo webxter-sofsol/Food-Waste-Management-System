@@ -304,7 +304,7 @@ const CertificatesPanel = ({ certificates, loading, error, onError, onRefresh })
       const url = URL.createObjectURL(result.data);
       const a = document.createElement('a');
       a.href = url;
-      a.download = `FoodShare_Certificate_${cert.match_id}.pdf`;
+      a.download = `FoodShare_Receipt_${cert.match_id}.pdf`;
       a.click();
       URL.revokeObjectURL(url);
     } else {
@@ -319,7 +319,7 @@ const CertificatesPanel = ({ certificates, loading, error, onError, onRefresh })
         <Box display="flex" alignItems="center" gap={1}>
           <CertificateIcon color="primary" />
           <Typography variant="h6" fontWeight={700}>
-            My Donation Certificates
+            My Donation Receipts
           </Typography>
           {certificates.length > 0 && (
             <Chip label={certificates.length} size="small" color="primary" variant="outlined" />
@@ -344,7 +344,7 @@ const CertificatesPanel = ({ certificates, loading, error, onError, onRefresh })
         <Box textAlign="center" py={4}>
           <CertificateIcon sx={{ fontSize: 48, color: 'text.disabled', mb: 1 }} />
           <Typography variant="body2" color="text.secondary">
-            No certificates yet. Certificates are issued when you approve a receiver's request.
+            No receipts yet. A receipt is issued when you approve a receiver's request.
           </Typography>
         </Box>
       ) : (
@@ -352,7 +352,7 @@ const CertificatesPanel = ({ certificates, loading, error, onError, onRefresh })
           <Table size="small">
             <TableHead>
               <TableRow>
-                {['#', 'Food Donated', 'Quantity', 'Received By', 'Date', 'Certificate'].map((h) => (
+                {['#', 'Food Donated', 'Quantity', 'Received By', 'Date', 'Receipt'].map((h) => (
                   <TableCell key={h} sx={{ fontWeight: 700, bgcolor: '#f8fafc', whiteSpace: 'nowrap' }}>
                     {h}
                   </TableCell>
@@ -391,7 +391,7 @@ const CertificatesPanel = ({ certificates, loading, error, onError, onRefresh })
                       disabled={downloading === cert.match_id}
                       sx={{ whiteSpace: 'nowrap' }}
                     >
-                      Download PDF
+                      Download Receipt
                     </Button>
                   </TableCell>
                 </TableRow>

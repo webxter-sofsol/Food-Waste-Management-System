@@ -170,8 +170,7 @@ def approve_food_request(request, pk):
                     user=food_request.receiver,
                     notification_type='match_created',
                     title='Food Request Approved',
-                    message=f"Your request for {food_request.requested_quantity} {listing.unit} of {listing.food_type} has been approved!",
-                    related_entity_type='match',
+                    message=f"Your request for {food_request.requested_quantity} {listing.unit} of {listing.food_type} has been approved!",                    related_entity_type='match',
                     related_entity_id=match.id,
                     sent_via_email=True
                 )
@@ -479,7 +478,7 @@ def download_certificate(request, match_id):
     )
 
     response = HttpResponse(pdf_bytes, content_type='application/pdf')
-    response['Content-Disposition'] = f'attachment; filename="FoodShare_Certificate_{match.id}.pdf"'
+    response['Content-Disposition'] = f'attachment; filename="FoodShare_Receipt_{match.id}.pdf"'
     return response
 
 
@@ -512,12 +511,12 @@ def _send_donation_certificate_for_match(match):
         )
 
         email = EmailMessage(
-            subject='Your FoodShare Donation Certificate 🌿',
+            subject='Your FoodShare Donation Receipt 🌿',
             body=(
                 f'Dear {donor_name},\n\n'
                 f'Thank you for your generous donation of {match.matched_quantity} '
                 f'{match.listing.unit} of {match.listing.food_type}!\n\n'
-                f'Please find your Certificate of Donation attached to this email.\n\n'
+                f'Please find your Donation Receipt attached to this email.\n\n'
                 f'Your contribution helps reduce food waste and supports those in need.\n\n'
                 f'With gratitude,\nThe FoodShare Team'
             ),
@@ -525,7 +524,7 @@ def _send_donation_certificate_for_match(match):
             to=[donor.email],
         )
         email.attach(
-            filename=f'FoodShare_Certificate_{match.id}.pdf',
+            filename=f'FoodShare_Receipt_{match.id}.pdf',
             content=pdf_bytes,
             mimetype='application/pdf',
         )
@@ -611,7 +610,7 @@ def admin_issue_certificate(request, match_id):
         or match.donor.username
     )
     return Response({
-        'message': f'Certificate issued and emailed to {match.donor.email}.',
+        'message': f'Receipt issued and emailed to {match.donor.email}.',
         'match_id': match.id,
         'donor_name': donor_name,
         'donor_email': match.donor.email,

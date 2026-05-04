@@ -1,6 +1,6 @@
 """
-Donation Certificate Generator
-Generates a professional PDF certificate of donation using ReportLab.
+Donation Receipt Generator
+Generates a professional PDF receipt of donation using ReportLab.
 """
 import io
 from datetime import datetime
@@ -8,7 +8,7 @@ from reportlab.lib.pagesizes import A4
 from reportlab.lib.units import cm
 from reportlab.lib import colors
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
-from reportlab.lib.enums import TA_CENTER, TA_LEFT
+from reportlab.lib.enums import TA_CENTER, TA_LEFT, TA_RIGHT
 from reportlab.platypus import (
     SimpleDocTemplate, Paragraph, Spacer, HRFlowable, Table, TableStyle
 )
@@ -23,6 +23,7 @@ GOLD        = colors.HexColor('#b45309')
 GREY_TEXT   = colors.HexColor('#374151')
 GREY_LIGHT  = colors.HexColor('#f9fafb')
 BORDER      = colors.HexColor('#bbf7d0')
+GREY_MID    = colors.HexColor('#6b7280')
 
 
 def _draw_border(c: canvas.Canvas, doc):
@@ -60,7 +61,7 @@ def generate_donation_certificate(
     receiver_name: str = '',
 ) -> bytes:
     """
-    Generate a PDF donation certificate and return it as bytes.
+    Generate a PDF donation receipt and return it as bytes.
 
     Parameters
     ----------
@@ -71,8 +72,8 @@ def generate_donation_certificate(
     unit            : Unit (servings / kg / liters)
     pickup_address  : Pickup address of the listing
     completed_at    : Datetime when the match was completed
-    match_id        : Match ID (used as certificate number)
-    receiver_name   : Name of the receiving organisation (optional)
+    match_id        : Match ID (used as receipt number)
+    receiver_name   : Name of the receiving organisation
     """
     buffer = io.BytesIO()
 
@@ -87,9 +88,23 @@ def generate_donation_certificate(
 
     styles = getSampleStyleSheet()
 
+    # ── Resolved values (never blank) ─────────────────────────────────────────
+    donor_name     = donor_name.strip()    or 'N/A'
+    donor_email    = donor_email.strip()   or 'N/A'
+    food_type      = food_type.strip()     or 'N/A'
+    pickup_address = pickup_address.strip() if pickup_address else 'N/A'
+    receiver_name  = receiver_name.strip() if receiver_name else 'N/A'
+    unit           = unit.strip()          or 'servings'
+
+    now            = completed_at or datetime.utcnow()
+    date_str       = now.strftime('%B %d, %Y')
+    time_str       = now.strftime('%I:%M %p UTC')
+    datetime_str   = f'{date_str}  {time_str}'
+    receipt_no     = f'FS-{match_id:06d}'
+
     # ── Custom styles ──────────────────────────────────────────────────────────
     title_style = ParagraphStyle(
-        'CertTitle',
+        'ReceiptTitle',
         parent=styles['Title'],
         fontSize=28,
         textColor=GREEN_DARK,
@@ -98,7 +113,7 @@ def generate_donation_certificate(
         fontName='Helvetica-Bold',
     )
     subtitle_style = ParagraphStyle(
-        'CertSubtitle',
+        'ReceiptSubtitle',
         parent=styles['Normal'],
         fontSize=13,
         textColor=GOLD,
@@ -128,7 +143,7 @@ def generate_donation_certificate(
         'Label',
         parent=styles['Normal'],
         fontSize=9,
-        textColor=colors.HexColor('#6b7280'),
+        textColor=GREY_MID,
         fontName='Helvetica',
         alignment=TA_LEFT,
     )
@@ -139,6 +154,22 @@ def generate_donation_certificate(
         textColor=GREY_TEXT,
         fontName='Helvetica-Bold',
         alignment=TA_LEFT,
+    )
+    sig_name_style = ParagraphStyle(
+        'SigName',
+        parent=styles['Normal'],
+        fontSize=11,
+        textColor=GREEN_DARK,
+        fontName='Helvetica-Bold',
+        alignment=TA_CENTER,
+    )
+    sig_label_style = ParagraphStyle(
+        'SigLabel',
+        parent=styles['Normal'],
+        fontSize=9,
+        textColor=GREY_MID,
+        fontName='Helvetica',
+        alignment=TA_CENTER,
     )
     footer_style = ParagraphStyle(
         'Footer',
@@ -151,7 +182,7 @@ def generate_donation_certificate(
     # ── Content ────────────────────────────────────────────────────────────────
     story = []
 
-    # Logo / org name
+    # Org name / logo
     story.append(Spacer(1, 0.4 * cm))
     story.append(Paragraph('🌿 FoodShare', ParagraphStyle(
         'OrgName', parent=styles['Normal'],
@@ -161,8 +192,8 @@ def generate_donation_certificate(
     story.append(Spacer(1, 0.3 * cm))
 
     # Title
-    story.append(Paragraph('Certificate of Donation', title_style))
-    story.append(Paragraph('This is to certify that', subtitle_style))
+    story.append(Paragraph('Donation Receipt', title_style))
+    story.append(Paragraph('This is to acknowledge that', subtitle_style))
     story.append(Spacer(1, 0.2 * cm))
 
     # Donor name (hero element)
@@ -181,18 +212,17 @@ def generate_donation_certificate(
 
     story.append(Spacer(1, 0.8 * cm))
 
-    # ── Details table ──────────────────────────────────────────────────────────
-    date_str = completed_at.strftime('%B %d, %Y') if completed_at else '—'
-    time_str = completed_at.strftime('%I:%M %p UTC') if completed_at else ''
-
+    # ── Details table ─────────────────────────────────────────────────────────
     rows = [
-        ('Food Donated',    f'{food_type}'),
-        ('Quantity',        f'{quantity} {unit}'),
-        ('Pickup Location', pickup_address or '—'),
-        ('Date of Donation', f'{date_str}  {time_str}'),
+        ('Receipt No.',      receipt_no),
+        ('Donor Name',       donor_name),
+        ('Donor Email',      donor_email),
+        ('Food Donated',     food_type),
+        ('Quantity',         f'{quantity} {unit}'),
+        ('Pickup Location',  pickup_address),
+        ('Received By',      receiver_name),
+        ('Date & Time',      datetime_str),
     ]
-    if receiver_name:
-        rows.append(('Received By', receiver_name))
 
     table_data = []
     for label, value in rows:
@@ -203,19 +233,17 @@ def generate_donation_certificate(
 
     tbl = Table(table_data, colWidths=[4.5 * cm, 11 * cm])
     tbl.setStyle(TableStyle([
-        ('BACKGROUND', (0, 0), (-1, -1), GREY_LIGHT),
         ('ROWBACKGROUNDS', (0, 0), (-1, -1), [colors.white, GREY_LIGHT]),
-        ('GRID', (0, 0), (-1, -1), 0.5, BORDER),
-        ('VALIGN', (0, 0), (-1, -1), 'MIDDLE'),
-        ('TOPPADDING', (0, 0), (-1, -1), 7),
-        ('BOTTOMPADDING', (0, 0), (-1, -1), 7),
-        ('LEFTPADDING', (0, 0), (-1, -1), 10),
-        ('RIGHTPADDING', (0, 0), (-1, -1), 10),
-        ('ROUNDEDCORNERS', [4]),
+        ('GRID',           (0, 0), (-1, -1), 0.5, BORDER),
+        ('VALIGN',         (0, 0), (-1, -1), 'MIDDLE'),
+        ('TOPPADDING',     (0, 0), (-1, -1), 7),
+        ('BOTTOMPADDING',  (0, 0), (-1, -1), 7),
+        ('LEFTPADDING',    (0, 0), (-1, -1), 10),
+        ('RIGHTPADDING',   (0, 0), (-1, -1), 10),
     ]))
     story.append(tbl)
 
-    story.append(Spacer(1, 1 * cm))
+    story.append(Spacer(1, 0.8 * cm))
 
     # Appreciation message
     story.append(Paragraph(
@@ -224,45 +252,73 @@ def generate_donation_certificate(
         body_center,
     ))
 
-    story.append(Spacer(1, 1.2 * cm))
+    story.append(Spacer(1, 1.0 * cm))
 
-    # Signature line
+    # ── Signature block ───────────────────────────────────────────────────────
+    # Left column: Admin signature  |  Right column: Issue date
+    sig_line = ParagraphStyle(
+        'SigLine', parent=styles['Normal'],
+        fontSize=11, textColor=GREEN_DARK,
+        fontName='Helvetica-Bold', alignment=TA_CENTER,
+    )
+
     sig_table = Table(
         [[
-            Paragraph('_______________________', body_center),
-            Paragraph('_______________________', body_center),
+            # Admin signature column
+            Table(
+                [
+                    [Paragraph('FoodShare Admin', sig_line)],
+                    [HRFlowable(width='100%', thickness=1, color=GREEN_MID)],
+                    [Paragraph('Authorised Signatory', sig_label_style)],
+                    [Paragraph('FoodShare Platform', sig_label_style)],
+                ],
+                colWidths=[7.5 * cm],
+                style=TableStyle([
+                    ('ALIGN',   (0, 0), (-1, -1), 'CENTER'),
+                    ('VALIGN',  (0, 0), (-1, -1), 'MIDDLE'),
+                    ('TOPPADDING',    (0, 0), (-1, -1), 3),
+                    ('BOTTOMPADDING', (0, 0), (-1, -1), 3),
+                ]),
+            ),
+            # Date column
+            Table(
+                [
+                    [Paragraph(date_str, sig_line)],
+                    [HRFlowable(width='100%', thickness=1, color=GREEN_MID)],
+                    [Paragraph('Date of Issue', sig_label_style)],
+                    [Paragraph(time_str, sig_label_style)],
+                ],
+                colWidths=[7.5 * cm],
+                style=TableStyle([
+                    ('ALIGN',   (0, 0), (-1, -1), 'CENTER'),
+                    ('VALIGN',  (0, 0), (-1, -1), 'MIDDLE'),
+                    ('TOPPADDING',    (0, 0), (-1, -1), 3),
+                    ('BOTTOMPADDING', (0, 0), (-1, -1), 3),
+                ]),
+            ),
         ]],
         colWidths=[8 * cm, 8 * cm],
     )
-    sig_table.setStyle(TableStyle([('ALIGN', (0, 0), (-1, -1), 'CENTER')]))
+    sig_table.setStyle(TableStyle([
+        ('ALIGN',  (0, 0), (-1, -1), 'CENTER'),
+        ('VALIGN', (0, 0), (-1, -1), 'TOP'),
+    ]))
     story.append(sig_table)
 
-    sig_labels = Table(
-        [[
-            Paragraph('FoodShare Administrator', ParagraphStyle(
-                'SigLabel', parent=styles['Normal'],
-                fontSize=9, textColor=GREY_TEXT, alignment=TA_CENTER,
-            )),
-            Paragraph('Date', ParagraphStyle(
-                'SigLabel2', parent=styles['Normal'],
-                fontSize=9, textColor=GREY_TEXT, alignment=TA_CENTER,
-            )),
-        ]],
-        colWidths=[8 * cm, 8 * cm],
-    )
-    story.append(sig_labels)
+    story.append(Spacer(1, 0.8 * cm))
 
-    story.append(Spacer(1, 1 * cm))
-
-    # Footer
+    # ── Footer ────────────────────────────────────────────────────────────────
     story.append(HRFlowable(width='100%', thickness=0.5, color=BORDER))
     story.append(Spacer(1, 0.3 * cm))
     story.append(Paragraph(
-        f'Certificate No: FS-{match_id:06d}  •  Issued: {date_str}  •  '
+        f'Receipt No: {receipt_no}  •  Issued: {date_str}  •  '
         f'FoodShare — Connecting donors with those in need',
         footer_style,
     ))
-    story.append(Paragraph(donor_email, footer_style))
+    story.append(Paragraph(
+        f'Donor: {donor_name}  ({donor_email})',
+        footer_style,
+    ))
 
     # ── Build PDF ──────────────────────────────────────────────────────────────
     doc.build(story, onFirstPage=_draw_border, onLaterPages=_draw_border)
