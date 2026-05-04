@@ -294,22 +294,8 @@ const SummaryStats = ({ listings }) => {
 
 // ─── Certificates Panel ────────────────────────────────────────────────────────
 
-const CertificatesPanel = () => {
-  const [certificates, setCertificates] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
+const CertificatesPanel = ({ certificates, loading, error, onError, onRefresh }) => {
   const [downloading, setDownloading] = useState(null);
-
-  const fetchCertificates = useCallback(async () => {
-    setLoading(true);
-    setError('');
-    const result = await donorService.getDonorCertificates();
-    if (result.success) setCertificates(result.data);
-    else setError(result.error);
-    setLoading(false);
-  }, []);
-
-  useEffect(() => { fetchCertificates(); }, [fetchCertificates]);
 
   const handleDownload = async (cert) => {
     setDownloading(cert.match_id);
@@ -322,7 +308,7 @@ const CertificatesPanel = () => {
       a.click();
       URL.revokeObjectURL(url);
     } else {
-      setError(result.error);
+      onError(result.error);
     }
     setDownloading(null);
   };
@@ -340,14 +326,14 @@ const CertificatesPanel = () => {
           )}
         </Box>
         <Tooltip title="Refresh">
-          <IconButton size="small" onClick={fetchCertificates} disabled={loading}>
+          <IconButton size="small" onClick={onRefresh} disabled={loading}>
             <RefreshIcon />
           </IconButton>
         </Tooltip>
       </Box>
 
       {error && (
-        <Alert severity="error" sx={{ mb: 2 }} onClose={() => setError('')}>{error}</Alert>
+        <Alert severity="error" sx={{ mb: 2 }} onClose={() => onError('')}>{error}</Alert>
       )}
 
       {loading ? (
@@ -420,15 +406,28 @@ const CertificatesPanel = () => {
 
 // ─── Main Component ────────────────────────────────────────────────────────────
 
-const DonorDashboard = () => {  const navigate = useNavigate();
+const DonorDashboard = () => {
+  const navigate = useNavigate();
   const [listings, setListings] = useState([]);
   const [requests, setRequests] = useState([]);
+  const [certificates, setCertificates] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [certLoading, setCertLoading] = useState(true);
   const [error, setError] = useState('');
+  const [certError, setCertError] = useState('');
 
   // Cancel dialog state
   const [cancelTarget, setCancelTarget] = useState(null);
   const [cancelLoading, setCancelLoading] = useState(false);
+
+  const fetchCertificates = useCallback(async () => {
+    setCertLoading(true);
+    setCertError('');
+    const result = await donorService.getDonorCertificates();
+    if (result.success) setCertificates(result.data);
+    else setCertError(result.error);
+    setCertLoading(false);
+  }, []);
 
   const fetchData = useCallback(async () => {
     setLoading(true);
@@ -449,7 +448,10 @@ const DonorDashboard = () => {  const navigate = useNavigate();
     }
 
     setLoading(false);
-  }, []);
+
+    // Also refresh certificates — a request approval creates a new certificate
+    fetchCertificates();
+  }, [fetchCertificates]);
 
   useEffect(() => {
     fetchData();
@@ -578,10 +580,17 @@ const DonorDashboard = () => {  const navigate = useNavigate();
       )}
 
       {/* Certificates */}
-      <CertificatesPanel />
+      <CertificatesPanel
+        certificates={certificates}
+        loading={certLoading}
+        error={certError}
+        onError={setCertError}
+        onRefresh={fetchCertificates}
+      />
 
       {/* Cancel dialog */}
-      <CancelListingDialog        open={!!cancelTarget}
+      <CancelListingDialog
+        open={!!cancelTarget}
         onClose={() => setCancelTarget(null)}
         onConfirm={handleCancelConfirm}
         listingName={cancelTarget?.food_type}
