@@ -91,18 +91,35 @@ const FoodListingDetailPage = () => {
       return;
     }
     if (!pickupTime) { setRequestError('Please select a pickup time.'); return; }
+
+    // datetime-local gives "YYYY-MM-DDTHH:mm" — append seconds + Z so DRF
+    // accepts it as a timezone-aware UTC datetime (USE_TZ=True).
+    const pickupTimeISO = pickupTime.length === 16 ? `${pickupTime}:00Z` : pickupTime;
+
     try {
       setRequestLoading(true);
       await api.post('/food-requests/', {
         listing: listing.id,
         requested_quantity: requestQty,
-        pickup_time_preference: pickupTime,
+        pickup_time_preference: pickupTimeISO,
         special_instructions: specialInstructions || null,
       });
       setRequestSuccess(true);
       setRequestOpen(false);
     } catch (err) {
-      setRequestError(err.response?.data?.message || err.response?.data?.detail || 'Failed to submit request.');
+      // DRF returns field-level errors as { field: ["msg"] } or a non_field_errors array
+      const data = err.response?.data;
+      if (data && typeof data === 'object') {
+        const messages = Object.entries(data)
+          .map(([field, msgs]) => {
+            const label = field === 'non_field_errors' ? '' : `${field}: `;
+            return `${label}${Array.isArray(msgs) ? msgs.join(' ') : msgs}`;
+          })
+          .join('\n');
+        setRequestError(messages || 'Failed to submit request.');
+      } else {
+        setRequestError(err.response?.data?.detail || 'Failed to submit request.');
+      }
     } finally {
       setRequestLoading(false);
     }
