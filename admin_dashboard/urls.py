@@ -25,6 +25,7 @@ urlpatterns = [
     # Volunteer assignment endpoints
     path('matches/', views.list_all_matches, name='admin-matches'),
     path('matches/<int:match_id>/assign-volunteer/', views.assign_volunteer, name='assign-volunteer'),
+    path('matches/<int:match_id>/issue-certificate/', views.admin_issue_certificate, name='admin-issue-certificate'),
     path('volunteers/', views.list_volunteers, name='list-volunteers'),
 
     # All users management

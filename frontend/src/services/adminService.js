@@ -192,6 +192,24 @@ export const getUserDetail = async (userId) => {
 };
 
 /**
+ * Admin manually issues a donation certificate to a donor for a given match.
+ * Also marks the match as completed if it isn't already.
+ * @param {number} matchId - Match ID
+ * @returns {Promise<Object>} Response with success message
+ */
+export const issueCertificate = async (matchId) => {
+  try {
+    const response = await api.post(`/admin/matches/${matchId}/issue-certificate/`);
+    return { success: true, data: response.data, message: response.data.message };
+  } catch (error) {
+    return {
+      success: false,
+      error: error.response?.data?.error || error.message || 'Failed to issue certificate',
+    };
+  }
+};
+
+/**
  * Export admin report
  * @param {Object} exportData - Export parameters (format, type, filters)
  * @returns {Promise<Object>} Response with export data
@@ -225,6 +243,7 @@ const adminService = {
   rejectListing,
   getAllUsers,
   getUserDetail,
+  issueCertificate,
 };
 
 export default adminService;

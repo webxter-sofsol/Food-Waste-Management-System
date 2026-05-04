@@ -142,29 +142,29 @@ def approve_food_request(request, pk):
             # Update request status
             food_request.status = 'approved'
             food_request.save()
-            
-            # Create Match record (Requirement 8.2)
+
+            # Create Match record and immediately mark as completed
+            # (volunteer module not yet active — donor approval = delivery confirmed)
             match = Match.objects.create(
                 listing=food_request.listing,
                 request=food_request,
                 donor=food_request.listing.donor,
                 receiver=food_request.receiver,
                 matched_quantity=food_request.requested_quantity,
-                status='matched'
+                status='completed',
+                completed_at=timezone.now(),
             )
-            
+
             # Update FoodListing status or reduce available_quantity (Requirement 8.3)
             listing = food_request.listing
             if food_request.requested_quantity >= listing.available_quantity:
-                # Mark as reserved if all quantity is matched
-                listing.status = 'reserved'
+                listing.status = 'completed'
                 listing.available_quantity = 0
             else:
-                # Reduce available quantity
                 listing.available_quantity -= food_request.requested_quantity
             listing.save()
-            
-            # Send notification to receiver (Requirement 8.2)
+
+            # Notify receiver that request was approved
             try:
                 Notification.objects.create(
                     user=food_request.receiver,
@@ -177,10 +177,10 @@ def approve_food_request(request, pk):
                 )
             except Exception as e:
                 print(f"Failed to send notification to receiver: {e}")
-            
-            # TODO: Initiate volunteer assignment process (Requirement 8.5)
-            # This will be implemented in the volunteer coordination module
-            
+
+            # Send donation certificate to donor immediately (volunteer module not yet active)
+            _send_donation_certificate_for_match(match)
+
             return Response(
                 MatchSerializer(match, context={'request': request}).data,
                 status=status.HTTP_200_OK
@@ -481,3 +481,138 @@ def download_certificate(request, match_id):
     response = HttpResponse(pdf_bytes, content_type='application/pdf')
     response['Content-Disposition'] = f'attachment; filename="FoodShare_Certificate_{match.id}.pdf"'
     return response
+
+
+# ── Certificate helpers ────────────────────────────────────────────────────────
+
+def _send_donation_certificate_for_match(match):
+    """Generate and email a PDF donation certificate to the donor."""
+    try:
+        from authentication.certificate import generate_donation_certificate
+        from django.core.mail import EmailMessage
+        from django.conf import settings as django_settings
+
+        donor = match.donor
+        donor_name = getattr(donor, 'profile', None) and donor.profile.full_name or donor.username
+        receiver_name = (
+            getattr(match.receiver, 'profile', None) and match.receiver.profile.full_name
+            or match.receiver.email
+        )
+
+        pdf_bytes = generate_donation_certificate(
+            donor_name=donor_name,
+            donor_email=donor.email,
+            food_type=match.listing.food_type,
+            quantity=match.matched_quantity,
+            unit=match.listing.unit,
+            pickup_address=match.listing.pickup_address,
+            completed_at=match.completed_at,
+            match_id=match.id,
+            receiver_name=receiver_name,
+        )
+
+        email = EmailMessage(
+            subject='Your FoodShare Donation Certificate 🌿',
+            body=(
+                f'Dear {donor_name},\n\n'
+                f'Thank you for your generous donation of {match.matched_quantity} '
+                f'{match.listing.unit} of {match.listing.food_type}!\n\n'
+                f'Please find your Certificate of Donation attached to this email.\n\n'
+                f'Your contribution helps reduce food waste and supports those in need.\n\n'
+                f'With gratitude,\nThe FoodShare Team'
+            ),
+            from_email=getattr(django_settings, 'DEFAULT_FROM_EMAIL', 'noreply@foodshare.com'),
+            to=[donor.email],
+        )
+        email.attach(
+            filename=f'FoodShare_Certificate_{match.id}.pdf',
+            content=pdf_bytes,
+            mimetype='application/pdf',
+        )
+        email.send(fail_silently=True)
+    except Exception as e:
+        print(f'Certificate email error for match {match.id}: {e}')
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated, IsDonor])
+def list_donor_certificates(request):
+    """
+    GET /api/matches/certificates/
+    Returns all completed matches for the donor — each one has a downloadable certificate.
+    """
+    matches = (
+        Match.objects
+        .filter(donor=request.user, status='completed')
+        .select_related('listing', 'receiver', 'receiver__profile')
+        .order_by('-completed_at')
+    )
+
+    data = []
+    for m in matches:
+        receiver_name = (
+            getattr(m.receiver, 'profile', None) and m.receiver.profile.full_name
+            or m.receiver.email
+        )
+        data.append({
+            'match_id': m.id,
+            'food_type': m.listing.food_type,
+            'quantity': m.matched_quantity,
+            'unit': m.listing.unit,
+            'receiver_name': receiver_name,
+            'completed_at': m.completed_at,
+            'certificate_url': f'/api/matches/{m.id}/certificate/',
+        })
+
+    return Response({'count': len(data), 'results': data})
+
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def admin_issue_certificate(request, match_id):
+    """
+    POST /api/admin/matches/{id}/issue-certificate/
+    Admin manually issues (re-sends) a donation certificate to the donor.
+    Also marks the match as completed if it isn't already.
+    """
+    from authentication.permissions import IsAdmin
+    from django.http import HttpResponse
+    from authentication.certificate import generate_donation_certificate
+
+    # Only admins may call this
+    if not (request.user.is_staff or getattr(request.user, 'role', '') == 'admin'):
+        return Response({'error': 'Admin access required.'}, status=status.HTTP_403_FORBIDDEN)
+
+    try:
+        match = Match.objects.select_related(
+            'listing', 'donor', 'receiver',
+            'donor__profile', 'receiver__profile',
+        ).get(id=match_id)
+    except Match.DoesNotExist:
+        return Response({'error': 'Match not found.'}, status=status.HTTP_404_NOT_FOUND)
+
+    # Mark as completed if not already
+    if match.status != 'completed':
+        match.status = 'completed'
+        match.completed_at = match.completed_at or timezone.now()
+        match.save()
+
+        # Also mark listing completed if fully matched
+        listing = match.listing
+        if listing.available_quantity == 0 and listing.status not in ('completed', 'cancelled'):
+            listing.status = 'completed'
+            listing.save()
+
+    # Send certificate email
+    _send_donation_certificate_for_match(match)
+
+    donor_name = (
+        getattr(match.donor, 'profile', None) and match.donor.profile.full_name
+        or match.donor.username
+    )
+    return Response({
+        'message': f'Certificate issued and emailed to {match.donor.email}.',
+        'match_id': match.id,
+        'donor_name': donor_name,
+        'donor_email': match.donor.email,
+    }, status=status.HTTP_200_OK)

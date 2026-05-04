@@ -13,5 +13,6 @@ urlpatterns = [
 
     # Match endpoints
     path('matches/', views.MatchListView.as_view(), name='list-matches'),
+    path('matches/certificates/', views.list_donor_certificates, name='list-donor-certificates'),
     path('matches/<int:match_id>/certificate/', views.download_certificate, name='download-certificate'),
 ]

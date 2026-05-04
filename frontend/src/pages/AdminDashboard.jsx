@@ -4,12 +4,12 @@ import {
   CircularProgress, Container, Divider, Grid, IconButton,
   LinearProgress, Paper, Tab, Table, TableBody, TableCell,
   TableContainer, TableHead, TableRow, Tabs, Tooltip, Typography,
-  useMediaQuery, useTheme,
+  useMediaQuery, useTheme, Snackbar,
 } from '@mui/material';
 import {
   People, Restaurant, Handshake, CheckCircle, Warning,
   TrendingUp, HourglassEmpty, Refresh, OpenInNew, Schedule,
-  LocationOn,
+  LocationOn, CardMembership as CertificateIcon, Send as SendIcon,
 } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import UserVerificationList from '../components/admin/UserVerificationList';
@@ -192,6 +192,157 @@ const FoodListingsPanel = () => {
   );
 };
 
+// ── Matches & Certificate Panel ───────────────────────────────────────────────
+const MatchCertificatesPanel = () => {
+  const [matches, setMatches] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
+  const [issuing, setIssuing] = useState(null);
+  const [snackbar, setSnackbar] = useState({ open: false, message: '', severity: 'success' });
+  const [tab, setTab] = useState('all');
+
+  const load = useCallback(async () => {
+    setLoading(true); setError('');
+    const res = await adminService.getAdminReports({ type: 'matches', page_size: 100 });
+    if (res.success) setMatches(res.data.data || []);
+    else setError(res.error || 'Failed to load matches.');
+    setLoading(false);
+  }, []);
+
+  useEffect(() => { load(); }, [load]);
+
+  const handleIssueCertificate = async (matchId, donorEmail) => {
+    setIssuing(matchId);
+    const res = await adminService.issueCertificate(matchId);
+    if (res.success) {
+      setSnackbar({ open: true, message: `Certificate sent to ${donorEmail}`, severity: 'success' });
+      load();
+    } else {
+      setSnackbar({ open: true, message: res.error, severity: 'error' });
+    }
+    setIssuing(null);
+  };
+
+  const MATCH_STATUS_COLOR = {
+    matched: 'warning', in_progress: 'info', completed: 'success', cancelled: 'error',
+  };
+
+  const TABS = [
+    { value: 'all', label: 'All' },
+    { value: 'matched', label: 'Matched' },
+    { value: 'in_progress', label: 'In Progress' },
+    { value: 'completed', label: 'Completed' },
+    { value: 'cancelled', label: 'Cancelled' },
+  ];
+
+  const filtered = tab === 'all' ? matches : matches.filter((m) => m.status === tab);
+  const counts = matches.reduce((a, m) => { a[m.status] = (a[m.status] || 0) + 1; return a; }, {});
+
+  return (
+    <Paper elevation={1} sx={{ p: { xs: 2, sm: 3 }, borderRadius: 2 }}>
+      <Box display="flex" alignItems="center" justifyContent="space-between" flexWrap="wrap" gap={1} mb={2}>
+        <Box display="flex" alignItems="center" gap={1}>
+          <CertificateIcon color="primary" />
+          <Typography variant="h6" fontWeight={700}>Matches & Certificates</Typography>
+          <Chip label={matches.length} size="small" color="primary" variant="outlined" />
+        </Box>
+        <Tooltip title="Refresh">
+          <IconButton size="small" onClick={load} disabled={loading}><Refresh /></IconButton>
+        </Tooltip>
+      </Box>
+
+      {error && <Alert severity="error" sx={{ mb: 2 }} onClose={() => setError('')}>{error}</Alert>}
+
+      <Box sx={{ borderBottom: 1, borderColor: 'divider', mb: 2 }}>
+        <Tabs value={tab} onChange={(_, v) => setTab(v)} variant="scrollable" scrollButtons="auto">
+          {TABS.map((t) => (
+            <Tab
+              key={t.value}
+              label={`${t.label} (${t.value === 'all' ? matches.length : counts[t.value] || 0})`}
+              value={t.value}
+              sx={{ fontSize: '0.8rem', minWidth: 'auto', px: 1.5 }}
+            />
+          ))}
+        </Tabs>
+      </Box>
+
+      {loading ? (
+        <Box display="flex" justifyContent="center" py={4}><CircularProgress /></Box>
+      ) : filtered.length === 0 ? (
+        <Box textAlign="center" py={4}>
+          <Handshake sx={{ fontSize: 40, color: 'text.disabled', mb: 1 }} />
+          <Typography variant="body2" color="text.secondary">No {tab === 'all' ? '' : tab} matches found</Typography>
+        </Box>
+      ) : (
+        <TableContainer sx={{ borderRadius: 2, border: '1px solid #f1f5f9' }}>
+          <Table size="small" stickyHeader>
+            <TableHead>
+              <TableRow>
+                {['ID', 'Food', 'Donor', 'Receiver', 'Qty', 'Status', 'Date', 'Certificate'].map((h) => (
+                  <TableCell key={h} sx={{ fontWeight: 700, bgcolor: '#f8fafc', whiteSpace: 'nowrap' }}>{h}</TableCell>
+                ))}
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {filtered.map((m, i) => (
+                <TableRow key={i} hover>
+                  <TableCell>
+                    <Typography variant="body2" color="text.secondary">#{m.id}</Typography>
+                  </TableCell>
+                  <TableCell>
+                    <Typography variant="body2" fontWeight={600} noWrap sx={{ maxWidth: 140 }}>
+                      {m['listing__food_type'] || '—'}
+                    </Typography>
+                  </TableCell>
+                  <TableCell>
+                    <Typography variant="body2" noWrap sx={{ maxWidth: 160 }}>{m['donor__email'] || '—'}</Typography>
+                  </TableCell>
+                  <TableCell>
+                    <Typography variant="body2" noWrap sx={{ maxWidth: 160 }}>{m['receiver__email'] || '—'}</Typography>
+                  </TableCell>
+                  <TableCell>
+                    <Typography variant="body2">{m.matched_quantity}</Typography>
+                  </TableCell>
+                  <TableCell>
+                    <Chip label={m.status} color={MATCH_STATUS_COLOR[m.status] || 'default'} size="small" />
+                  </TableCell>
+                  <TableCell>
+                    <Typography variant="body2" noWrap>{fmtDate(m.created_at)}</Typography>
+                  </TableCell>
+                  <TableCell>
+                    <Button
+                      size="small"
+                      variant={m.status === 'completed' ? 'outlined' : 'contained'}
+                      color="success"
+                      startIcon={issuing === m.id ? <CircularProgress size={14} /> : <SendIcon />}
+                      onClick={() => handleIssueCertificate(m.id, m['donor__email'])}
+                      disabled={issuing === m.id || m.status === 'cancelled'}
+                      sx={{ whiteSpace: 'nowrap', fontSize: '0.75rem' }}
+                    >
+                      {m.status === 'completed' ? 'Re-send' : 'Issue'}
+                    </Button>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      )}
+
+      <Snackbar
+        open={snackbar.open}
+        autoHideDuration={4000}
+        onClose={() => setSnackbar((s) => ({ ...s, open: false }))}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+      >
+        <Alert severity={snackbar.severity} onClose={() => setSnackbar((s) => ({ ...s, open: false }))}>
+          {snackbar.message}
+        </Alert>
+      </Snackbar>
+    </Paper>
+  );
+};
+
 // ── Main dashboard ────────────────────────────────────────────────────────────
 const AdminDashboard = () => {
   const [metrics, setMetrics] = useState(null);
@@ -302,6 +453,11 @@ const AdminDashboard = () => {
       {/* Food listings panel */}
       <Box mb={3}>
         <FoodListingsPanel />
+      </Box>
+
+      {/* Matches & Certificates panel */}
+      <Box mb={3}>
+        <MatchCertificatesPanel />
       </Box>
 
       <Divider sx={{ my: { xs: 2, sm: 3 } }} />

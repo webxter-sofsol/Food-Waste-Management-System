@@ -158,6 +158,42 @@ export const rejectRequest = async (requestId, reason) => {
   }
 };
 
+/**
+ * Get all completed matches (certificates) for the donor
+ * @returns {Promise<Object>} Response with certificates array
+ */
+export const getDonorCertificates = async () => {
+  try {
+    const response = await api.get('/matches/certificates/');
+    const data = response.data.results || [];
+    return { success: true, data };
+  } catch (error) {
+    return {
+      success: false,
+      error: error.response?.data?.error || error.message || 'Failed to fetch certificates',
+    };
+  }
+};
+
+/**
+ * Download a donation certificate PDF for a completed match
+ * @param {number} matchId - Match ID
+ * @returns {Promise<Object>} Response with blob data
+ */
+export const downloadCertificate = async (matchId) => {
+  try {
+    const response = await api.get(`/matches/${matchId}/certificate/`, {
+      responseType: 'blob',
+    });
+    return { success: true, data: response.data };
+  } catch (error) {
+    return {
+      success: false,
+      error: error.response?.data?.error || error.message || 'Failed to download certificate',
+    };
+  }
+};
+
 const donorService = {
   getDonorListings,
   updateListing,
@@ -167,6 +203,8 @@ const donorService = {
   getListingMetrics,
   approveRequest,
   rejectRequest,
+  getDonorCertificates,
+  downloadCertificate,
 };
 
 export default donorService;

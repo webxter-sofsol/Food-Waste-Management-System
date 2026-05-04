@@ -17,6 +17,13 @@ import {
   IconButton,
   Tooltip,
   Collapse,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
 } from '@mui/material';
 import {
   Add as AddIcon,
@@ -30,6 +37,8 @@ import {
   Assignment as AssignmentIcon,
   CheckCircle as CheckCircleIcon,
   Refresh as RefreshIcon,
+  CardMembership as CertificateIcon,
+  Download as DownloadIcon,
 } from '@mui/icons-material';
 import { formatTimeRemaining } from '../utils/helpers';
 import donorService from '../services/donorService';
@@ -283,10 +292,135 @@ const SummaryStats = ({ listings }) => {
   );
 };
 
+// ─── Certificates Panel ────────────────────────────────────────────────────────
+
+const CertificatesPanel = () => {
+  const [certificates, setCertificates] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
+  const [downloading, setDownloading] = useState(null);
+
+  const fetchCertificates = useCallback(async () => {
+    setLoading(true);
+    setError('');
+    const result = await donorService.getDonorCertificates();
+    if (result.success) setCertificates(result.data);
+    else setError(result.error);
+    setLoading(false);
+  }, []);
+
+  useEffect(() => { fetchCertificates(); }, [fetchCertificates]);
+
+  const handleDownload = async (cert) => {
+    setDownloading(cert.match_id);
+    const result = await donorService.downloadCertificate(cert.match_id);
+    if (result.success) {
+      const url = URL.createObjectURL(result.data);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `FoodShare_Certificate_${cert.match_id}.pdf`;
+      a.click();
+      URL.revokeObjectURL(url);
+    } else {
+      setError(result.error);
+    }
+    setDownloading(null);
+  };
+
+  return (
+    <Paper elevation={1} sx={{ p: { xs: 2, sm: 3 }, borderRadius: 2, mt: 4 }}>
+      <Box display="flex" alignItems="center" justifyContent="space-between" mb={2} flexWrap="wrap" gap={1}>
+        <Box display="flex" alignItems="center" gap={1}>
+          <CertificateIcon color="primary" />
+          <Typography variant="h6" fontWeight={700}>
+            My Donation Certificates
+          </Typography>
+          {certificates.length > 0 && (
+            <Chip label={certificates.length} size="small" color="primary" variant="outlined" />
+          )}
+        </Box>
+        <Tooltip title="Refresh">
+          <IconButton size="small" onClick={fetchCertificates} disabled={loading}>
+            <RefreshIcon />
+          </IconButton>
+        </Tooltip>
+      </Box>
+
+      {error && (
+        <Alert severity="error" sx={{ mb: 2 }} onClose={() => setError('')}>{error}</Alert>
+      )}
+
+      {loading ? (
+        <Box display="flex" justifyContent="center" py={4}>
+          <CircularProgress size={28} />
+        </Box>
+      ) : certificates.length === 0 ? (
+        <Box textAlign="center" py={4}>
+          <CertificateIcon sx={{ fontSize: 48, color: 'text.disabled', mb: 1 }} />
+          <Typography variant="body2" color="text.secondary">
+            No certificates yet. Certificates are issued when you approve a receiver's request.
+          </Typography>
+        </Box>
+      ) : (
+        <TableContainer sx={{ borderRadius: 1, border: '1px solid #f1f5f9' }}>
+          <Table size="small">
+            <TableHead>
+              <TableRow>
+                {['#', 'Food Donated', 'Quantity', 'Received By', 'Date', 'Certificate'].map((h) => (
+                  <TableCell key={h} sx={{ fontWeight: 700, bgcolor: '#f8fafc', whiteSpace: 'nowrap' }}>
+                    {h}
+                  </TableCell>
+                ))}
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {certificates.map((cert) => (
+                <TableRow key={cert.match_id} hover>
+                  <TableCell>
+                    <Typography variant="body2" color="text.secondary">
+                      FS-{String(cert.match_id).padStart(6, '0')}
+                    </Typography>
+                  </TableCell>
+                  <TableCell>
+                    <Typography variant="body2" fontWeight={600}>{cert.food_type}</Typography>
+                  </TableCell>
+                  <TableCell>
+                    <Typography variant="body2">{cert.quantity} {cert.unit}</Typography>
+                  </TableCell>
+                  <TableCell>
+                    <Typography variant="body2">{cert.receiver_name}</Typography>
+                  </TableCell>
+                  <TableCell>
+                    <Typography variant="body2" noWrap>
+                      {cert.completed_at ? new Date(cert.completed_at).toLocaleDateString() : '—'}
+                    </Typography>
+                  </TableCell>
+                  <TableCell>
+                    <Button
+                      size="small"
+                      variant="outlined"
+                      color="success"
+                      startIcon={downloading === cert.match_id ? <CircularProgress size={14} /> : <DownloadIcon />}
+                      onClick={() => handleDownload(cert)}
+                      disabled={downloading === cert.match_id}
+                      sx={{ whiteSpace: 'nowrap' }}
+                    >
+                      Download PDF
+                    </Button>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      )}
+    </Paper>
+  );
+};
+
 // ─── Main Component ────────────────────────────────────────────────────────────
 
-const DonorDashboard = () => {
-  const navigate = useNavigate();
+const DonorDashboard = () => {  const navigate = useNavigate();
   const [listings, setListings] = useState([]);
   const [requests, setRequests] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -443,9 +577,11 @@ const DonorDashboard = () => {
         </Grid>
       )}
 
+      {/* Certificates */}
+      <CertificatesPanel />
+
       {/* Cancel dialog */}
-      <CancelListingDialog
-        open={!!cancelTarget}
+      <CancelListingDialog        open={!!cancelTarget}
         onClose={() => setCancelTarget(null)}
         onConfirm={handleCancelConfirm}
         listingName={cancelTarget?.food_type}

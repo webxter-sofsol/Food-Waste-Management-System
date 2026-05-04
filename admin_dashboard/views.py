@@ -347,3 +347,15 @@ def get_user_detail(request, user_id):
         return Response({'error': 'User not found'}, status=status.HTTP_404_NOT_FOUND)
     serializer = AllUsersSerializer(user, context={'request': request})
     return Response(serializer.data)
+
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated, IsAdmin])
+def admin_issue_certificate(request, match_id):
+    """
+    POST /api/admin/matches/{id}/issue-certificate/
+    Admin manually issues (re-sends) a donation certificate to the donor
+    and marks the match as completed if it isn't already.
+    """
+    from matching.views import admin_issue_certificate as _issue
+    return _issue(request, match_id)
