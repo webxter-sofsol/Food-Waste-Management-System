@@ -111,7 +111,7 @@ const MatchCard = ({ match }) => {
             onClick={handleDownloadCertificate}
             disabled={downloading}
           >
-            {downloading ? 'Downloading…' : 'Download Certificate'}
+            {downloading ? 'Downloading…' : 'Download Receipt'}
           </Button>
         </Box>
       )}

@@ -159,8 +159,8 @@ export const rejectRequest = async (requestId, reason) => {
 };
 
 /**
- * Get all completed matches (certificates) for the donor
- * @returns {Promise<Object>} Response with certificates array
+ * Get all completed matches (receipts) for the donor
+ * @returns {Promise<Object>} Response with receipts array
  */
 export const getDonorCertificates = async () => {
   try {

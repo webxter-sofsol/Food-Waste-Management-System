@@ -177,7 +177,7 @@ def approve_food_request(request, pk):
             except Exception as e:
                 print(f"Failed to send notification to receiver: {e}")
 
-            # Send donation certificate to donor immediately (volunteer module not yet active)
+            # Send donation receipt to donor immediately (volunteer module not yet active)
             _send_donation_certificate_for_match(match)
 
             return Response(
@@ -442,7 +442,7 @@ class MatchListView(APIView):
 def download_certificate(request, match_id):
     """
     GET /api/matches/{id}/certificate/
-    Donor downloads their PDF donation certificate for a completed match.
+    Donor downloads their PDF donation receipt for a completed match.
     """
     from django.http import HttpResponse
     from authentication.certificate import generate_donation_certificate
@@ -482,10 +482,10 @@ def download_certificate(request, match_id):
     return response
 
 
-# ── Certificate helpers ────────────────────────────────────────────────────────
+# ── Receipt helpers ────────────────────────────────────────────────────────────
 
 def _send_donation_certificate_for_match(match):
-    """Generate and email a PDF donation certificate to the donor."""
+    """Generate and email a PDF donation receipt to the donor."""
     try:
         from authentication.certificate import generate_donation_certificate
         from django.core.mail import EmailMessage
@@ -530,7 +530,7 @@ def _send_donation_certificate_for_match(match):
         )
         email.send(fail_silently=True)
     except Exception as e:
-        print(f'Certificate email error for match {match.id}: {e}')
+        print(f'Receipt email error for match {match.id}: {e}')
 
 
 @api_view(['GET'])
@@ -538,7 +538,7 @@ def _send_donation_certificate_for_match(match):
 def list_donor_certificates(request):
     """
     GET /api/matches/certificates/
-    Returns all completed matches for the donor — each one has a downloadable certificate.
+    Returns all completed matches for the donor — each one has a downloadable receipt.
     """
     matches = (
         Match.objects
@@ -560,7 +560,7 @@ def list_donor_certificates(request):
             'unit': m.listing.unit,
             'receiver_name': receiver_name,
             'completed_at': m.completed_at,
-            'certificate_url': f'/api/matches/{m.id}/certificate/',
+            'receipt_url': f'/api/matches/{m.id}/certificate/',
         })
 
     return Response({'count': len(data), 'results': data})
@@ -571,7 +571,7 @@ def list_donor_certificates(request):
 def admin_issue_certificate(request, match_id):
     """
     POST /api/admin/matches/{id}/issue-certificate/
-    Admin manually issues (re-sends) a donation certificate to the donor.
+    Admin manually issues (re-sends) a donation receipt to the donor.
     Also marks the match as completed if it isn't already.
     """
     from authentication.permissions import IsAdmin
@@ -602,7 +602,7 @@ def admin_issue_certificate(request, match_id):
             listing.status = 'completed'
             listing.save()
 
-    # Send certificate email
+    # Send receipt email
     _send_donation_certificate_for_match(match)
 
     donor_name = (

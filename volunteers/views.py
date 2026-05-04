@@ -428,7 +428,7 @@ def complete_delivery(request, match_id):
     Volunteer marks a delivery as completed.
     - Sets Match.status = 'completed' and records completed_at
     - Sets FoodListing.status = 'completed'
-    - Emails a PDF donation certificate to the donor
+    - Emails a PDF donation receipt to the donor
     """
     try:
         match = Match.objects.select_related(
@@ -466,7 +466,7 @@ def complete_delivery(request, match_id):
         coord.assignment_status = 'completed'
         coord.save()
 
-    # Send certificate email to donor (non-blocking — errors are logged, not raised)
+    # Send receipt email to donor (non-blocking — errors are logged, not raised)
     _send_donation_certificate(match)
 
     # Notify donor and receiver
@@ -477,7 +477,7 @@ def complete_delivery(request, match_id):
             user=match.donor,
             notification_type='delivery_completed',
             title='Delivery Completed',
-            message=f'Your donation of {match.listing.food_type} has been successfully delivered to {receiver_name}. A certificate of donation has been sent to your email.',
+            message=f'Your donation of {match.listing.food_type} has been successfully delivered to {receiver_name}. A donation receipt has been sent to your email.',
             related_entity_type='match',
             related_entity_id=match.id,
         )
@@ -496,7 +496,7 @@ def complete_delivery(request, match_id):
 
 
 def _send_donation_certificate(match):
-    """Generate and email a PDF donation certificate to the donor."""
+    """Generate and email a PDF donation receipt to the donor."""
     try:
         from authentication.certificate import generate_donation_certificate
         from django.core.mail import EmailMessage
@@ -522,12 +522,12 @@ def _send_donation_certificate(match):
         )
 
         email = EmailMessage(
-            subject='Your FoodShare Donation Certificate 🌿',
+            subject='Your FoodShare Donation Receipt 🌿',
             body=(
                 f'Dear {donor_name},\n\n'
                 f'Thank you for your generous donation of {match.matched_quantity} '
                 f'{match.listing.unit} of {match.listing.food_type}!\n\n'
-                f'Please find your Certificate of Donation attached to this email.\n\n'
+                f'Please find your Donation Receipt attached to this email.\n\n'
                 f'Your contribution helps reduce food waste and supports those in need.\n\n'
                 f'With gratitude,\nThe FoodShare Team'
             ),
@@ -535,11 +535,11 @@ def _send_donation_certificate(match):
             to=[donor.email],
         )
         email.attach(
-            filename=f'FoodShare_Certificate_{match.id}.pdf',
+            filename=f'FoodShare_Receipt_{match.id}.pdf',
             content=pdf_bytes,
             mimetype='application/pdf',
         )
         email.send(fail_silently=False)
 
     except Exception as e:
-        print(f'Certificate email error for match {match.id}: {e}')
+        print(f'Receipt email error for match {match.id}: {e}')
