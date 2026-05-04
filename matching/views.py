@@ -139,7 +139,7 @@ def approve_food_request(request, pk):
     
     try:
         with transaction.atomic():
-            # Update request status
+            # Mark request as approved (terminal state — match is immediately completed)
             food_request.status = 'approved'
             food_request.save()
 

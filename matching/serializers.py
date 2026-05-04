@@ -73,12 +73,15 @@ class FoodRequestSerializer(serializers.ModelSerializer):
             receiver = request.user
             listing = data.get('listing')
             
-            # Check if there's already an active request
+            # Check if there's already an active (pending) request.
+            # 'approved' is no longer considered active — once a donor approves,
+            # the match is immediately completed and the receiver may request again
+            # (e.g. for a different listing or a new quantity on the same one).
             if listing:
                 existing_request = FoodRequest.objects.filter(
                     listing=listing,
                     receiver=receiver,
-                    status__in=['pending', 'approved']
+                    status='pending'
                 ).exists()
                 
                 if existing_request:

@@ -43,11 +43,12 @@ class FoodRequest(models.Model):
             models.Index(fields=['receiver']),
             models.Index(fields=['status']),
         ]
-        # Unique constraint: one active request per listing per receiver
+        # Unique constraint: one pending request per listing per receiver
+        # ('approved' is excluded — once approved the match is completed immediately)
         constraints = [
             models.UniqueConstraint(
                 fields=['listing', 'receiver'],
-                condition=models.Q(status='pending') | models.Q(status='approved'),
+                condition=models.Q(status='pending'),
                 name='unique_active_request_per_listing_receiver'
             )
         ]
