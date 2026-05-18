@@ -1,0 +1,3095 @@
+[
+{
+  "model": "authentication.user",
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$6QvyPLXbKaXrw9eLTSsZ9m$KoL3RmsZJp1IhMfsXh2vOgC1nn4MG28NTRPFi7O1OHw=",
+    "is_superuser": false,
+    "username": "donor1",
+    "first_name": "",
+    "last_name": "",
+    "is_staff": false,
+    "date_joined": "2026-03-09T17:45:21.638Z",
+    "email": "donor@example.com",
+    "role": "donor",
+    "verification_status": "approved",
+    "last_login": null,
+    "is_active": true,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "authentication.user",
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$5bKhnSViDLVKA1CPQhhnpo$uUWMXhqqNYeyilQwS+NfiVb1mzqMu5Bw6mIaccH7Sr0=",
+    "is_superuser": false,
+    "username": "receiver1",
+    "first_name": "",
+    "last_name": "",
+    "is_staff": false,
+    "date_joined": "2026-03-09T17:45:22.214Z",
+    "email": "receiver@example.com",
+    "role": "receiver",
+    "verification_status": "approved",
+    "last_login": null,
+    "is_active": true,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "authentication.user",
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$fsUvJJqf1VgCHofGeEh8xw$ghXpcsOfUqVLYoDVG0xkMXMxTmy1AZSXrP8dMKV/mho=",
+    "is_superuser": false,
+    "username": "volunteer1",
+    "first_name": "",
+    "last_name": "",
+    "is_staff": false,
+    "date_joined": "2026-03-09T17:45:22.811Z",
+    "email": "volunteer@example.com",
+    "role": "volunteer",
+    "verification_status": "approved",
+    "last_login": null,
+    "is_active": true,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "authentication.user",
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$uX6Y4q8juUeEsXDMWCJYYc$1pG+E5UoJUEX3Ap1qSpXmr4dagao+frQWKyDof1daQM=",
+    "is_superuser": false,
+    "username": "test_donor",
+    "first_name": "",
+    "last_name": "",
+    "is_staff": false,
+    "date_joined": "2026-03-09T17:46:24.200Z",
+    "email": "test_donor@example.com",
+    "role": "donor",
+    "verification_status": "approved",
+    "last_login": null,
+    "is_active": true,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "authentication.user",
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$f4snVoApzOduckmCHvzLxc$NKK8zooRYkrLQWfdAzUFvteVoNIkGrYX4femrIyH+r0=",
+    "is_superuser": false,
+    "username": "test_receiver",
+    "first_name": "",
+    "last_name": "",
+    "is_staff": false,
+    "date_joined": "2026-03-09T17:46:24.752Z",
+    "email": "test_receiver@example.com",
+    "role": "receiver",
+    "verification_status": "approved",
+    "last_login": null,
+    "is_active": true,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "authentication.user",
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$SDFxwVfAvpLpCvYvGYPbnu$s9L1vgXA5H5mFeh6SWbqSv4966RFKGkShJQB9l/YcWo=",
+    "is_superuser": false,
+    "username": "testdonor",
+    "first_name": "",
+    "last_name": "",
+    "is_staff": false,
+    "date_joined": "2026-03-10T10:08:14.711Z",
+    "email": "testdonor@example.com",
+    "role": "donor",
+    "verification_status": "approved",
+    "last_login": null,
+    "is_active": true,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "authentication.user",
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$m6xdU9Z4CJZQ2AbniUBTIZ$WzDly5GXy2JG0Xb4k1i2udhRSYc7uQIUeCqHheR6lCU=",
+    "is_superuser": false,
+    "username": "testreceiver",
+    "first_name": "",
+    "last_name": "",
+    "is_staff": false,
+    "date_joined": "2026-03-10T10:08:15.194Z",
+    "email": "testreceiver@example.com",
+    "role": "receiver",
+    "verification_status": "approved",
+    "last_login": null,
+    "is_active": true,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "authentication.user",
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$9Z40U61oMIjRJGPYIWH5e6$aLmTHmo1cCYZ1lEjjpOrA9XuY8ntRwdoDwrpyyF0IxQ=",
+    "is_superuser": true,
+    "username": "admin",
+    "first_name": "",
+    "last_name": "",
+    "is_staff": true,
+    "date_joined": "2026-03-14T06:29:13.115Z",
+    "email": "admin@mail.com",
+    "role": "admin",
+    "verification_status": "approved",
+    "last_login": "2026-04-15T07:39:44.746Z",
+    "is_active": true,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "authentication.user",
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$AL2m7pLy0CqAYgAgQCgnh1$Vzj4jn2DZfp6Scg83IEMV6Vv4k5gkurKo3RZ2/kkjn4=",
+    "is_superuser": false,
+    "username": "user@gmail.com",
+    "first_name": "",
+    "last_name": "",
+    "is_staff": false,
+    "date_joined": "2026-03-14T08:10:32.185Z",
+    "email": "user@gmail.com",
+    "role": "donor",
+    "verification_status": "approved",
+    "last_login": "2026-03-14T08:19:23.951Z",
+    "is_active": true,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "authentication.user",
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$W4I0ZKzNLtI6dWOViUpPP8$asA2Rs8dKlgZm+qAsmgMqlx5DYUoNVqlFK8Ge5L5SQM=",
+    "is_superuser": false,
+    "username": "user@yopmail.com",
+    "first_name": "",
+    "last_name": "",
+    "is_staff": false,
+    "date_joined": "2026-03-14T08:22:47.183Z",
+    "email": "user@yopmail.com",
+    "role": "donor",
+    "verification_status": "approved",
+    "last_login": "2026-04-15T07:41:54.886Z",
+    "is_active": true,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "authentication.user",
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$Rztwh9GZvjvHe3b3uxmhci$8R2o7i7nWONBHMkQJqu5lemE8PEGavMhu1S6DMkYhCk=",
+    "is_superuser": true,
+    "username": "admin2",
+    "first_name": "",
+    "last_name": "",
+    "is_staff": true,
+    "date_joined": "2026-04-09T07:20:01.837Z",
+    "email": "admin2@mail.com",
+    "role": "admin",
+    "verification_status": "approved",
+    "last_login": null,
+    "is_active": true,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "authentication.user",
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$yIHjYLOOww4p3qbCBHORpZ$aPxzTBVIQHqfStfJDyHxPQa63lkuuPJwhYmlXgUQqzM=",
+    "is_superuser": true,
+    "username": "admin_seed",
+    "first_name": "",
+    "last_name": "",
+    "is_staff": true,
+    "date_joined": "2026-04-19T20:42:29.634Z",
+    "email": "admin@foodshare.com",
+    "role": "admin",
+    "verification_status": "approved",
+    "last_login": "2026-05-04T07:17:40.689Z",
+    "is_active": true,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "authentication.user",
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$VB65DKi67a2YZd9yuRoUNx$MzfERogQKDtIFiu5soFhrAF/Nj1WZvSaym7CiGXX/TQ=",
+    "is_superuser": false,
+    "username": "donor1_seed",
+    "first_name": "",
+    "last_name": "",
+    "is_staff": false,
+    "date_joined": "2026-04-19T20:42:30.145Z",
+    "email": "donor@foodshare.com",
+    "role": "donor",
+    "verification_status": "approved",
+    "last_login": "2026-05-04T09:27:45.791Z",
+    "is_active": true,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "authentication.user",
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$JcRyEOntce7i3a6Cfcntc5$ztiLpGg4ozmimP86GXltPvrQXtx5WgA7deMToWwB2o4=",
+    "is_superuser": false,
+    "username": "donor2",
+    "first_name": "",
+    "last_name": "",
+    "is_staff": false,
+    "date_joined": "2026-04-19T20:42:30.595Z",
+    "email": "donor2@foodshare.com",
+    "role": "donor",
+    "verification_status": "approved",
+    "last_login": null,
+    "is_active": true,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "authentication.user",
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$MQFAjbhwYGWo0RswBuu8Ek$2axdNl1lTaqesMH7ARpPvZL8Fm/UsrWeF7Cm+YMrlJc=",
+    "is_superuser": false,
+    "username": "receiver1_seed",
+    "first_name": "",
+    "last_name": "",
+    "is_staff": false,
+    "date_joined": "2026-04-19T20:42:31.051Z",
+    "email": "receiver@foodshare.com",
+    "role": "receiver",
+    "verification_status": "approved",
+    "last_login": "2026-05-04T09:28:16.105Z",
+    "is_active": true,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "authentication.user",
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$LyJwQHyWl32RNfC9EViOcz$2hfpARnDyFcBw1ckqtB7/Vrp8yEWiAXMlg27/mixFZQ=",
+    "is_superuser": false,
+    "username": "receiver2",
+    "first_name": "",
+    "last_name": "",
+    "is_staff": false,
+    "date_joined": "2026-04-19T20:42:31.509Z",
+    "email": "receiver2@foodshare.com",
+    "role": "receiver",
+    "verification_status": "approved",
+    "last_login": null,
+    "is_active": true,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "authentication.user",
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$ar1hPexMLo2BLJUyxXEmrB$3VLbdjKPxTc5tIhXOh7h0pygItt1nd996g2ukKbwYP8=",
+    "is_superuser": false,
+    "username": "volunteer1_seed",
+    "first_name": "",
+    "last_name": "",
+    "is_staff": false,
+    "date_joined": "2026-04-19T20:42:31.976Z",
+    "email": "volunteer@foodshare.com",
+    "role": "volunteer",
+    "verification_status": "approved",
+    "last_login": "2026-05-04T06:44:32.410Z",
+    "is_active": true,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "authentication.user",
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$7Fa17PKH8asvKXStBHuiAA$3x+f9MBpeZfRaUmkcxbbcxpooLrmqrxjdhrhZ+0wpoc=",
+    "is_superuser": false,
+    "username": "pending1",
+    "first_name": "",
+    "last_name": "",
+    "is_staff": false,
+    "date_joined": "2026-04-19T20:42:32.417Z",
+    "email": "pending@foodshare.com",
+    "role": "donor",
+    "verification_status": "approved",
+    "last_login": null,
+    "is_active": true,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "authentication.user",
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$4mcII4ne7bbFGoRa3oUqc6$wc32v/wwjUtUOzItslhjvflREPymJSXfbF1vFQIOoAw=",
+    "is_superuser": false,
+    "username": "user2@yopmail.com",
+    "first_name": "",
+    "last_name": "",
+    "is_staff": false,
+    "date_joined": "2026-04-30T19:22:48.961Z",
+    "email": "user2@yopmail.com",
+    "role": "receiver",
+    "verification_status": "approved",
+    "last_login": "2026-04-30T19:23:04.868Z",
+    "is_active": true,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "authentication.userprofile",
+  "pk": 1,
+  "fields": {
+    "user": [
+      "donor@example.com"
+    ],
+    "full_name": "Test Donor",
+    "phone_encrypted": "Z0FBQUFBQnByd2N5LTdhT0RlV0FkenFneDJiODRtWGs0YUVSaXN1dzdMalVkUDBtODQzQld3UHJ6cEFFRGR5NlJUMk4tT3ltVGFoQm9NY1NROU5mak1XWHpSYV9jbE1od2c9PQ==",
+    "address_encrypted": "Z0FBQUFBQnByd2N5VEl2UXNhMUJfVjE5YlhHZ1NhTThMdG1FS0x5S3VaMVprNjloTktPREZQa29ZQkVYVDlJc3N4Z04wcUdpdVQ4Ri1YMmt6M25FTjRYTlpOWGdCM09qY2VjOHd4Um55RnFHOUFwczNQZzZqTlk9",
+    "latitude_encrypted": "Z0FBQUFBQnByd2N5ZXZxU0ljVGdOTVFURE50VnU3NmhwN1ZMRDl3R2pWUjJMaWtmVTZvSm11TER1aXZUcTJnaENHN0xoYWpJWF8tTHFNUlNzaHg5VnBMTmNHYjVUQjR5YWc9PQ==",
+    "longitude_encrypted": "Z0FBQUFBQnByd2N5aUloU3pRUldIbUh0dm9xYjQ5bG50RG1uUHZiVkI4dGtCaDYyaWdEajB5dzhrSzdCNUppUzk0U3BhTDNHeVY3NEN6UWpPZVBlZnRXNHhraHYwc1k3T0E9PQ==",
+    "receiver_type": null,
+    "verification_document": "",
+    "dietary_preferences": [],
+    "allergies": [],
+    "organization_name": "Test Restaurant",
+    "food_types": [],
+    "operating_hours": {},
+    "available_time_slots": [],
+    "transportation_capacity": null,
+    "average_rating": 0.0,
+    "total_ratings": 0,
+    "updated_at": "2026-03-09T17:45:22.192Z",
+    "created_at": "2026-03-09T17:45:22.178Z"
+  }
+},
+{
+  "model": "authentication.userprofile",
+  "pk": 2,
+  "fields": {
+    "user": [
+      "testdonor@example.com"
+    ],
+    "full_name": "Test Donor Restaurant",
+    "phone_encrypted": "Z0FBQUFBQnByLTJQaGdJYjdDZ0FVcF9QOUxwM0JYSU1fVXdQbkZGaHZQRHlBX1FOZ3BmVUt6VVdRb3RET2lreldYMGVLRjVub0Z3UkNPNHJ4cldGLXJrWWhETUw4eXQ5bFE9PQ==",
+    "address_encrypted": "Z0FBQUFBQnByLTJQM1JZeVgtU0ltc3h4QlpvUXVPNEdXa0NVdGFTTDJTdFJKTl9QWEVyVlJGR0ZtX3hYM21qb3VVZGt6alZPazBNSzNhVUxkZzFja1lzSmZ6SHg4bTFxdHZBM25RTWFXQmQyMWNoakptLURmRms9",
+    "latitude_encrypted": "Z0FBQUFBQnByLTJQdXJEMklSSy1pdG8zajNrYXBUcUtTVGdBY05UVWJoQlpULVRvNjJtMmFmOTFFVVRzdFc5NXo0ZEUzdThDaTJ5SUh0c0duczJkQXdqaFRHMXNzNmxYWXc9PQ==",
+    "longitude_encrypted": "Z0FBQUFBQnByLTJQdl9qTVMydmQxM1JoVWNpZnJQd2dWWE1oVTRDMG9zbTRHdlFDZUpfXzJuZ2V4SWsxWnBtcFQ3LTdjTXM5Q0c1TlZVNERseGc1SUt3Sl9kWEgtRmRfUGc9PQ==",
+    "receiver_type": null,
+    "verification_document": "",
+    "dietary_preferences": [],
+    "allergies": [],
+    "organization_name": "Test Restaurant",
+    "food_types": [],
+    "operating_hours": {},
+    "available_time_slots": [],
+    "transportation_capacity": null,
+    "average_rating": 0.0,
+    "total_ratings": 0,
+    "updated_at": "2026-03-10T10:08:15.647Z",
+    "created_at": "2026-03-10T10:08:15.627Z"
+  }
+},
+{
+  "model": "authentication.userprofile",
+  "pk": 3,
+  "fields": {
+    "user": [
+      "testreceiver@example.com"
+    ],
+    "full_name": "Test Receiver Organization",
+    "phone_encrypted": "Z0FBQUFBQnByLTJQTWxxRXJ1OGdnWnlOWjZqdGJVRXdRNDJTRzUxaUM2RS1rQmVUek80em92T2RGbmlIOWZGUHQ1bHhxQTFEMWZkZ1VDaG1nbEZMZGZORDlBTVhkWFNLcWc9PQ==",
+    "address_encrypted": "Z0FBQUFBQnByLTJQaXFTejltQ1I0SnBXbzJhZWNiSGFWWTByY3puNU1LeG5uc1A2QnBURDBUQ1RJam9lRlk0cHZqN3dub19YMmxtajhwNmEwN3BFazlTSk92cUpiMlBjaXlKZ2s4SDdxejhFVkRrYTVZamdSbE09",
+    "latitude_encrypted": "Z0FBQUFBQnByLTJQb1Bmczl3TldDQTdGS3pmdGdsaTlRcWNIX3gwMVAzTFZhMmtjcXBMaUd0Z0VlWE12QkNjOWlzdF94MWVydnMyYnVRRm1TWVdpbkFLNDhDMjgzVmFReHc9PQ==",
+    "longitude_encrypted": "Z0FBQUFBQnByLTJQQjY0QXJvZGtQcVBMYnAxTG1odXY1bU5SZnRvRVJKb3poeElNcFB6YmV0VTJvTXBrZnE0LUl0MDVsM1IyeFVhaFlrVDVRTEoyRGNpVDFVNEJnSV91X2c9PQ==",
+    "receiver_type": null,
+    "verification_document": "",
+    "dietary_preferences": [
+      "vegetarian",
+      "gluten_free"
+    ],
+    "allergies": [
+      "nuts",
+      "dairy"
+    ],
+    "organization_name": null,
+    "food_types": [],
+    "operating_hours": {},
+    "available_time_slots": [],
+    "transportation_capacity": null,
+    "average_rating": 0.0,
+    "total_ratings": 0,
+    "updated_at": "2026-03-10T10:08:15.665Z",
+    "created_at": "2026-03-10T10:08:15.656Z"
+  }
+},
+{
+  "model": "authentication.userprofile",
+  "pk": 4,
+  "fields": {
+    "user": [
+      "user@gmail.com"
+    ],
+    "full_name": "user",
+    "phone_encrypted": null,
+    "address_encrypted": null,
+    "latitude_encrypted": null,
+    "longitude_encrypted": null,
+    "receiver_type": null,
+    "verification_document": "",
+    "dietary_preferences": [],
+    "allergies": [],
+    "organization_name": null,
+    "food_types": [],
+    "operating_hours": {},
+    "available_time_slots": [],
+    "transportation_capacity": null,
+    "average_rating": 0.0,
+    "total_ratings": 0,
+    "updated_at": "2026-03-14T08:10:32.693Z",
+    "created_at": "2026-03-14T08:10:32.693Z"
+  }
+},
+{
+  "model": "authentication.userprofile",
+  "pk": 5,
+  "fields": {
+    "user": [
+      "user@yopmail.com"
+    ],
+    "full_name": "user",
+    "phone_encrypted": null,
+    "address_encrypted": null,
+    "latitude_encrypted": null,
+    "longitude_encrypted": null,
+    "receiver_type": null,
+    "verification_document": "",
+    "dietary_preferences": [],
+    "allergies": [],
+    "organization_name": null,
+    "food_types": [],
+    "operating_hours": {},
+    "available_time_slots": [],
+    "transportation_capacity": null,
+    "average_rating": 0.0,
+    "total_ratings": 0,
+    "updated_at": "2026-03-14T08:22:47.847Z",
+    "created_at": "2026-03-14T08:22:47.847Z"
+  }
+},
+{
+  "model": "authentication.userprofile",
+  "pk": 6,
+  "fields": {
+    "user": [
+      "admin@mail.com"
+    ],
+    "full_name": "",
+    "phone_encrypted": null,
+    "address_encrypted": null,
+    "latitude_encrypted": null,
+    "longitude_encrypted": null,
+    "receiver_type": null,
+    "verification_document": "",
+    "dietary_preferences": [],
+    "allergies": [],
+    "organization_name": null,
+    "food_types": [],
+    "operating_hours": {},
+    "available_time_slots": [],
+    "transportation_capacity": null,
+    "average_rating": 0.0,
+    "total_ratings": 0,
+    "updated_at": "2026-03-24T20:43:08.734Z",
+    "created_at": "2026-03-24T20:43:08.734Z"
+  }
+},
+{
+  "model": "authentication.userprofile",
+  "pk": 7,
+  "fields": {
+    "user": [
+      "admin@foodshare.com"
+    ],
+    "full_name": "System Admin",
+    "phone_encrypted": "Z0FBQUFBQnA1VDQybFpwbHVmZ0hBYnYzUmxxWlRiSlEzM19SblhQeDNpWDljZ2xrZXgwbDlsTHZZUTNxWml3aDF5Zm5jRmxjVDhWSmV3RVdweUY3b0pTOHZlR3FDakhLWnc9PQ==",
+    "address_encrypted": "Z0FBQUFBQnA1VDQybkt2VC1xajlYUVBaSXlESEI0aUJadnJ1WGNfT0prTjVUelBBTU1ZYUF6cElrQmVsNXJGeTV2V01PT1YtNndkMThlYWhGSHpqb2RZLW1Jck1SdXY2ZkF2UUNHN2RwcF9tNldWVGZDZFlqSHAtUHZfY1d3cU1fZ29UeGtaRnZHWkQ=",
+    "latitude_encrypted": null,
+    "longitude_encrypted": null,
+    "receiver_type": null,
+    "verification_document": "",
+    "dietary_preferences": [],
+    "allergies": [],
+    "organization_name": null,
+    "food_types": [],
+    "operating_hours": {},
+    "available_time_slots": [],
+    "transportation_capacity": null,
+    "average_rating": 0.0,
+    "total_ratings": 0,
+    "updated_at": "2026-04-19T20:42:30.136Z",
+    "created_at": "2026-04-19T20:42:30.106Z"
+  }
+},
+{
+  "model": "authentication.userprofile",
+  "pk": 8,
+  "fields": {
+    "user": [
+      "donor@foodshare.com"
+    ],
+    "full_name": "Green Leaf Restaurant",
+    "phone_encrypted": "Z0FBQUFBQnA1VDQyRUV0OHBneXNodEtSZEw1amY2bU50U2xkZUc0S0xXMVZiU1lyRWJHdFc5ejd4OTdTLXhBb2Y1ZGZfa2VHaElNZU5fcUxiN1BzbkdPQ0ptdFBUY0F6TlE9PQ==",
+    "address_encrypted": "Z0FBQUFBQnA1VDQyNVJ6cGY3N2hfYk04RlRvUzM4MmM3X2cxOFBwSnNXdzNkOU5NT05yU01fU21PX0JmSFU1RUtBR2RDLURzc1E1djhDUHFuRUxPSUZ2QXB4blhnUjBuVXd2TG9DaDNOUktaR3pRbWRUZ0FZMTZNZkJCU1V0TUY0bnRKWWNwRldKMEQ=",
+    "latitude_encrypted": "Z0FBQUFBQnA1VDQyUzdma1VIeC1lT3FMY3h6Uk82RFBXa3hzM3J3NV8wbnJDd2tWel9KMmU5U2JOXy1pZFNZNGVqZU4xVjdjYTVKem8yT2YwX2dYVVhxNHQzVzZtcE1CSlE9PQ==",
+    "longitude_encrypted": "Z0FBQUFBQnA1VDQyYjU0VHZNRk5nNzhmX0hveVczeVJKa3BPb2szdTU3amFjQlNnM2hNQ2daaTV3SXU2SHlhWUJYYU54US1oU2paYXdnNUxqSVlsV2s4ZWJwLVVuWDdiU1E9PQ==",
+    "receiver_type": null,
+    "verification_document": "",
+    "dietary_preferences": [],
+    "allergies": [],
+    "organization_name": "Green Leaf Restaurant",
+    "food_types": [
+      "Indian",
+      "Continental",
+      "Desserts"
+    ],
+    "operating_hours": {
+      "monday": "09:00-21:00",
+      "tuesday": "09:00-21:00",
+      "wednesday": "09:00-21:00",
+      "thursday": "09:00-21:00",
+      "friday": "09:00-22:00",
+      "saturday": "10:00-22:00",
+      "sunday": "10:00-20:00"
+    },
+    "available_time_slots": [],
+    "transportation_capacity": null,
+    "average_rating": 0.0,
+    "total_ratings": 0,
+    "updated_at": "2026-04-19T20:42:30.586Z",
+    "created_at": "2026-04-19T20:42:30.577Z"
+  }
+},
+{
+  "model": "authentication.userprofile",
+  "pk": 9,
+  "fields": {
+    "user": [
+      "donor2@foodshare.com"
+    ],
+    "full_name": "Sunrise Banquet Hall",
+    "phone_encrypted": "Z0FBQUFBQnA1VDQzUGNiUXY4a1pHS3RFOGk1SFlwZURpX2RuME0tbjNJdGtTMVUtV0ZxaFhaX3ZBTFBsRnBGSEp6c3pHV2VidUo2YTBuTkZCNEZGUkNydWVlUmxidU5iWXc9PQ==",
+    "address_encrypted": "Z0FBQUFBQnA1VDQzVEt6ejRFQk1RMzlDMVg1Z0s4SzJudVFUQlQzbWFzZ1dlQi1jQ3JqYVdPNE9fT3BocFVoWUJETHVRUVh2UDBETklWV1JsUGQ0MjRvSVJqUS04aktKVTlnT2V5TGE2d3Q0VU9KeURDSTk5WFk9",
+    "latitude_encrypted": "Z0FBQUFBQnA1VDQzc0lIWmdaNFB0dk5HMUU5ZWw5LWJ2TmFRQmJvY05ELU9wcXhQTXZkajdOclRRUnJEVWdMWnFlakc5dElMS1dkTWJGWkZtckZtOTY1NExYek9wWjFjMXc9PQ==",
+    "longitude_encrypted": "Z0FBQUFBQnA1VDQzdjZPV0RGMGxmNmFoSGU5NnVmVlBwMUVSZEFITkFoV2ljYWRkODhtTzdHelZaSklROFBIUU9zbkdKam1uYXpFcFIyZDJlNkVjV2NtdWZWY0FzYVM4MFE9PQ==",
+    "receiver_type": null,
+    "verification_document": "",
+    "dietary_preferences": [],
+    "allergies": [],
+    "organization_name": "Sunrise Banquet Hall",
+    "food_types": [
+      "Buffet",
+      "Catering",
+      "Beverages"
+    ],
+    "operating_hours": {
+      "friday": "16:00-23:00",
+      "saturday": "12:00-23:00",
+      "sunday": "12:00-20:00"
+    },
+    "available_time_slots": [],
+    "transportation_capacity": null,
+    "average_rating": 0.0,
+    "total_ratings": 0,
+    "updated_at": "2026-04-19T20:42:31.046Z",
+    "created_at": "2026-04-19T20:42:31.036Z"
+  }
+},
+{
+  "model": "authentication.userprofile",
+  "pk": 10,
+  "fields": {
+    "user": [
+      "receiver@foodshare.com"
+    ],
+    "full_name": "Hope Shelter",
+    "phone_encrypted": "Z0FBQUFBQnA1VDQzdm9EVl9jQy13b0t5c1d4SmtmSko0V2ZuNWFra09yZ3UxZ0p5M1dFV2RFSjBQV21xZzRVZHpoa2ozbjRvcER5QkxueURoZENLNFFoZW5PZ0lnckdyOWc9PQ==",
+    "address_encrypted": "Z0FBQUFBQnA1VDQzcU1aUGVJQlFzYjdzUFRJQjl5ajZ3aG80dFVuMzJkQ1pDNUpSb1d1ZEpYRGVtWFZjNUpYd0tvTmNCNS1xR0pMODBGVUliY0tJcjhVd1N5Y3M0bkdoTzlyZmlLOGxNRFRsbFV5RjUwakVlN0U9",
+    "latitude_encrypted": "Z0FBQUFBQnA1VDQzNW5VaEVaWjQtSTl1RzJGMTdsVU8zR201Q3ZRaGNZWXdaTWFkLURsRjV1ZlhpNmswVkxXQnk1bDc4ZFlZdVhIbFFrTk1IQkZtSVJhVWNHSjBudWpJZmc9PQ==",
+    "longitude_encrypted": "Z0FBQUFBQnA1VDQzS1pnUjcyU2gwX2RFSlBwUWwtZHN5Mll2d3p4UzNTeExpeTFwLVQtcjI3eGlJaktGaEUzdnNoanlrWEtqbWs3OUZjRnRxRDhyUUtEUmRUWlI2N3hjZkE9PQ==",
+    "receiver_type": null,
+    "verification_document": "",
+    "dietary_preferences": [
+      "Vegetarian",
+      "Halal"
+    ],
+    "allergies": [
+      "Peanuts",
+      "Shellfish"
+    ],
+    "organization_name": null,
+    "food_types": [],
+    "operating_hours": {},
+    "available_time_slots": [],
+    "transportation_capacity": null,
+    "average_rating": 0.0,
+    "total_ratings": 0,
+    "updated_at": "2026-04-19T20:42:31.499Z",
+    "created_at": "2026-04-19T20:42:31.490Z"
+  }
+},
+{
+  "model": "authentication.userprofile",
+  "pk": 11,
+  "fields": {
+    "user": [
+      "receiver2@foodshare.com"
+    ],
+    "full_name": "Bright Future Orphanage",
+    "phone_encrypted": "Z0FBQUFBQnA1VDQzaFpOSmVSREFfMVkyUWFDOEZDQzVwaHQ2TUUxeTJXVWIySFdlbGt2Y3FnZzF1dk1yMVc1WkNRbzlhaGlzSDFEZnJ0X0hETEsxMFo4eUJxS3J6d3UzUHc9PQ==",
+    "address_encrypted": "Z0FBQUFBQnA1VDQzOTBFRjMtZjFVM05EUnVUU19GMHE1b2JrU3l5U3dlMk1ldXN2eHU4RC16NlVodzYyaC0zVHJxVG90ZzZwMTdEUUI3ZGxmclhrTVU5LWd5TXhZYzF3NVN3NDBTdmRacWVUTTN6XzhDekJsWTZhUkpZcV85NmRPLWwwRW9VZ1lGNlk=",
+    "latitude_encrypted": "Z0FBQUFBQnA1VDQzSzBpSFduSGNPQkVIN3hqZE9UajRhN1VPaDBhak1LV0phejZYdVVFRWd6d2VBXzFwNXhXTTVIdVlrN0oxNWktRFV1NDBqYmpEZGVjUWo2bC1KSTY0M2c9PQ==",
+    "longitude_encrypted": "Z0FBQUFBQnA1VDQzX0xjdWVERVZPSVFqWFFHTjJIRXRoUVRJZ0Z5NTdqdlVyQ3ZObVJyOWdadWNLZFJCUVA1Wlk3eTBLX3I1aElCOXFsYzU2M2pwMW1ySUphR3FNcDdYNkE9PQ==",
+    "receiver_type": null,
+    "verification_document": "",
+    "dietary_preferences": [
+      "Vegan"
+    ],
+    "allergies": [
+      "Dairy",
+      "Gluten"
+    ],
+    "organization_name": null,
+    "food_types": [],
+    "operating_hours": {},
+    "available_time_slots": [],
+    "transportation_capacity": null,
+    "average_rating": 0.0,
+    "total_ratings": 0,
+    "updated_at": "2026-04-19T20:42:31.969Z",
+    "created_at": "2026-04-19T20:42:31.960Z"
+  }
+},
+{
+  "model": "authentication.userprofile",
+  "pk": 12,
+  "fields": {
+    "user": [
+      "volunteer@foodshare.com"
+    ],
+    "full_name": "Alex Johnson",
+    "phone_encrypted": "Z0FBQUFBQnA1VDQ0X1lPLTQ1d28xYnRRMzNoRV9acnpHSXVMZ0FxbUZRcWdCUmpuaGVCYzJNZG11cUkzWnVETi1DM0pEMkxjd2VzQ3AyMnNYa0twMWNTd2Z3UFpNczlEN1E9PQ==",
+    "address_encrypted": "Z0FBQUFBQnA1VDQ0Q0pGSkoxSGtHUXVxTnktRDdOV1ZCYTN4YlpRQ29VWlVWQnQ1eFBSSkJPWl9mempGa19kYk9KLUVVajMtRGlEN3ptSjFSR2F0RXpwREZDWGd3aGIteTZFLUJWTHF2ejR5c2lFMUkxRWtaeFotenNLNjBROHhhWDB0Mk1ZRUZ1eG8=",
+    "latitude_encrypted": "Z0FBQUFBQnA1VDQ0bm1YOU1MTHRycmFHdy0tMmM4NzhMb3JEN2FnampBSkRqczlrcVFhQk5wU0o0aGpuSGJPRl91eHNHaWw2TWR5aG5LM0hYOXZQSVhqcGYycGtzaVBLRHc9PQ==",
+    "longitude_encrypted": "Z0FBQUFBQnA1VDQ0NFVROFY0YjJkRlVJMk4tUTFjbGRCU0NqTG9OMk92YW1ITVNJbDRYQXFoazBBOGFKbkR2ZlRaUllBc1RFSGgwTk9ESy1FQ2cydXFKSHJ3SFI1Njd6OHc9PQ==",
+    "receiver_type": null,
+    "verification_document": "",
+    "dietary_preferences": [],
+    "allergies": [],
+    "organization_name": null,
+    "food_types": [],
+    "operating_hours": {},
+    "available_time_slots": [
+      "Weekday Mornings",
+      "Weekend Afternoons"
+    ],
+    "transportation_capacity": 50,
+    "average_rating": 0.0,
+    "total_ratings": 0,
+    "updated_at": "2026-04-19T20:42:32.409Z",
+    "created_at": "2026-04-19T20:42:32.401Z"
+  }
+},
+{
+  "model": "authentication.userprofile",
+  "pk": 13,
+  "fields": {
+    "user": [
+      "pending@foodshare.com"
+    ],
+    "full_name": "New Donor Pending",
+    "phone_encrypted": "Z0FBQUFBQnA1VDQ0SzE5M0Z4Q1Nta0REX3BfN182Wmt6LW9nLVVtYkNDdHYwUFFPMU5WbmY5bk9Lb2o1RGFvQTVWMDAyYXJTU3BjOWdKQ25RNlBxN1EwNWdMUFUxT1hoX1E9PQ==",
+    "address_encrypted": "Z0FBQUFBQnA1VDQ0X083WDB6NVVCS3hXWHdtdUQ3ZVg5Y2dPNklyN21qN3BPLW1rcl9mcXFZc0F6MGFKSTNBYVlYUVpIYWdKUThLS3BTcWhONlNwaDF6SnpfRHhaNFhINXRJVHZvVUY3Z25YMTdGdThES2o1dGx3emtFMXZDblBfbHE1UDBxU3owSEk=",
+    "latitude_encrypted": "Z0FBQUFBQnA1VDQ0WnJOWFlNWW1iQ2VzYW5PeVBSenN5WXkwZGtJdkd3TlpleWtBX2Y5bmVnZ013WU5YTk5ERkZ3cHE4dHdRRXlBS0Z4TzRFUjdOaW9MV3hVYWJqcTZ1LUE9PQ==",
+    "longitude_encrypted": "Z0FBQUFBQnA1VDQ0dW8zSDQwRldWZUpxQ1FFRlVVbWNncm50QW53UEJXV2U0RGQ2VHlwWG50eG9VbzdHQXdjY19MUlZYZDNMRktOX0hpRDVaaFJwYTkyV0ZfUXZ1WXpTM1E9PQ==",
+    "receiver_type": null,
+    "verification_document": "",
+    "dietary_preferences": [],
+    "allergies": [],
+    "organization_name": "Pending Bistro",
+    "food_types": [
+      "Fast Food"
+    ],
+    "operating_hours": {},
+    "available_time_slots": [],
+    "transportation_capacity": null,
+    "average_rating": 0.0,
+    "total_ratings": 0,
+    "updated_at": "2026-04-19T20:42:32.851Z",
+    "created_at": "2026-04-19T20:42:32.846Z"
+  }
+},
+{
+  "model": "authentication.userprofile",
+  "pk": 14,
+  "fields": {
+    "user": [
+      "user2@yopmail.com"
+    ],
+    "full_name": "user2",
+    "phone_encrypted": null,
+    "address_encrypted": null,
+    "latitude_encrypted": null,
+    "longitude_encrypted": null,
+    "receiver_type": "ngo",
+    "verification_document": "verification_docs/a93c912c14fd74e5728695f6c28fbb25a02f3382.jpg",
+    "dietary_preferences": [],
+    "allergies": [],
+    "organization_name": null,
+    "food_types": [],
+    "operating_hours": {},
+    "available_time_slots": [],
+    "transportation_capacity": null,
+    "average_rating": 0.0,
+    "total_ratings": 0,
+    "updated_at": "2026-04-30T19:22:49.389Z",
+    "created_at": "2026-04-30T19:22:49.378Z"
+  }
+},
+{
+  "model": "food_listings.foodlisting",
+  "pk": 1,
+  "fields": {
+    "donor": [
+      "donor@example.com"
+    ],
+    "food_type": "Vegetarian Curry",
+    "description": "Delicious curry with rice",
+    "quantity": 20,
+    "unit": "servings",
+    "preparation_time": "2026-03-09T17:45:22.205Z",
+    "expiry_time": "2026-03-09T23:45:22.205Z",
+    "freshness_score": 100.0,
+    "pickup_address": "123 Main St",
+    "pickup_latitude": 40.7128,
+    "pickup_longitude": -74.006,
+    "is_vegetarian": true,
+    "is_vegan": false,
+    "is_gluten_free": false,
+    "allergen_info": [],
+    "status": "expired",
+    "available_quantity": 20,
+    "images": [
+      "image1.jpg",
+      "image2.jpg"
+    ],
+    "created_at": "2026-03-09T17:45:22.205Z",
+    "updated_at": "2026-03-09T17:45:22.205Z"
+  }
+},
+{
+  "model": "food_listings.foodlisting",
+  "pk": 2,
+  "fields": {
+    "donor": [
+      "test_donor@example.com"
+    ],
+    "food_type": "Test Food",
+    "description": "Test description",
+    "quantity": 10,
+    "unit": "servings",
+    "preparation_time": "2026-03-09T17:46:25.266Z",
+    "expiry_time": "2026-03-09T23:46:25.266Z",
+    "freshness_score": 99.99999525,
+    "pickup_address": "Test Address",
+    "pickup_latitude": 40.7128,
+    "pickup_longitude": -74.006,
+    "is_vegetarian": false,
+    "is_vegan": false,
+    "is_gluten_free": false,
+    "allergen_info": [],
+    "status": "expired",
+    "available_quantity": 10,
+    "images": [],
+    "created_at": "2026-03-09T17:46:25.267Z",
+    "updated_at": "2026-03-09T17:46:25.267Z"
+  }
+},
+{
+  "model": "food_listings.foodlisting",
+  "pk": 3,
+  "fields": {
+    "donor": [
+      "testdonor@example.com"
+    ],
+    "food_type": "Vegetarian Pasta",
+    "description": "Fresh vegetarian pasta with tomato sauce and vegetables",
+    "quantity": 15,
+    "unit": "servings",
+    "preparation_time": "2026-03-10T09:08:15.678Z",
+    "expiry_time": "2026-03-10T15:08:15.678Z",
+    "freshness_score": 83.33333333333334,
+    "pickup_address": "123 Restaurant St, New York, NY",
+    "pickup_latitude": 40.7128,
+    "pickup_longitude": -74.006,
+    "is_vegetarian": true,
+    "is_vegan": false,
+    "is_gluten_free": false,
+    "allergen_info": [
+      "gluten"
+    ],
+    "status": "expired",
+    "available_quantity": 15,
+    "images": [
+      "https://example.com/pasta1.jpg",
+      "https://example.com/pasta2.jpg"
+    ],
+    "created_at": "2026-03-10T10:08:15.678Z",
+    "updated_at": "2026-03-10T10:08:15.678Z"
+  }
+},
+{
+  "model": "food_listings.foodlisting",
+  "pk": 4,
+  "fields": {
+    "donor": [
+      "testdonor@example.com"
+    ],
+    "food_type": "Vegan Curry",
+    "description": "Delicious vegan curry with rice and vegetables",
+    "quantity": 20,
+    "unit": "servings",
+    "preparation_time": "2026-03-10T09:38:15.678Z",
+    "expiry_time": "2026-03-10T18:08:15.678Z",
+    "freshness_score": 94.11760476470587,
+    "pickup_address": "123 Restaurant St, New York, NY",
+    "pickup_latitude": 40.7128,
+    "pickup_longitude": -74.006,
+    "is_vegetarian": true,
+    "is_vegan": true,
+    "is_gluten_free": true,
+    "allergen_info": [],
+    "status": "expired",
+    "available_quantity": 20,
+    "images": [
+      "https://example.com/curry1.jpg"
+    ],
+    "created_at": "2026-03-10T10:08:15.692Z",
+    "updated_at": "2026-03-10T10:08:15.692Z"
+  }
+},
+{
+  "model": "food_listings.foodlisting",
+  "pk": 5,
+  "fields": {
+    "donor": [
+      "testdonor@example.com"
+    ],
+    "food_type": "Chicken Sandwiches",
+    "description": "Grilled chicken sandwiches with fresh vegetables",
+    "quantity": 10,
+    "unit": "servings",
+    "preparation_time": "2026-03-10T08:08:15.678Z",
+    "expiry_time": "2026-03-10T13:08:15.678Z",
+    "freshness_score": 59.99983336111111,
+    "pickup_address": "123 Restaurant St, New York, NY",
+    "pickup_latitude": 40.7128,
+    "pickup_longitude": -74.006,
+    "is_vegetarian": false,
+    "is_vegan": false,
+    "is_gluten_free": false,
+    "allergen_info": [
+      "gluten",
+      "dairy"
+    ],
+    "status": "expired",
+    "available_quantity": 10,
+    "images": [
+      "https://example.com/sandwich1.jpg"
+    ],
+    "created_at": "2026-03-10T10:08:15.708Z",
+    "updated_at": "2026-03-10T10:08:15.708Z"
+  }
+},
+{
+  "model": "food_listings.foodlisting",
+  "pk": 6,
+  "fields": {
+    "donor": [
+      "user@yopmail.com"
+    ],
+    "food_type": "Rajma Chawal",
+    "description": "edffdsfgdfgdf",
+    "quantity": 20,
+    "unit": "kg",
+    "preparation_time": "2026-03-14T12:55:06Z",
+    "expiry_time": "2026-03-18T17:55:06Z",
+    "freshness_score": 100.0,
+    "pickup_address": "kenedy avenue amritsar",
+    "pickup_latitude": 31.655048426758583,
+    "pickup_longitude": 74.85727509645398,
+    "is_vegetarian": true,
+    "is_vegan": false,
+    "is_gluten_free": false,
+    "allergen_info": {
+      "contains_nuts": false,
+      "contains_dairy": false,
+      "contains_eggs": false,
+      "contains_soy": false,
+      "contains_shellfish": false,
+      "other_allergens": ""
+    },
+    "status": "expired",
+    "available_quantity": 20,
+    "images": [],
+    "created_at": "2026-03-14T08:25:31.809Z",
+    "updated_at": "2026-03-14T08:25:31.809Z"
+  }
+},
+{
+  "model": "food_listings.foodlisting",
+  "pk": 7,
+  "fields": {
+    "donor": [
+      "donor@foodshare.com"
+    ],
+    "food_type": "Butter Chicken & Naan",
+    "description": "Freshly prepared butter chicken with garlic naan. Mild spice level, perfect for families.",
+    "quantity": 40,
+    "unit": "servings",
+    "preparation_time": "2026-04-19T19:42:32.862Z",
+    "expiry_time": "2026-04-20T02:42:32.862Z",
+    "freshness_score": 85.71428284523809,
+    "pickup_address": "42 Oak Street, Chicago, IL 60601",
+    "pickup_latitude": 41.8781,
+    "pickup_longitude": -87.6298,
+    "is_vegetarian": false,
+    "is_vegan": false,
+    "is_gluten_free": false,
+    "allergen_info": [
+      "Dairy",
+      "Gluten"
+    ],
+    "status": "expired",
+    "available_quantity": 40,
+    "images": [],
+    "created_at": "2026-04-19T20:42:32.864Z",
+    "updated_at": "2026-04-19T20:42:32.864Z"
+  }
+},
+{
+  "model": "food_listings.foodlisting",
+  "pk": 8,
+  "fields": {
+    "donor": [
+      "donor@foodshare.com"
+    ],
+    "food_type": "Vegetable Biryani",
+    "description": "Aromatic basmati rice cooked with seasonal vegetables and whole spices.",
+    "quantity": 30,
+    "unit": "servings",
+    "preparation_time": "2026-04-19T18:42:32.862Z",
+    "expiry_time": "2026-04-20T04:42:32.862Z",
+    "freshness_score": 79.99997212500001,
+    "pickup_address": "42 Oak Street, Chicago, IL 60601",
+    "pickup_latitude": 41.8781,
+    "pickup_longitude": -87.6298,
+    "is_vegetarian": true,
+    "is_vegan": true,
+    "is_gluten_free": true,
+    "allergen_info": [],
+    "status": "expired",
+    "available_quantity": 30,
+    "images": [],
+    "created_at": "2026-04-19T20:42:32.873Z",
+    "updated_at": "2026-04-19T20:42:32.873Z"
+  }
+},
+{
+  "model": "food_listings.foodlisting",
+  "pk": 9,
+  "fields": {
+    "donor": [
+      "donor@foodshare.com"
+    ],
+    "food_type": "Chocolate Lava Cake",
+    "description": "Warm chocolate lava cakes with vanilla ice cream. Individually portioned.",
+    "quantity": 25,
+    "unit": "servings",
+    "preparation_time": "2026-04-19T19:42:32.862Z",
+    "expiry_time": "2026-04-20T00:42:32.862Z",
+    "freshness_score": 79.99988873888888,
+    "pickup_address": "42 Oak Street, Chicago, IL 60601",
+    "pickup_latitude": 41.8781,
+    "pickup_longitude": -87.6298,
+    "is_vegetarian": true,
+    "is_vegan": false,
+    "is_gluten_free": false,
+    "allergen_info": [
+      "Dairy",
+      "Eggs",
+      "Gluten"
+    ],
+    "status": "expired",
+    "available_quantity": 25,
+    "images": [],
+    "created_at": "2026-04-19T20:42:32.882Z",
+    "updated_at": "2026-04-19T20:42:32.882Z"
+  }
+},
+{
+  "model": "food_listings.foodlisting",
+  "pk": 10,
+  "fields": {
+    "donor": [
+      "donor2@foodshare.com"
+    ],
+    "food_type": "Wedding Buffet Leftovers",
+    "description": "Mixed buffet from a wedding event: rice, curries, salads, and breads. Assorted items.",
+    "quantity": 100,
+    "unit": "servings",
+    "preparation_time": "2026-04-19T17:42:32.862Z",
+    "expiry_time": "2026-04-20T01:42:32.862Z",
+    "freshness_score": 62.499894045138895,
+    "pickup_address": "88 Maple Ave, Chicago, IL 60602",
+    "pickup_latitude": 41.885,
+    "pickup_longitude": -87.635,
+    "is_vegetarian": false,
+    "is_vegan": false,
+    "is_gluten_free": false,
+    "allergen_info": [
+      "Dairy",
+      "Gluten",
+      "Eggs"
+    ],
+    "status": "expired",
+    "available_quantity": 100,
+    "images": [],
+    "created_at": "2026-04-19T20:42:32.893Z",
+    "updated_at": "2026-04-19T20:42:32.893Z"
+  }
+},
+{
+  "model": "food_listings.foodlisting",
+  "pk": 11,
+  "fields": {
+    "donor": [
+      "donor2@foodshare.com"
+    ],
+    "food_type": "Fresh Fruit Platter",
+    "description": "Assorted seasonal fruits: watermelon, mango, pineapple, grapes, and berries.",
+    "quantity": 20,
+    "unit": "kg",
+    "preparation_time": "2026-04-19T19:42:32.862Z",
+    "expiry_time": "2026-04-20T08:42:32.862Z",
+    "freshness_score": 92.30760736538463,
+    "pickup_address": "88 Maple Ave, Chicago, IL 60602",
+    "pickup_latitude": 41.885,
+    "pickup_longitude": -87.635,
+    "is_vegetarian": true,
+    "is_vegan": true,
+    "is_gluten_free": true,
+    "allergen_info": [],
+    "status": "expired",
+    "available_quantity": 20,
+    "images": [],
+    "created_at": "2026-04-19T20:42:32.902Z",
+    "updated_at": "2026-04-19T20:42:32.902Z"
+  }
+},
+{
+  "model": "food_listings.foodlisting",
+  "pk": 12,
+  "fields": {
+    "donor": [
+      "donor2@foodshare.com"
+    ],
+    "food_type": "Assorted Beverages",
+    "description": "Unopened juice boxes, water bottles, and soft drinks from the event.",
+    "quantity": 60,
+    "unit": "servings",
+    "preparation_time": "2026-04-19T20:42:32.862Z",
+    "expiry_time": "2026-04-21T20:42:32.862Z",
+    "freshness_score": 99.99997046064816,
+    "pickup_address": "88 Maple Ave, Chicago, IL 60602",
+    "pickup_latitude": 41.885,
+    "pickup_longitude": -87.635,
+    "is_vegetarian": true,
+    "is_vegan": true,
+    "is_gluten_free": true,
+    "allergen_info": [],
+    "status": "expired",
+    "available_quantity": 60,
+    "images": [],
+    "created_at": "2026-04-19T20:42:32.914Z",
+    "updated_at": "2026-04-19T20:42:32.914Z"
+  }
+},
+{
+  "model": "food_listings.foodlisting",
+  "pk": 13,
+  "fields": {
+    "donor": [
+      "donor@foodshare.com"
+    ],
+    "food_type": "Rajma Chawal",
+    "description": "descfdgdfgdfgdfgdfgdf",
+    "quantity": 2,
+    "unit": "servings",
+    "preparation_time": "2026-04-20T03:05:57Z",
+    "expiry_time": "2026-04-20T10:15:57Z",
+    "freshness_score": 100.0,
+    "pickup_address": "kenedy avenue amritsar",
+    "pickup_latitude": 31.686936011670582,
+    "pickup_longitude": 74.85602767774017,
+    "is_vegetarian": true,
+    "is_vegan": false,
+    "is_gluten_free": false,
+    "allergen_info": {
+      "contains_nuts": false,
+      "contains_dairy": false,
+      "contains_eggs": false,
+      "contains_soy": false,
+      "contains_shellfish": false,
+      "other_allergens": ""
+    },
+    "status": "reserved",
+    "available_quantity": 0,
+    "images": [],
+    "created_at": "2026-04-19T22:46:44.899Z",
+    "updated_at": "2026-04-19T23:04:32.047Z"
+  }
+},
+{
+  "model": "food_listings.foodlisting",
+  "pk": 14,
+  "fields": {
+    "donor": [
+      "donor@foodshare.com"
+    ],
+    "food_type": "dsfdfds",
+    "description": "sddfdsfsdds eefdsf",
+    "quantity": 12,
+    "unit": "kg",
+    "preparation_time": "2026-05-04T12:46:38Z",
+    "expiry_time": "2026-05-04T18:46:38Z",
+    "freshness_score": 100.0,
+    "pickup_address": "Address here",
+    "pickup_latitude": 31.65497184625944,
+    "pickup_longitude": 74.85724322239452,
+    "is_vegetarian": false,
+    "is_vegan": false,
+    "is_gluten_free": false,
+    "allergen_info": {
+      "contains_nuts": false,
+      "contains_dairy": false,
+      "contains_eggs": false,
+      "contains_soy": false,
+      "contains_shellfish": false,
+      "other_allergens": ""
+    },
+    "status": "available",
+    "available_quantity": 10,
+    "images": [],
+    "created_at": "2026-05-04T07:17:19.210Z",
+    "updated_at": "2026-05-04T09:28:32.973Z"
+  }
+},
+{
+  "model": "matching.foodrequest",
+  "pk": 1,
+  "fields": {
+    "listing": 1,
+    "receiver": [
+      "receiver@example.com"
+    ],
+    "requested_quantity": 10,
+    "pickup_time_preference": "2026-03-09T19:45:22.787Z",
+    "special_instructions": "Please call before delivery",
+    "status": "pending",
+    "rejection_reason": null,
+    "created_at": "2026-03-09T17:45:22.789Z",
+    "updated_at": "2026-03-09T17:45:22.789Z"
+  }
+},
+{
+  "model": "matching.foodrequest",
+  "pk": 2,
+  "fields": {
+    "listing": 2,
+    "receiver": [
+      "test_receiver@example.com"
+    ],
+    "requested_quantity": 5,
+    "pickup_time_preference": "2026-03-09T19:46:25.266Z",
+    "special_instructions": null,
+    "status": "cancelled",
+    "rejection_reason": null,
+    "created_at": "2026-03-09T17:46:25.275Z",
+    "updated_at": "2026-03-09T17:46:25.287Z"
+  }
+},
+{
+  "model": "matching.foodrequest",
+  "pk": 3,
+  "fields": {
+    "listing": 2,
+    "receiver": [
+      "test_receiver@example.com"
+    ],
+    "requested_quantity": 3,
+    "pickup_time_preference": "2026-03-09T20:46:25.266Z",
+    "special_instructions": null,
+    "status": "pending",
+    "rejection_reason": null,
+    "created_at": "2026-03-09T17:46:25.299Z",
+    "updated_at": "2026-03-09T17:46:25.299Z"
+  }
+},
+{
+  "model": "matching.foodrequest",
+  "pk": 4,
+  "fields": {
+    "listing": 13,
+    "receiver": [
+      "receiver@example.com"
+    ],
+    "requested_quantity": 1,
+    "pickup_time_preference": "2026-04-20T01:01:51Z",
+    "special_instructions": null,
+    "status": "approved",
+    "rejection_reason": null,
+    "created_at": "2026-04-19T23:01:51.900Z",
+    "updated_at": "2026-04-19T23:04:32.039Z"
+  }
+},
+{
+  "model": "matching.foodrequest",
+  "pk": 5,
+  "fields": {
+    "listing": 13,
+    "receiver": [
+      "receiver@foodshare.com"
+    ],
+    "requested_quantity": 1,
+    "pickup_time_preference": "2026-04-20T04:33:00Z",
+    "special_instructions": null,
+    "status": "approved",
+    "rejection_reason": null,
+    "created_at": "2026-04-19T23:03:25.140Z",
+    "updated_at": "2026-04-19T23:04:28.749Z"
+  }
+},
+{
+  "model": "matching.foodrequest",
+  "pk": 6,
+  "fields": {
+    "listing": 14,
+    "receiver": [
+      "receiver@foodshare.com"
+    ],
+    "requested_quantity": 1,
+    "pickup_time_preference": "2026-05-04T12:48:00Z",
+    "special_instructions": null,
+    "status": "approved",
+    "rejection_reason": null,
+    "created_at": "2026-05-04T07:18:46.524Z",
+    "updated_at": "2026-05-04T07:19:13.867Z"
+  }
+},
+{
+  "model": "matching.foodrequest",
+  "pk": 7,
+  "fields": {
+    "listing": 14,
+    "receiver": [
+      "receiver@foodshare.com"
+    ],
+    "requested_quantity": 1,
+    "pickup_time_preference": "2026-05-16T14:58:00Z",
+    "special_instructions": null,
+    "status": "approved",
+    "rejection_reason": null,
+    "created_at": "2026-05-04T09:28:25.839Z",
+    "updated_at": "2026-05-04T09:28:32.967Z"
+  }
+},
+{
+  "model": "matching.match",
+  "pk": 1,
+  "fields": {
+    "listing": 1,
+    "request": 1,
+    "donor": [
+      "donor@example.com"
+    ],
+    "receiver": [
+      "receiver@example.com"
+    ],
+    "matched_quantity": 10,
+    "status": "matched",
+    "created_at": "2026-03-09T17:45:22.799Z",
+    "completed_at": null
+  }
+},
+{
+  "model": "matching.match",
+  "pk": 2,
+  "fields": {
+    "listing": 13,
+    "request": 5,
+    "donor": [
+      "donor@foodshare.com"
+    ],
+    "receiver": [
+      "receiver@foodshare.com"
+    ],
+    "matched_quantity": 1,
+    "status": "matched",
+    "created_at": "2026-04-19T23:04:28.751Z",
+    "completed_at": null
+  }
+},
+{
+  "model": "matching.match",
+  "pk": 3,
+  "fields": {
+    "listing": 13,
+    "request": 4,
+    "donor": [
+      "donor@foodshare.com"
+    ],
+    "receiver": [
+      "receiver@example.com"
+    ],
+    "matched_quantity": 1,
+    "status": "matched",
+    "created_at": "2026-04-19T23:04:32.047Z",
+    "completed_at": null
+  }
+},
+{
+  "model": "matching.match",
+  "pk": 4,
+  "fields": {
+    "listing": 14,
+    "request": 6,
+    "donor": [
+      "donor@foodshare.com"
+    ],
+    "receiver": [
+      "receiver@foodshare.com"
+    ],
+    "matched_quantity": 1,
+    "status": "completed",
+    "created_at": "2026-05-04T07:19:13.867Z",
+    "completed_at": "2026-05-04T07:19:13.867Z"
+  }
+},
+{
+  "model": "matching.match",
+  "pk": 5,
+  "fields": {
+    "listing": 14,
+    "request": 7,
+    "donor": [
+      "donor@foodshare.com"
+    ],
+    "receiver": [
+      "receiver@foodshare.com"
+    ],
+    "matched_quantity": 1,
+    "status": "completed",
+    "created_at": "2026-05-04T09:28:32.971Z",
+    "completed_at": "2026-05-04T09:28:32.969Z"
+  }
+},
+{
+  "model": "volunteers.pickupcoordination",
+  "pk": 1,
+  "fields": {
+    "match": 1,
+    "volunteer": [
+      "volunteer@example.com"
+    ],
+    "donor_location": {
+      "lat": 40.7128,
+      "lon": -74.006
+    },
+    "receiver_location": {
+      "lat": 40.758,
+      "lon": -73.9855
+    },
+    "food_quantity": 10,
+    "required_pickup_time": "2026-03-09T19:45:23.387Z",
+    "assignment_status": "accepted",
+    "escalation_count": 0,
+    "created_at": "2026-03-09T17:45:23.387Z",
+    "assigned_at": null
+  }
+},
+{
+  "model": "tracking.deliverytracking",
+  "pk": 1,
+  "fields": {
+    "coordination": 1,
+    "volunteer": [
+      "volunteer@example.com"
+    ],
+    "current_latitude": 40.7128,
+    "current_longitude": -74.006,
+    "status": "en_route_to_donor",
+    "estimated_arrival": null,
+    "started_at": "2026-03-09T17:45:23.393Z",
+    "completed_at": null,
+    "last_updated": "2026-03-09T17:45:23.393Z"
+  }
+},
+{
+  "model": "safety_analytics.notification",
+  "pk": 1,
+  "fields": {
+    "user": [
+      "receiver@example.com"
+    ],
+    "notification_type": "match_created",
+    "title": "Match Created",
+    "message": "Your food request has been approved!",
+    "related_entity_type": "match",
+    "related_entity_id": 1,
+    "is_read": false,
+    "sent_via_email": false,
+    "created_at": "2026-03-09T17:45:23.410Z"
+  }
+},
+{
+  "model": "safety_analytics.notification",
+  "pk": 2,
+  "fields": {
+    "user": [
+      "donor@foodshare.com"
+    ],
+    "notification_type": "food_request",
+    "title": "New Food Request",
+    "message": "Hope Shelter has requested 1 servings of Rajma Chawal",
+    "related_entity_type": "food_request",
+    "related_entity_id": 5,
+    "is_read": false,
+    "sent_via_email": true,
+    "created_at": "2026-04-19T23:03:25.152Z"
+  }
+},
+{
+  "model": "safety_analytics.notification",
+  "pk": 3,
+  "fields": {
+    "user": [
+      "receiver@foodshare.com"
+    ],
+    "notification_type": "match_created",
+    "title": "Food Request Approved",
+    "message": "Your request for 1 servings of Rajma Chawal has been approved!",
+    "related_entity_type": "match",
+    "related_entity_id": 2,
+    "is_read": false,
+    "sent_via_email": true,
+    "created_at": "2026-04-19T23:04:28.752Z"
+  }
+},
+{
+  "model": "safety_analytics.notification",
+  "pk": 4,
+  "fields": {
+    "user": [
+      "receiver@example.com"
+    ],
+    "notification_type": "match_created",
+    "title": "Food Request Approved",
+    "message": "Your request for 1 servings of Rajma Chawal has been approved!",
+    "related_entity_type": "match",
+    "related_entity_id": 3,
+    "is_read": false,
+    "sent_via_email": true,
+    "created_at": "2026-04-19T23:04:32.047Z"
+  }
+},
+{
+  "model": "safety_analytics.notification",
+  "pk": 5,
+  "fields": {
+    "user": [
+      "donor@foodshare.com"
+    ],
+    "notification_type": "food_request",
+    "title": "New Food Request",
+    "message": "Hope Shelter has requested 1 kg of dsfdfds",
+    "related_entity_type": "food_request",
+    "related_entity_id": 6,
+    "is_read": false,
+    "sent_via_email": true,
+    "created_at": "2026-05-04T07:18:46.531Z"
+  }
+},
+{
+  "model": "safety_analytics.notification",
+  "pk": 6,
+  "fields": {
+    "user": [
+      "receiver@foodshare.com"
+    ],
+    "notification_type": "match_created",
+    "title": "Food Request Approved",
+    "message": "Your request for 1 kg of dsfdfds has been approved!",
+    "related_entity_type": "match",
+    "related_entity_id": 4,
+    "is_read": false,
+    "sent_via_email": true,
+    "created_at": "2026-05-04T07:19:13.874Z"
+  }
+},
+{
+  "model": "safety_analytics.notification",
+  "pk": 7,
+  "fields": {
+    "user": [
+      "donor@foodshare.com"
+    ],
+    "notification_type": "food_request",
+    "title": "New Food Request",
+    "message": "Hope Shelter has requested 1 kg of dsfdfds",
+    "related_entity_type": "food_request",
+    "related_entity_id": 7,
+    "is_read": false,
+    "sent_via_email": true,
+    "created_at": "2026-05-04T09:28:25.856Z"
+  }
+},
+{
+  "model": "safety_analytics.notification",
+  "pk": 8,
+  "fields": {
+    "user": [
+      "receiver@foodshare.com"
+    ],
+    "notification_type": "match_created",
+    "title": "Food Request Approved",
+    "message": "Your request for 1 kg of dsfdfds has been approved!",
+    "related_entity_type": "match",
+    "related_entity_id": 5,
+    "is_read": false,
+    "sent_via_email": true,
+    "created_at": "2026-05-04T09:28:32.974Z"
+  }
+},
+{
+  "model": "safety_analytics.rating",
+  "pk": 1,
+  "fields": {
+    "match": 1,
+    "rater": [
+      "receiver@example.com"
+    ],
+    "rated_user": [
+      "donor@example.com"
+    ],
+    "rating_type": "food_quality",
+    "rating_value": 5,
+    "comment": "Excellent food!",
+    "created_at": "2026-03-09T17:45:23.420Z"
+  }
+},
+{
+  "model": "safety_analytics.successstory",
+  "pk": 1,
+  "fields": {
+    "match": 1,
+    "donor_name": "Test Donor",
+    "receiver_name": "Test Receiver",
+    "food_quantity": 10,
+    "food_type": "Vegetarian Curry",
+    "completion_date": "2026-03-09T17:45:23.427Z",
+    "testimonial": null,
+    "photos": [],
+    "is_public": true,
+    "created_at": "2026-03-09T17:45:23.427Z"
+  }
+},
+{
+  "model": "safety_analytics.searchpreference",
+  "pk": 1,
+  "fields": {
+    "user": [
+      "receiver@example.com"
+    ],
+    "filters": {
+      "food_type": "vegetarian",
+      "max_distance": 10
+    },
+    "recent_searches": [
+      "curry",
+      "rice",
+      "pasta"
+    ],
+    "updated_at": "2026-03-09T17:45:23.438Z"
+  }
+},
+{
+  "model": "safety_analytics.auditlog",
+  "pk": 1,
+  "fields": {
+    "user": [
+      "receiver@example.com"
+    ],
+    "action_type": "login",
+    "entity_type": null,
+    "entity_id": null,
+    "ip_address": "127.0.0.1",
+    "user_agent": "Mozilla/5.0",
+    "details": null,
+    "timestamp": "2026-03-09T17:45:23.447Z"
+  }
+},
+{
+  "model": "safety_analytics.auditlog",
+  "pk": 2,
+  "fields": {
+    "user": [
+      "admin@mail.com"
+    ],
+    "action_type": "login",
+    "entity_type": null,
+    "entity_id": null,
+    "ip_address": "127.0.0.1",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "details": {
+      "success": true
+    },
+    "timestamp": "2026-03-14T06:29:35.278Z"
+  }
+},
+{
+  "model": "safety_analytics.auditlog",
+  "pk": 3,
+  "fields": {
+    "user": [
+      "admin@mail.com"
+    ],
+    "action_type": "login",
+    "entity_type": null,
+    "entity_id": null,
+    "ip_address": "127.0.0.1",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "details": {
+      "success": true
+    },
+    "timestamp": "2026-03-14T07:59:24.957Z"
+  }
+},
+{
+  "model": "safety_analytics.auditlog",
+  "pk": 4,
+  "fields": {
+    "user": [
+      "admin@mail.com"
+    ],
+    "action_type": "logout",
+    "entity_type": null,
+    "entity_id": null,
+    "ip_address": "127.0.0.1",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "details": {},
+    "timestamp": "2026-03-14T08:07:51.349Z"
+  }
+},
+{
+  "model": "safety_analytics.auditlog",
+  "pk": 5,
+  "fields": {
+    "user": [
+      "user@gmail.com"
+    ],
+    "action_type": "register",
+    "entity_type": null,
+    "entity_id": null,
+    "ip_address": "127.0.0.1",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "details": {
+      "role": "donor"
+    },
+    "timestamp": "2026-03-14T08:10:32.703Z"
+  }
+},
+{
+  "model": "safety_analytics.auditlog",
+  "pk": 6,
+  "fields": {
+    "user": [
+      "user@gmail.com"
+    ],
+    "action_type": "login",
+    "entity_type": null,
+    "entity_id": null,
+    "ip_address": "127.0.0.1",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "details": {
+      "success": true
+    },
+    "timestamp": "2026-03-14T08:10:45.531Z"
+  }
+},
+{
+  "model": "safety_analytics.auditlog",
+  "pk": 7,
+  "fields": {
+    "user": [
+      "user@gmail.com"
+    ],
+    "action_type": "login",
+    "entity_type": null,
+    "entity_id": null,
+    "ip_address": "127.0.0.1",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "details": {
+      "success": true
+    },
+    "timestamp": "2026-03-14T08:19:24.009Z"
+  }
+},
+{
+  "model": "safety_analytics.auditlog",
+  "pk": 8,
+  "fields": {
+    "user": [
+      "user@gmail.com"
+    ],
+    "action_type": "logout",
+    "entity_type": null,
+    "entity_id": null,
+    "ip_address": "127.0.0.1",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "details": {},
+    "timestamp": "2026-03-14T08:22:16.477Z"
+  }
+},
+{
+  "model": "safety_analytics.auditlog",
+  "pk": 9,
+  "fields": {
+    "user": [
+      "user@yopmail.com"
+    ],
+    "action_type": "register",
+    "entity_type": null,
+    "entity_id": null,
+    "ip_address": "127.0.0.1",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "details": {
+      "role": "donor"
+    },
+    "timestamp": "2026-03-14T08:22:47.856Z"
+  }
+},
+{
+  "model": "safety_analytics.auditlog",
+  "pk": 10,
+  "fields": {
+    "user": [
+      "user@yopmail.com"
+    ],
+    "action_type": "login",
+    "entity_type": null,
+    "entity_id": null,
+    "ip_address": "127.0.0.1",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "details": {
+      "success": true
+    },
+    "timestamp": "2026-03-14T08:23:01.676Z"
+  }
+},
+{
+  "model": "safety_analytics.auditlog",
+  "pk": 11,
+  "fields": {
+    "user": [
+      "admin@mail.com"
+    ],
+    "action_type": "login",
+    "entity_type": null,
+    "entity_id": null,
+    "ip_address": "127.0.0.1",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36",
+    "details": {
+      "success": true
+    },
+    "timestamp": "2026-03-24T20:41:57.698Z"
+  }
+},
+{
+  "model": "safety_analytics.auditlog",
+  "pk": 12,
+  "fields": {
+    "user": [
+      "admin@mail.com"
+    ],
+    "action_type": "login",
+    "entity_type": null,
+    "entity_id": null,
+    "ip_address": "127.0.0.1",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+    "details": {
+      "success": true
+    },
+    "timestamp": "2026-04-15T07:39:44.779Z"
+  }
+},
+{
+  "model": "safety_analytics.auditlog",
+  "pk": 13,
+  "fields": {
+    "user": [
+      "admin@mail.com"
+    ],
+    "action_type": "logout",
+    "entity_type": null,
+    "entity_id": null,
+    "ip_address": "127.0.0.1",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+    "details": {},
+    "timestamp": "2026-04-15T07:41:44.858Z"
+  }
+},
+{
+  "model": "safety_analytics.auditlog",
+  "pk": 14,
+  "fields": {
+    "user": [
+      "user@yopmail.com"
+    ],
+    "action_type": "login",
+    "entity_type": null,
+    "entity_id": null,
+    "ip_address": "127.0.0.1",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+    "details": {
+      "success": true
+    },
+    "timestamp": "2026-04-15T07:41:54.940Z"
+  }
+},
+{
+  "model": "safety_analytics.auditlog",
+  "pk": 15,
+  "fields": {
+    "user": [
+      "admin@foodshare.com"
+    ],
+    "action_type": "login",
+    "entity_type": null,
+    "entity_id": null,
+    "ip_address": "127.0.0.1",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+    "details": {
+      "success": true
+    },
+    "timestamp": "2026-04-19T20:43:11.563Z"
+  }
+},
+{
+  "model": "safety_analytics.auditlog",
+  "pk": 16,
+  "fields": {
+    "user": [
+      "donor@foodshare.com"
+    ],
+    "action_type": "login",
+    "entity_type": null,
+    "entity_id": null,
+    "ip_address": "127.0.0.1",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+    "details": {
+      "success": true
+    },
+    "timestamp": "2026-04-19T20:54:22.847Z"
+  }
+},
+{
+  "model": "safety_analytics.auditlog",
+  "pk": 17,
+  "fields": {
+    "user": null,
+    "action_type": "login",
+    "entity_type": null,
+    "entity_id": null,
+    "ip_address": "127.0.0.1",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+    "details": {
+      "success": false,
+      "email": "dmin@foodshare.com"
+    },
+    "timestamp": "2026-04-19T22:44:09.691Z"
+  }
+},
+{
+  "model": "safety_analytics.auditlog",
+  "pk": 18,
+  "fields": {
+    "user": [
+      "admin@foodshare.com"
+    ],
+    "action_type": "login",
+    "entity_type": null,
+    "entity_id": null,
+    "ip_address": "127.0.0.1",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+    "details": {
+      "success": true
+    },
+    "timestamp": "2026-04-19T22:44:35.390Z"
+  }
+},
+{
+  "model": "safety_analytics.auditlog",
+  "pk": 19,
+  "fields": {
+    "user": [
+      "donor@foodshare.com"
+    ],
+    "action_type": "login",
+    "entity_type": null,
+    "entity_id": null,
+    "ip_address": "127.0.0.1",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+    "details": {
+      "success": true
+    },
+    "timestamp": "2026-04-19T22:45:25.972Z"
+  }
+},
+{
+  "model": "safety_analytics.auditlog",
+  "pk": 20,
+  "fields": {
+    "user": [
+      "receiver@foodshare.com"
+    ],
+    "action_type": "login",
+    "entity_type": null,
+    "entity_id": null,
+    "ip_address": "127.0.0.1",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+    "details": {
+      "success": true
+    },
+    "timestamp": "2026-04-19T22:51:29.311Z"
+  }
+},
+{
+  "model": "safety_analytics.auditlog",
+  "pk": 21,
+  "fields": {
+    "user": [
+      "volunteer@foodshare.com"
+    ],
+    "action_type": "login",
+    "entity_type": null,
+    "entity_id": null,
+    "ip_address": "127.0.0.1",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+    "details": {
+      "success": true
+    },
+    "timestamp": "2026-04-19T23:08:04.270Z"
+  }
+},
+{
+  "model": "safety_analytics.auditlog",
+  "pk": 22,
+  "fields": {
+    "user": [
+      "admin@foodshare.com"
+    ],
+    "action_type": "login",
+    "entity_type": null,
+    "entity_id": null,
+    "ip_address": "127.0.0.1",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+    "details": {
+      "success": true
+    },
+    "timestamp": "2026-04-21T08:03:05.573Z"
+  }
+},
+{
+  "model": "safety_analytics.auditlog",
+  "pk": 23,
+  "fields": {
+    "user": [
+      "admin@foodshare.com"
+    ],
+    "action_type": "logout",
+    "entity_type": null,
+    "entity_id": null,
+    "ip_address": "127.0.0.1",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+    "details": {},
+    "timestamp": "2026-04-21T08:04:10.052Z"
+  }
+},
+{
+  "model": "safety_analytics.auditlog",
+  "pk": 24,
+  "fields": {
+    "user": [
+      "donor@foodshare.com"
+    ],
+    "action_type": "login",
+    "entity_type": null,
+    "entity_id": null,
+    "ip_address": "127.0.0.1",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+    "details": {
+      "success": true
+    },
+    "timestamp": "2026-04-21T08:04:30.340Z"
+  }
+},
+{
+  "model": "safety_analytics.auditlog",
+  "pk": 25,
+  "fields": {
+    "user": [
+      "donor@foodshare.com"
+    ],
+    "action_type": "logout",
+    "entity_type": null,
+    "entity_id": null,
+    "ip_address": "127.0.0.1",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+    "details": {},
+    "timestamp": "2026-04-21T08:06:04.993Z"
+  }
+},
+{
+  "model": "safety_analytics.auditlog",
+  "pk": 26,
+  "fields": {
+    "user": [
+      "receiver@foodshare.com"
+    ],
+    "action_type": "login",
+    "entity_type": null,
+    "entity_id": null,
+    "ip_address": "127.0.0.1",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+    "details": {
+      "success": true
+    },
+    "timestamp": "2026-04-21T08:06:25.134Z"
+  }
+},
+{
+  "model": "safety_analytics.auditlog",
+  "pk": 27,
+  "fields": {
+    "user": [
+      "receiver@foodshare.com"
+    ],
+    "action_type": "logout",
+    "entity_type": null,
+    "entity_id": null,
+    "ip_address": "127.0.0.1",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+    "details": {},
+    "timestamp": "2026-04-21T08:08:57.029Z"
+  }
+},
+{
+  "model": "safety_analytics.auditlog",
+  "pk": 28,
+  "fields": {
+    "user": [
+      "admin@foodshare.com"
+    ],
+    "action_type": "login",
+    "entity_type": null,
+    "entity_id": null,
+    "ip_address": "127.0.0.1",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+    "details": {
+      "success": true
+    },
+    "timestamp": "2026-04-23T09:57:15.292Z"
+  }
+},
+{
+  "model": "safety_analytics.auditlog",
+  "pk": 29,
+  "fields": {
+    "user": [
+      "admin@foodshare.com"
+    ],
+    "action_type": "logout",
+    "entity_type": null,
+    "entity_id": null,
+    "ip_address": "127.0.0.1",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+    "details": {},
+    "timestamp": "2026-04-23T10:02:21.908Z"
+  }
+},
+{
+  "model": "safety_analytics.auditlog",
+  "pk": 30,
+  "fields": {
+    "user": [
+      "donor@foodshare.com"
+    ],
+    "action_type": "login",
+    "entity_type": null,
+    "entity_id": null,
+    "ip_address": "127.0.0.1",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+    "details": {
+      "success": true
+    },
+    "timestamp": "2026-04-23T10:02:45.486Z"
+  }
+},
+{
+  "model": "safety_analytics.auditlog",
+  "pk": 31,
+  "fields": {
+    "user": [
+      "donor@foodshare.com"
+    ],
+    "action_type": "logout",
+    "entity_type": null,
+    "entity_id": null,
+    "ip_address": "127.0.0.1",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+    "details": {},
+    "timestamp": "2026-04-23T10:06:56.055Z"
+  }
+},
+{
+  "model": "safety_analytics.auditlog",
+  "pk": 32,
+  "fields": {
+    "user": [
+      "receiver@foodshare.com"
+    ],
+    "action_type": "login",
+    "entity_type": null,
+    "entity_id": null,
+    "ip_address": "127.0.0.1",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+    "details": {
+      "success": true
+    },
+    "timestamp": "2026-04-23T10:07:20.057Z"
+  }
+},
+{
+  "model": "safety_analytics.auditlog",
+  "pk": 33,
+  "fields": {
+    "user": [
+      "user2@yopmail.com"
+    ],
+    "action_type": "register",
+    "entity_type": null,
+    "entity_id": null,
+    "ip_address": "127.0.0.1",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+    "details": {
+      "role": "receiver"
+    },
+    "timestamp": "2026-04-30T19:22:49.398Z"
+  }
+},
+{
+  "model": "safety_analytics.auditlog",
+  "pk": 34,
+  "fields": {
+    "user": [
+      "user2@yopmail.com"
+    ],
+    "action_type": "login",
+    "entity_type": null,
+    "entity_id": null,
+    "ip_address": "127.0.0.1",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+    "details": {
+      "success": true
+    },
+    "timestamp": "2026-04-30T19:23:04.907Z"
+  }
+},
+{
+  "model": "safety_analytics.auditlog",
+  "pk": 35,
+  "fields": {
+    "user": [
+      "user2@yopmail.com"
+    ],
+    "action_type": "logout",
+    "entity_type": null,
+    "entity_id": null,
+    "ip_address": "127.0.0.1",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+    "details": {},
+    "timestamp": "2026-04-30T19:23:16.765Z"
+  }
+},
+{
+  "model": "safety_analytics.auditlog",
+  "pk": 36,
+  "fields": {
+    "user": null,
+    "action_type": "login",
+    "entity_type": null,
+    "entity_id": null,
+    "ip_address": "127.0.0.1",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+    "details": {
+      "success": false,
+      "email": "admin@foodshare.com"
+    },
+    "timestamp": "2026-04-30T19:23:26.423Z"
+  }
+},
+{
+  "model": "safety_analytics.auditlog",
+  "pk": 37,
+  "fields": {
+    "user": [
+      "admin@foodshare.com"
+    ],
+    "action_type": "login",
+    "entity_type": null,
+    "entity_id": null,
+    "ip_address": "127.0.0.1",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+    "details": {
+      "success": true
+    },
+    "timestamp": "2026-04-30T19:23:45.426Z"
+  }
+},
+{
+  "model": "safety_analytics.auditlog",
+  "pk": 38,
+  "fields": {
+    "user": [
+      "admin@foodshare.com"
+    ],
+    "action_type": "logout",
+    "entity_type": null,
+    "entity_id": null,
+    "ip_address": "127.0.0.1",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+    "details": {},
+    "timestamp": "2026-04-30T19:23:58.650Z"
+  }
+},
+{
+  "model": "safety_analytics.auditlog",
+  "pk": 39,
+  "fields": {
+    "user": [
+      "user@yopmail.com"
+    ],
+    "action_type": "password_reset_request",
+    "entity_type": null,
+    "entity_id": null,
+    "ip_address": "127.0.0.1",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+    "details": {
+      "email": "user@yopmail.com"
+    },
+    "timestamp": "2026-04-30T19:24:11.396Z"
+  }
+},
+{
+  "model": "safety_analytics.auditlog",
+  "pk": 40,
+  "fields": {
+    "user": [
+      "admin@foodshare.com"
+    ],
+    "action_type": "login",
+    "entity_type": null,
+    "entity_id": null,
+    "ip_address": "127.0.0.1",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+    "details": {
+      "success": true
+    },
+    "timestamp": "2026-04-30T19:30:51.868Z"
+  }
+},
+{
+  "model": "safety_analytics.auditlog",
+  "pk": 41,
+  "fields": {
+    "user": [
+      "admin@foodshare.com"
+    ],
+    "action_type": "logout",
+    "entity_type": null,
+    "entity_id": null,
+    "ip_address": "127.0.0.1",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+    "details": {},
+    "timestamp": "2026-04-30T19:46:19.820Z"
+  }
+},
+{
+  "model": "safety_analytics.auditlog",
+  "pk": 42,
+  "fields": {
+    "user": [
+      "admin@foodshare.com"
+    ],
+    "action_type": "login",
+    "entity_type": null,
+    "entity_id": null,
+    "ip_address": "127.0.0.1",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+    "details": {
+      "success": true
+    },
+    "timestamp": "2026-05-04T04:14:33.692Z"
+  }
+},
+{
+  "model": "safety_analytics.auditlog",
+  "pk": 43,
+  "fields": {
+    "user": [
+      "admin@foodshare.com"
+    ],
+    "action_type": "logout",
+    "entity_type": null,
+    "entity_id": null,
+    "ip_address": "127.0.0.1",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+    "details": {},
+    "timestamp": "2026-05-04T06:43:11.632Z"
+  }
+},
+{
+  "model": "safety_analytics.auditlog",
+  "pk": 44,
+  "fields": {
+    "user": [
+      "admin@foodshare.com"
+    ],
+    "action_type": "login",
+    "entity_type": null,
+    "entity_id": null,
+    "ip_address": "127.0.0.1",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+    "details": {
+      "success": true
+    },
+    "timestamp": "2026-05-04T06:43:19.226Z"
+  }
+},
+{
+  "model": "safety_analytics.auditlog",
+  "pk": 45,
+  "fields": {
+    "user": [
+      "admin@foodshare.com"
+    ],
+    "action_type": "logout",
+    "entity_type": null,
+    "entity_id": null,
+    "ip_address": "127.0.0.1",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+    "details": {},
+    "timestamp": "2026-05-04T06:43:26.439Z"
+  }
+},
+{
+  "model": "safety_analytics.auditlog",
+  "pk": 46,
+  "fields": {
+    "user": [
+      "volunteer@foodshare.com"
+    ],
+    "action_type": "login",
+    "entity_type": null,
+    "entity_id": null,
+    "ip_address": "127.0.0.1",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+    "details": {
+      "success": true
+    },
+    "timestamp": "2026-05-04T06:44:32.443Z"
+  }
+},
+{
+  "model": "safety_analytics.auditlog",
+  "pk": 47,
+  "fields": {
+    "user": [
+      "donor@foodshare.com"
+    ],
+    "action_type": "login",
+    "entity_type": null,
+    "entity_id": null,
+    "ip_address": "127.0.0.1",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+    "details": {
+      "success": true
+    },
+    "timestamp": "2026-05-04T07:16:32.606Z"
+  }
+},
+{
+  "model": "safety_analytics.auditlog",
+  "pk": 48,
+  "fields": {
+    "user": [
+      "donor@foodshare.com"
+    ],
+    "action_type": "logout",
+    "entity_type": null,
+    "entity_id": null,
+    "ip_address": "127.0.0.1",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+    "details": {},
+    "timestamp": "2026-05-04T07:17:25.670Z"
+  }
+},
+{
+  "model": "safety_analytics.auditlog",
+  "pk": 49,
+  "fields": {
+    "user": [
+      "admin@foodshare.com"
+    ],
+    "action_type": "login",
+    "entity_type": null,
+    "entity_id": null,
+    "ip_address": "127.0.0.1",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+    "details": {
+      "success": true
+    },
+    "timestamp": "2026-05-04T07:17:40.714Z"
+  }
+},
+{
+  "model": "safety_analytics.auditlog",
+  "pk": 50,
+  "fields": {
+    "user": [
+      "admin@foodshare.com"
+    ],
+    "action_type": "logout",
+    "entity_type": null,
+    "entity_id": null,
+    "ip_address": "127.0.0.1",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+    "details": {},
+    "timestamp": "2026-05-04T07:18:01.650Z"
+  }
+},
+{
+  "model": "safety_analytics.auditlog",
+  "pk": 51,
+  "fields": {
+    "user": [
+      "receiver@foodshare.com"
+    ],
+    "action_type": "login",
+    "entity_type": null,
+    "entity_id": null,
+    "ip_address": "127.0.0.1",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+    "details": {
+      "success": true
+    },
+    "timestamp": "2026-05-04T07:18:25.726Z"
+  }
+},
+{
+  "model": "safety_analytics.auditlog",
+  "pk": 52,
+  "fields": {
+    "user": [
+      "receiver@foodshare.com"
+    ],
+    "action_type": "logout",
+    "entity_type": null,
+    "entity_id": null,
+    "ip_address": "127.0.0.1",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+    "details": {},
+    "timestamp": "2026-05-04T07:18:50.545Z"
+  }
+},
+{
+  "model": "safety_analytics.auditlog",
+  "pk": 53,
+  "fields": {
+    "user": [
+      "donor@foodshare.com"
+    ],
+    "action_type": "login",
+    "entity_type": null,
+    "entity_id": null,
+    "ip_address": "127.0.0.1",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+    "details": {
+      "success": true
+    },
+    "timestamp": "2026-05-04T07:19:03.596Z"
+  }
+},
+{
+  "model": "safety_analytics.auditlog",
+  "pk": 54,
+  "fields": {
+    "user": [
+      "donor@foodshare.com"
+    ],
+    "action_type": "login",
+    "entity_type": null,
+    "entity_id": null,
+    "ip_address": "127.0.0.1",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+    "details": {
+      "success": true
+    },
+    "timestamp": "2026-05-04T09:27:45.826Z"
+  }
+},
+{
+  "model": "safety_analytics.auditlog",
+  "pk": 55,
+  "fields": {
+    "user": [
+      "receiver@foodshare.com"
+    ],
+    "action_type": "login",
+    "entity_type": null,
+    "entity_id": null,
+    "ip_address": "127.0.0.1",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+    "details": {
+      "success": true
+    },
+    "timestamp": "2026-05-04T09:28:16.137Z"
+  }
+},
+{
+  "model": "token_blacklist.outstandingtoken",
+  "pk": 1,
+  "fields": {
+    "user": [
+      "admin@mail.com"
+    ],
+    "jti": "93a2892e45184343bbdfda1aaf4c17a8",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc3NDA3NDU3NSwiaWF0IjoxNzczNDY5Nzc1LCJqdGkiOiI5M2EyODkyZTQ1MTg0MzQzYmJkZmRhMWFhZjRjMTdhOCIsInVzZXJfaWQiOiI4In0.ZjZsF_hPE8ZMNafB-EJefcYcJhb7tm69v-iLbZwspCM",
+    "created_at": "2026-03-14T06:29:35.232Z",
+    "expires_at": "2026-03-21T06:29:35Z"
+  }
+},
+{
+  "model": "token_blacklist.outstandingtoken",
+  "pk": 2,
+  "fields": {
+    "user": [
+      "admin@mail.com"
+    ],
+    "jti": "5044457d13ec4446b14bc942582d6941",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc3NDA3OTk2NCwiaWF0IjoxNzczNDc1MTY0LCJqdGkiOiI1MDQ0NDU3ZDEzZWM0NDQ2YjE0YmM5NDI1ODJkNjk0MSIsInVzZXJfaWQiOiI4In0.p9kObvuAgVxetVT-MqgyStDtPTIWBkmxTu1ag0mYtQs",
+    "created_at": "2026-03-14T07:59:24.910Z",
+    "expires_at": "2026-03-21T07:59:24Z"
+  }
+},
+{
+  "model": "token_blacklist.outstandingtoken",
+  "pk": 3,
+  "fields": {
+    "user": [
+      "user@gmail.com"
+    ],
+    "jti": "8003f7941a96450abf1cfe1b808bb8dc",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc3NDA4MDY0NSwiaWF0IjoxNzczNDc1ODQ1LCJqdGkiOiI4MDAzZjc5NDFhOTY0NTBhYmYxY2ZlMWI4MDhiYjhkYyIsInVzZXJfaWQiOiI5In0.pyNRg3dFJzcJt8U1JVnsedMBzsm_15098lrHlkwgwpc",
+    "created_at": "2026-03-14T08:10:45.521Z",
+    "expires_at": "2026-03-21T08:10:45Z"
+  }
+},
+{
+  "model": "token_blacklist.outstandingtoken",
+  "pk": 4,
+  "fields": {
+    "user": [
+      "user@gmail.com"
+    ],
+    "jti": "47011be2c73d45c6b18af31b609b524b",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc3NDA4MTE2MywiaWF0IjoxNzczNDc2MzYzLCJqdGkiOiI0NzAxMWJlMmM3M2Q0NWM2YjE4YWYzMWI2MDliNTI0YiIsInVzZXJfaWQiOiI5In0.B_kDs8-U0ex6Xrb_UtCrbWiFinvvBrPWd7vOn0x-XOs",
+    "created_at": "2026-03-14T08:19:23.962Z",
+    "expires_at": "2026-03-21T08:19:23Z"
+  }
+},
+{
+  "model": "token_blacklist.outstandingtoken",
+  "pk": 5,
+  "fields": {
+    "user": [
+      "user@yopmail.com"
+    ],
+    "jti": "b10bf7d2212d4bd2a32cb18ab56bf0b1",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc3NDA4MTM4MSwiaWF0IjoxNzczNDc2NTgxLCJqdGkiOiJiMTBiZjdkMjIxMmQ0YmQyYTMyY2IxOGFiNTZiZjBiMSIsInVzZXJfaWQiOiIxMCJ9.0lw7L0NoUWIsFkFdoCro1VdVXgSow6ZbrMVp0MVOgTk",
+    "created_at": "2026-03-14T08:23:01.665Z",
+    "expires_at": "2026-03-21T08:23:01Z"
+  }
+},
+{
+  "model": "token_blacklist.outstandingtoken",
+  "pk": 6,
+  "fields": {
+    "user": [
+      "admin@mail.com"
+    ],
+    "jti": "b182ea0c6078473e958f47eb033da9f4",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc3NDk4OTcxNywiaWF0IjoxNzc0Mzg0OTE3LCJqdGkiOiJiMTgyZWEwYzYwNzg0NzNlOTU4ZjQ3ZWIwMzNkYTlmNCIsInVzZXJfaWQiOiI4In0.ABZAhOVAJAI1o0WLTAfKauJsdmEK12h5kE9HJWykkwg",
+    "created_at": "2026-03-24T20:41:57.635Z",
+    "expires_at": "2026-03-31T20:41:57Z"
+  }
+},
+{
+  "model": "token_blacklist.outstandingtoken",
+  "pk": 7,
+  "fields": {
+    "user": [
+      "admin@mail.com"
+    ],
+    "jti": "93776e866c29424880ff8480fd5fe14a",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc3Njg0MzU4NCwiaWF0IjoxNzc2MjM4Nzg0LCJqdGkiOiI5Mzc3NmU4NjZjMjk0MjQ4ODBmZjg0ODBmZDVmZTE0YSIsInVzZXJfaWQiOiI4In0.JFJ8CyHTNBTkx_jrQpBrqffPvIYJEvQsFQDgxQDWlbA",
+    "created_at": "2026-04-15T07:39:44.763Z",
+    "expires_at": "2026-04-22T07:39:44Z"
+  }
+},
+{
+  "model": "token_blacklist.outstandingtoken",
+  "pk": 8,
+  "fields": {
+    "user": [
+      "user@yopmail.com"
+    ],
+    "jti": "70fbec0f5b8b4e1f81b8711799ddd98b",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc3Njg0MzcxNCwiaWF0IjoxNzc2MjM4OTE0LCJqdGkiOiI3MGZiZWMwZjViOGI0ZTFmODFiODcxMTc5OWRkZDk4YiIsInVzZXJfaWQiOiIxMCJ9.huaj6U3L3Vp6oLGb-T_N7rkzMFEAP3V3wK4hrv65Vdo",
+    "created_at": "2026-04-15T07:41:54.898Z",
+    "expires_at": "2026-04-22T07:41:54Z"
+  }
+},
+{
+  "model": "token_blacklist.outstandingtoken",
+  "pk": 9,
+  "fields": {
+    "user": [
+      "admin@foodshare.com"
+    ],
+    "jti": "e381e23ce7ba4bf19d65a2bd6ef846f8",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc3NzIzNjE5MSwiaWF0IjoxNzc2NjMxMzkxLCJqdGkiOiJlMzgxZTIzY2U3YmE0YmYxOWQ2NWEyYmQ2ZWY4NDZmOCIsInVzZXJfaWQiOiIxMiJ9.sn1yntEFof-2mH4miyx6Mkw5DMRdDOu8qjn2iEDXPvc",
+    "created_at": "2026-04-19T20:43:11.553Z",
+    "expires_at": "2026-04-26T20:43:11Z"
+  }
+},
+{
+  "model": "token_blacklist.outstandingtoken",
+  "pk": 10,
+  "fields": {
+    "user": [
+      "donor@foodshare.com"
+    ],
+    "jti": "2b129980c0c34630a1d08fb0a1bb9e09",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc3NzIzNjg2MiwiaWF0IjoxNzc2NjMyMDYyLCJqdGkiOiIyYjEyOTk4MGMwYzM0NjMwYTFkMDhmYjBhMWJiOWUwOSIsInVzZXJfaWQiOiIxMyJ9.ltWKT5adBBC-ZpPWjnZ3OvLHBxyX0zXMEBw_ksqBcY4",
+    "created_at": "2026-04-19T20:54:22.837Z",
+    "expires_at": "2026-04-26T20:54:22Z"
+  }
+},
+{
+  "model": "token_blacklist.outstandingtoken",
+  "pk": 11,
+  "fields": {
+    "user": [
+      "admin@foodshare.com"
+    ],
+    "jti": "3563bc0cc2a84e48874bd5f5e6131421",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc3NzI0MzQ3NSwiaWF0IjoxNzc2NjM4Njc1LCJqdGkiOiIzNTYzYmMwY2MyYTg0ZTQ4ODc0YmQ1ZjVlNjEzMTQyMSIsInVzZXJfaWQiOiIxMiJ9.4LukDwUvTa2AGDpBh7hNN9yPoqikfZtZNVcp5dzUDeg",
+    "created_at": "2026-04-19T22:44:35.350Z",
+    "expires_at": "2026-04-26T22:44:35Z"
+  }
+},
+{
+  "model": "token_blacklist.outstandingtoken",
+  "pk": 12,
+  "fields": {
+    "user": [
+      "donor@foodshare.com"
+    ],
+    "jti": "d72dbb27b5664229a3a9563e207fbf82",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc3NzI0MzUyNSwiaWF0IjoxNzc2NjM4NzI1LCJqdGkiOiJkNzJkYmIyN2I1NjY0MjI5YTNhOTU2M2UyMDdmYmY4MiIsInVzZXJfaWQiOiIxMyJ9.mpmpQw63Y1DGiu4iUIBTlMrDvj3s-BcbsiSlm_RVYzY",
+    "created_at": "2026-04-19T22:45:25.964Z",
+    "expires_at": "2026-04-26T22:45:25Z"
+  }
+},
+{
+  "model": "token_blacklist.outstandingtoken",
+  "pk": 13,
+  "fields": {
+    "user": [
+      "receiver@foodshare.com"
+    ],
+    "jti": "b3ccfbd39da54a08985741bb4d300cdb",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc3NzI0Mzg4OSwiaWF0IjoxNzc2NjM5MDg5LCJqdGkiOiJiM2NjZmJkMzlkYTU0YTA4OTg1NzQxYmI0ZDMwMGNkYiIsInVzZXJfaWQiOiIxNSJ9.R4_IkyOil8vLZqvY4u39YCMnKGKW7pHN3jcFGqkgMlI",
+    "created_at": "2026-04-19T22:51:29.303Z",
+    "expires_at": "2026-04-26T22:51:29Z"
+  }
+},
+{
+  "model": "token_blacklist.outstandingtoken",
+  "pk": 14,
+  "fields": {
+    "user": [
+      "receiver@example.com"
+    ],
+    "jti": "8c382f7ef8cc490e906cabcf63768a19",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc3NzI0NDMwNiwiaWF0IjoxNzc2NjM5NTA2LCJqdGkiOiI4YzM4MmY3ZWY4Y2M0OTBlOTA2Y2FiY2Y2Mzc2OGExOSIsInVzZXJfaWQiOiIyIn0.fod-gSQ5FeYbWFIeAM78maVL8GE4GcHON3-dYC-fI00",
+    "created_at": "2026-04-19T22:58:26.344Z",
+    "expires_at": "2026-04-26T22:58:26Z"
+  }
+},
+{
+  "model": "token_blacklist.outstandingtoken",
+  "pk": 15,
+  "fields": {
+    "user": [
+      "receiver@example.com"
+    ],
+    "jti": "cca41ce2beb14c5496424623d3b58803",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc3NzI0NDMyMSwiaWF0IjoxNzc2NjM5NTIxLCJqdGkiOiJjY2E0MWNlMmJlYjE0YzU0OTY0MjQ2MjNkM2I1ODgwMyIsInVzZXJfaWQiOiIyIn0.amMDRycD24MwSm0SwqkOUynDJhD0t-n2Eu85e4mW1Ao",
+    "created_at": "2026-04-19T22:58:41.128Z",
+    "expires_at": "2026-04-26T22:58:41Z"
+  }
+},
+{
+  "model": "token_blacklist.outstandingtoken",
+  "pk": 16,
+  "fields": {
+    "user": [
+      "receiver@example.com"
+    ],
+    "jti": "f14273cb074c4de68a76ea0f46461268",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc3NzI0NDUxMSwiaWF0IjoxNzc2NjM5NzExLCJqdGkiOiJmMTQyNzNjYjA3NGM0ZGU2OGE3NmVhMGY0NjQ2MTI2OCIsInVzZXJfaWQiOiIyIn0.EAHTHvAOCwlwYITdqvJLy0MXgoBwh1efdDcZwEkCvT8",
+    "created_at": "2026-04-19T23:01:51.817Z",
+    "expires_at": "2026-04-26T23:01:51Z"
+  }
+},
+{
+  "model": "token_blacklist.outstandingtoken",
+  "pk": 17,
+  "fields": {
+    "user": [
+      "receiver@example.com"
+    ],
+    "jti": "fb02e7f8cb0d4206a86b3f739c947423",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc3NzI0NDU2MCwiaWF0IjoxNzc2NjM5NzYwLCJqdGkiOiJmYjAyZTdmOGNiMGQ0MjA2YTg2YjNmNzM5Yzk0NzQyMyIsInVzZXJfaWQiOiIyIn0.SBz-GYBSmL7Mn7i6g8fbw28aUpeMeunBVIoppInT64g",
+    "created_at": "2026-04-19T23:02:40.513Z",
+    "expires_at": "2026-04-26T23:02:40Z"
+  }
+},
+{
+  "model": "token_blacklist.outstandingtoken",
+  "pk": 18,
+  "fields": {
+    "user": [
+      "volunteer@foodshare.com"
+    ],
+    "jti": "14cf884424cb41fc8c269b07130838bc",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc3NzI0NDg4NCwiaWF0IjoxNzc2NjQwMDg0LCJqdGkiOiIxNGNmODg0NDI0Y2I0MWZjOGMyNjliMDcxMzA4MzhiYyIsInVzZXJfaWQiOiIxNyJ9.lSjpCb71xQcp4D96JiCPUAT-MFl0M2UYBn3EjRGuOF4",
+    "created_at": "2026-04-19T23:08:04.263Z",
+    "expires_at": "2026-04-26T23:08:04Z"
+  }
+},
+{
+  "model": "token_blacklist.outstandingtoken",
+  "pk": 19,
+  "fields": {
+    "user": [
+      "admin@mail.com"
+    ],
+    "jti": "fbb6b0f1fd0b447c8009e0b862dad433",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc3NzI0NTIzNSwiaWF0IjoxNzc2NjQwNDM1LCJqdGkiOiJmYmI2YjBmMWZkMGI0NDdjODAwOWUwYjg2MmRhZDQzMyIsInVzZXJfaWQiOiI4In0.oWUVW40HjXLV7ws4SgeLiM-SQiMMKFFewzRt7PuQtsg",
+    "created_at": "2026-04-19T23:13:55.912Z",
+    "expires_at": "2026-04-26T23:13:55Z"
+  }
+},
+{
+  "model": "token_blacklist.outstandingtoken",
+  "pk": 20,
+  "fields": {
+    "user": [
+      "admin@foodshare.com"
+    ],
+    "jti": "fb839492d3464904ab61c7dad70b0b4b",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc3NzM2MzM4NSwiaWF0IjoxNzc2NzU4NTg1LCJqdGkiOiJmYjgzOTQ5MmQzNDY0OTA0YWI2MWM3ZGFkNzBiMGI0YiIsInVzZXJfaWQiOiIxMiJ9.6qyS_zJBbDe1IhtO6BAD6Ikh6jnec4oCGzPaSsc5IJk",
+    "created_at": "2026-04-21T08:03:05.562Z",
+    "expires_at": "2026-04-28T08:03:05Z"
+  }
+},
+{
+  "model": "token_blacklist.outstandingtoken",
+  "pk": 21,
+  "fields": {
+    "user": [
+      "donor@foodshare.com"
+    ],
+    "jti": "7dd3a0cd30364991a2b08d50a42e64ce",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc3NzM2MzQ3MCwiaWF0IjoxNzc2NzU4NjcwLCJqdGkiOiI3ZGQzYTBjZDMwMzY0OTkxYTJiMDhkNTBhNDJlNjRjZSIsInVzZXJfaWQiOiIxMyJ9.mSIn7UB5wyTuCkWupHRMTl2SU2tak2d60a8bwflrZ8M",
+    "created_at": "2026-04-21T08:04:30.329Z",
+    "expires_at": "2026-04-28T08:04:30Z"
+  }
+},
+{
+  "model": "token_blacklist.outstandingtoken",
+  "pk": 22,
+  "fields": {
+    "user": [
+      "receiver@foodshare.com"
+    ],
+    "jti": "e315be79df894379b038751ceff301f6",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc3NzM2MzU4NSwiaWF0IjoxNzc2NzU4Nzg1LCJqdGkiOiJlMzE1YmU3OWRmODk0Mzc5YjAzODc1MWNlZmYzMDFmNiIsInVzZXJfaWQiOiIxNSJ9.Kz61vSTgXDTbgSj9L3Vm4otmpu-fuy2WSuw0W5acZME",
+    "created_at": "2026-04-21T08:06:25.118Z",
+    "expires_at": "2026-04-28T08:06:25Z"
+  }
+},
+{
+  "model": "token_blacklist.outstandingtoken",
+  "pk": 23,
+  "fields": {
+    "user": [
+      "admin@foodshare.com"
+    ],
+    "jti": "769dec0e96584166954c2b97fe44ebc2",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc3NzU0MzAzNSwiaWF0IjoxNzc2OTM4MjM1LCJqdGkiOiI3NjlkZWMwZTk2NTg0MTY2OTU0YzJiOTdmZTQ0ZWJjMiIsInVzZXJfaWQiOiIxMiJ9.Ez74StZ1iU3MlV101zytKKy7pdkrITJ6QO06B51rmbk",
+    "created_at": "2026-04-23T09:57:15.218Z",
+    "expires_at": "2026-04-30T09:57:15Z"
+  }
+},
+{
+  "model": "token_blacklist.outstandingtoken",
+  "pk": 24,
+  "fields": {
+    "user": [
+      "donor@foodshare.com"
+    ],
+    "jti": "a051566e0e304d7c8aa1edea9b131610",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc3NzU0MzM2NSwiaWF0IjoxNzc2OTM4NTY1LCJqdGkiOiJhMDUxNTY2ZTBlMzA0ZDdjOGFhMWVkZWE5YjEzMTYxMCIsInVzZXJfaWQiOiIxMyJ9.Zm1h2-q3fPMF1szlQ6KzspZBRbp6JPrcn8C34p7wV9M",
+    "created_at": "2026-04-23T10:02:45.462Z",
+    "expires_at": "2026-04-30T10:02:45Z"
+  }
+},
+{
+  "model": "token_blacklist.outstandingtoken",
+  "pk": 25,
+  "fields": {
+    "user": [
+      "receiver@foodshare.com"
+    ],
+    "jti": "fdcfce79a61d47ae9cc461085812bd94",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc3NzU0MzY0MCwiaWF0IjoxNzc2OTM4ODQwLCJqdGkiOiJmZGNmY2U3OWE2MWQ0N2FlOWNjNDYxMDg1ODEyYmQ5NCIsInVzZXJfaWQiOiIxNSJ9.7Whezm1-2w8_a56Wf-ZT21eWProLmRTLWr8ddAwqe_M",
+    "created_at": "2026-04-23T10:07:20.041Z",
+    "expires_at": "2026-04-30T10:07:20Z"
+  }
+},
+{
+  "model": "token_blacklist.outstandingtoken",
+  "pk": 26,
+  "fields": {
+    "user": [
+      "user2@yopmail.com"
+    ],
+    "jti": "4037b226f6214a34ab99a68fddd64340",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc3ODE4MTc4NCwiaWF0IjoxNzc3NTc2OTg0LCJqdGkiOiI0MDM3YjIyNmY2MjE0YTM0YWI5OWE2OGZkZGQ2NDM0MCIsInVzZXJfaWQiOiIxOSJ9.KWfMOfNWmtX8Vsa5JFpOcrglowGSaRu0T7KYpYpiOiI",
+    "created_at": "2026-04-30T19:23:04.877Z",
+    "expires_at": "2026-05-07T19:23:04Z"
+  }
+},
+{
+  "model": "token_blacklist.outstandingtoken",
+  "pk": 27,
+  "fields": {
+    "user": [
+      "admin@foodshare.com"
+    ],
+    "jti": "bb022c53127740af9cd027b5f8abe42d",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc3ODE4MTgyNSwiaWF0IjoxNzc3NTc3MDI1LCJqdGkiOiJiYjAyMmM1MzEyNzc0MGFmOWNkMDI3YjVmOGFiZTQyZCIsInVzZXJfaWQiOiIxMiJ9.o1F9dvITEpMtbpaiOBNnvnWKKpwEKJpRt_8loHBe_AI",
+    "created_at": "2026-04-30T19:23:45.417Z",
+    "expires_at": "2026-05-07T19:23:45Z"
+  }
+},
+{
+  "model": "token_blacklist.outstandingtoken",
+  "pk": 28,
+  "fields": {
+    "user": [
+      "admin@foodshare.com"
+    ],
+    "jti": "7973e74f27444ba9bcec35ae2ebb87e9",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc3ODE4MjI1MSwiaWF0IjoxNzc3NTc3NDUxLCJqdGkiOiI3OTczZTc0ZjI3NDQ0YmE5YmNlYzM1YWUyZWJiODdlOSIsInVzZXJfaWQiOiIxMiJ9.4WueWciu5v_qy9SUrkepV0e9gZUemsfK0clph5EEgGA",
+    "created_at": "2026-04-30T19:30:51.823Z",
+    "expires_at": "2026-05-07T19:30:51Z"
+  }
+},
+{
+  "model": "token_blacklist.outstandingtoken",
+  "pk": 29,
+  "fields": {
+    "user": [
+      "admin@foodshare.com"
+    ],
+    "jti": "7a300a4c53b841fcbb8f3be7585a4868",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc3ODQ3Mjg3MywiaWF0IjoxNzc3ODY4MDczLCJqdGkiOiI3YTMwMGE0YzUzYjg0MWZjYmI4ZjNiZTc1ODVhNDg2OCIsInVzZXJfaWQiOiIxMiJ9.QoW6s-JQBF6JNPQvTL23LL4mJnv3Q-1-_xb6TOmmJwA",
+    "created_at": "2026-05-04T04:14:33.676Z",
+    "expires_at": "2026-05-11T04:14:33Z"
+  }
+},
+{
+  "model": "token_blacklist.outstandingtoken",
+  "pk": 30,
+  "fields": {
+    "user": [
+      "admin@foodshare.com"
+    ],
+    "jti": "51a0a631c97947579f6654a3e69d4475",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc3ODQ4MTc5OSwiaWF0IjoxNzc3ODc2OTk5LCJqdGkiOiI1MWEwYTYzMWM5Nzk0NzU3OWY2NjU0YTNlNjlkNDQ3NSIsInVzZXJfaWQiOiIxMiJ9.l6I3Dg_jiKalVH9HYlari0LkssWO9aiSgzOZpnaKVoA",
+    "created_at": "2026-05-04T06:43:19.199Z",
+    "expires_at": "2026-05-11T06:43:19Z"
+  }
+},
+{
+  "model": "token_blacklist.outstandingtoken",
+  "pk": 31,
+  "fields": {
+    "user": [
+      "volunteer@foodshare.com"
+    ],
+    "jti": "cbb9747fb41748fb990e6758f442e2b5",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc3ODQ4MTg3MiwiaWF0IjoxNzc3ODc3MDcyLCJqdGkiOiJjYmI5NzQ3ZmI0MTc0OGZiOTkwZTY3NThmNDQyZTJiNSIsInVzZXJfaWQiOiIxNyJ9.LePLjioWml6hlXn16IbLDEh73EEs5CsMelDljNs1n_w",
+    "created_at": "2026-05-04T06:44:32.441Z",
+    "expires_at": "2026-05-11T06:44:32Z"
+  }
+},
+{
+  "model": "token_blacklist.outstandingtoken",
+  "pk": 32,
+  "fields": {
+    "user": [
+      "donor@foodshare.com"
+    ],
+    "jti": "4d86c3aa4ad84e51bdc06a0cff255291",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc3ODQ4Mzc5MiwiaWF0IjoxNzc3ODc4OTkyLCJqdGkiOiI0ZDg2YzNhYTRhZDg0ZTUxYmRjMDZhMGNmZjI1NTI5MSIsInVzZXJfaWQiOiIxMyJ9.gvmli85CcNTPsikD7dtZclcaUGkl79NsA12JWOsxAQQ",
+    "created_at": "2026-05-04T07:16:32.558Z",
+    "expires_at": "2026-05-11T07:16:32Z"
+  }
+},
+{
+  "model": "token_blacklist.outstandingtoken",
+  "pk": 33,
+  "fields": {
+    "user": [
+      "admin@foodshare.com"
+    ],
+    "jti": "e028b812644d414489e16b6aae5e602c",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc3ODQ4Mzg2MCwiaWF0IjoxNzc3ODc5MDYwLCJqdGkiOiJlMDI4YjgxMjY0NGQ0MTQ0ODllMTZiNmFhZTVlNjAyYyIsInVzZXJfaWQiOiIxMiJ9.q42QkylYsWw9mg0qb1BYuHA7Gt4_pkeqrvD-ZHruHPI",
+    "created_at": "2026-05-04T07:17:40.698Z",
+    "expires_at": "2026-05-11T07:17:40Z"
+  }
+},
+{
+  "model": "token_blacklist.outstandingtoken",
+  "pk": 34,
+  "fields": {
+    "user": [
+      "receiver@foodshare.com"
+    ],
+    "jti": "cc7a4015c84e4ae8960cc08b9f993eb7",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc3ODQ4MzkwNSwiaWF0IjoxNzc3ODc5MTA1LCJqdGkiOiJjYzdhNDAxNWM4NGU0YWU4OTYwY2MwOGI5Zjk5M2ViNyIsInVzZXJfaWQiOiIxNSJ9.6532jiEo1chZ5DEtjmOE0I3g_OeArY19FFvrYftSIlQ",
+    "created_at": "2026-05-04T07:18:25.701Z",
+    "expires_at": "2026-05-11T07:18:25Z"
+  }
+},
+{
+  "model": "token_blacklist.outstandingtoken",
+  "pk": 35,
+  "fields": {
+    "user": [
+      "donor@foodshare.com"
+    ],
+    "jti": "1595a5e95472454e9905ada50e02ffbd",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc3ODQ4Mzk0MywiaWF0IjoxNzc3ODc5MTQzLCJqdGkiOiIxNTk1YTVlOTU0NzI0NTRlOTkwNWFkYTUwZTAyZmZiZCIsInVzZXJfaWQiOiIxMyJ9.D0_fl53nID_s3Wkd7szR01LzuLf_qquX5uP3iGbSKsQ",
+    "created_at": "2026-05-04T07:19:03.575Z",
+    "expires_at": "2026-05-11T07:19:03Z"
+  }
+},
+{
+  "model": "token_blacklist.outstandingtoken",
+  "pk": 36,
+  "fields": {
+    "user": [
+      "donor@foodshare.com"
+    ],
+    "jti": "527b59f703f7419fba4daf0091db3996",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc3ODQ5MTY2NSwiaWF0IjoxNzc3ODg2ODY1LCJqdGkiOiI1MjdiNTlmNzAzZjc0MTlmYmE0ZGFmMDA5MWRiMzk5NiIsInVzZXJfaWQiOiIxMyJ9.zZle-JQx3XF6YFVd1TwQXqm_Tkh_3FE6sg2kybEjaNA",
+    "created_at": "2026-05-04T09:27:45.799Z",
+    "expires_at": "2026-05-11T09:27:45Z"
+  }
+},
+{
+  "model": "token_blacklist.outstandingtoken",
+  "pk": 37,
+  "fields": {
+    "user": [
+      "receiver@foodshare.com"
+    ],
+    "jti": "cd86327dfd454e33b419190716bc3764",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc3ODQ5MTY5NiwiaWF0IjoxNzc3ODg2ODk2LCJqdGkiOiJjZDg2MzI3ZGZkNDU0ZTMzYjQxOTE5MDcxNmJjMzc2NCIsInVzZXJfaWQiOiIxNSJ9.yJNX1ODOvyef_4kJNM8ww0wpwMGVwYwipIK_Nog0HK0",
+    "created_at": "2026-05-04T09:28:16.121Z",
+    "expires_at": "2026-05-11T09:28:16Z"
+  }
+}
+]
